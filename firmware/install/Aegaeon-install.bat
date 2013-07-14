@@ -19,7 +19,7 @@ cls
 	@ECHO.		
 @ECHO ---------------------------------------------------------
 
-"C:\Program Files (x86)\Atmel\AVR Tools\STK500\stk500.exe" -cUSB -I57600 -dattiny84a -s -fdfe2 -Eff -e -pf -if"images\rc_calib.hex"
+"C:\Program Files (x86)\Atmel\AVR Tools\STK500\stk500.exe" -cUSB -I8000 -dattiny84a -s -fdfe2 -Eff -e -pf -if"images\rc_calib.hex"
 
 
 
@@ -29,7 +29,7 @@ cls
 	@ECHO  ** Start Calibration
 
 @ECHO ---------------------------------------------------------
-"C:\Program Files (x86)\Atmel\AVR Tools\STK500\stk500.exe" -cUSB -dattiny84a -Y
+"C:\Program Files (x86)\Atmel\AVR Tools\STK500\stk500.exe" -cUSB -I57600 -dattiny84a -Y
 
 @IF ERRORLEVEL ==1 GOTO Calibration_error
 
@@ -64,7 +64,7 @@ cls
 	@ECHO Program in customers code to FLASH, in this case Aegaeon-%1-%2.hex.
 	@ECHO Verify programming of customers code.
 
-"C:\Program Files (x86)\Atmel\AVR Tools\STK500\stk500.exe" -cUSB -dattiny84a -e -pf -vf -if"images\Aegaeon-%1-%2.hex"
+"C:\Program Files (x86)\Atmel\AVR Tools\STK500\stk500.exe" -cUSB -I1000000 -dattiny84a -e -pf -vf -if"images\Aegaeon-%1-%2.hex"
 
 
 @IF ERRORLEVEL ==1 GOTO prog_customer_code_error
