@@ -1,0 +1,75 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATtiny84</DEVICE>
+ <WORKING_DIR>C:\Users\DGOODMAN\Desktop\AVR053\code</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\RC_Calibration.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\Device specific\t84.asm</FILE>
+  <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\tn84def.inc</FILE>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\Common\memoryMap.inc</FILE>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\Device specific\t24_family_pinout.inc</FILE>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\Interface specific\isp_AVRISP_mkII_interface.inc</FILE>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\macros.inc</FILE>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.map</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Reset><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>88</LINE></Reset>
+  <Init_Stack><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>93</LINE></Init_Stack>
+  <Init_interface><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>107</LINE></Init_interface>
+  <Init_IO><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>115</LINE></Init_IO>
+  <CalibrationBegin><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>121</LINE></CalibrationBegin>
+  <newCalibrateRc><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>208</LINE></newCalibrateRc>
+  <WaitForEepromReady><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>138</LINE></WaitForEepromReady>
+  <CalibSuccessful><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>149</LINE></CalibSuccessful>
+  <CCS_WaitForPinHigh><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>157</LINE></CCS_WaitForPinHigh>
+  <CCS_WaitForPinLow><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>164</LINE></CCS_WaitForPinLow>
+  <Handshake_loop><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>170</LINE></Handshake_loop>
+  <StopHere><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>175</LINE></StopHere>
+  <EOP><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>197</LINE></EOP>
+  <BinSearch><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>215</LINE></BinSearch>
+  <BinSearchLoop><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>218</LINE></BinSearchLoop>
+  <DetermineClockSpeed><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>296</LINE></DetermineClockSpeed>
+  <FreqHit><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>286</LINE></FreqHit>
+  <TryNeighbourghhoodValues><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>238</LINE></TryNeighbourghhoodValues>
+  <AddStep><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>234</LINE></AddStep>
+  <NegateNextStep><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>232</LINE></NegateNextStep>
+  <DownstairsNeighbor><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>245</LINE></DownstairsNeighbor>
+  <AddOscStep><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>247</LINE></AddOscStep>
+  <CalibPassCompleted><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>275</LINE></CalibPassCompleted>
+  <CalibrationFailure><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>282</LINE></CalibrationFailure>
+  <Prepare_Detection><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>298</LINE></Prepare_Detection>
+  <WaitForPinHigh><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>307</LINE></WaitForPinHigh>
+  <WaitForPinLow><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>311</LINE></WaitForPinLow>
+  <DetectHighCC01><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>317</LINE></DetectHighCC01>
+  <DetectHighLoopCC01><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>323</LINE></DetectHighLoopCC01>
+  <DetectLowCC01><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>327</LINE></DetectLowCC01>
+  <DetectLowLoopCC01><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>333</LINE></DetectLowLoopCC01>
+  <DetectHighCCxx><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>338</LINE></DetectHighCCxx>
+  <DetectHighLoopCCxx><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>344</LINE></DetectHighLoopCCxx>
+  <DetectLowCCxx><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>348</LINE></DetectLowCCxx>
+  <DetectLowLoopCCxx><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>354</LINE></DetectLowLoopCCxx>
+  <DetectHighCC40><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>362</LINE></DetectHighCC40>
+  <DetectHighLoopCC40><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>368</LINE></DetectHighLoopCC40>
+  <DetectLowCC40><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>372</LINE></DetectLowCC40>
+  <DetectLowLoopCC40><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>378</LINE></DetectLowLoopCC40>
+  <Detect_End><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>382</LINE></Detect_End>
+  <CountLastOVF><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>384</LINE></CountLastOVF>
+  <MergeTimerHighAndLow><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>392</LINE></MergeTimerHighAndLow>
+  <CompareToLimits><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>395</LINE></CompareToLimits>
+  <TooFast><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>410</LINE></TooFast>
+  <TooSlow><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>413</LINE></TooSlow>
+  <RightInTheEye><FILE>C:\Users\DGOODMAN\Desktop\AVR053\code\common\main.asm</FILE><LINE>407</LINE></RightInTheEye>
+ </LABELS>
+</ASSEMBLER_INFO>

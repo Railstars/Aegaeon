@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\Users\DGOODMAN\Desktop\AVR053\code\labels.tmp" -fI -W+ie -C V3 -o "C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.hex" -d "C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.obj" -e "C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.eep" -m "C:\Users\DGOODMAN\Desktop\AVR053\code\rc_calib.map" "C:\Users\DGOODMAN\Desktop\AVR053\code\RC_Calibration.asm"
