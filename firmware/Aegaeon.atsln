@@ -5,14 +5,26 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Aegaeon", "Aegaeon.cproj", 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|AVR = Debug|AVR
-		Release|AVR = Release|AVR
+		C-Debug|AVR = C-Debug|AVR
+		C-Release|AVR = C-Release|AVR
+		L2-Debug|AVR = L2-Debug|AVR
+		L2-Release|AVR = L2-Release|AVR
+		M-Debug|AVR = M-Debug|AVR
+		M-Release|AVR = M-Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6756654A-3DD8-484B-B370-472E97734018}.Debug|AVR.ActiveCfg = Debug|AVR
-		{6756654A-3DD8-484B-B370-472E97734018}.Debug|AVR.Build.0 = Debug|AVR
-		{6756654A-3DD8-484B-B370-472E97734018}.Release|AVR.ActiveCfg = Release|AVR
-		{6756654A-3DD8-484B-B370-472E97734018}.Release|AVR.Build.0 = Release|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.C-Debug|AVR.ActiveCfg = C-Debug|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.C-Debug|AVR.Build.0 = C-Debug|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.C-Release|AVR.ActiveCfg = C-Release|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.C-Release|AVR.Build.0 = C-Release|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.L2-Debug|AVR.ActiveCfg = L2-Debug|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.L2-Debug|AVR.Build.0 = L2-Debug|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.L2-Release|AVR.ActiveCfg = L2-Release|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.L2-Release|AVR.Build.0 = L2-Release|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.M-Debug|AVR.ActiveCfg = M-Debug|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.M-Debug|AVR.Build.0 = M-Debug|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.M-Release|AVR.ActiveCfg = M-Release|AVR
+		{6756654A-3DD8-484B-B370-472E97734018}.M-Release|AVR.Build.0 = M-Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
