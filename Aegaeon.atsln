@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Aegaeon-L2", "Aegaeon-L2\Aegaeon-L2.cproj", "{4533B27B-91FE-4338-8CF3-9AA2A53014FA}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Aegaeon-C", "Aegaeon-C\Aegaeon-C.cproj", "{9FCCC97D-C64D-436C-ACEE-04CB5EFDDF21}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Aegaeon-M", "Aegaeon-M\Aegaeon-M.cproj", "{C14E13E8-2E40-4E9D-8986-04A753D62D12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4533B27B-91FE-4338-8CF3-9AA2A53014FA}.Debug|AVR.ActiveCfg = Debug|AVR
+		{4533B27B-91FE-4338-8CF3-9AA2A53014FA}.Debug|AVR.Build.0 = Debug|AVR
+		{4533B27B-91FE-4338-8CF3-9AA2A53014FA}.Release|AVR.ActiveCfg = Release|AVR
+		{4533B27B-91FE-4338-8CF3-9AA2A53014FA}.Release|AVR.Build.0 = Release|AVR
+		{9FCCC97D-C64D-436C-ACEE-04CB5EFDDF21}.Debug|AVR.ActiveCfg = Debug|AVR
+		{9FCCC97D-C64D-436C-ACEE-04CB5EFDDF21}.Debug|AVR.Build.0 = Debug|AVR
+		{9FCCC97D-C64D-436C-ACEE-04CB5EFDDF21}.Release|AVR.ActiveCfg = Release|AVR
+		{9FCCC97D-C64D-436C-ACEE-04CB5EFDDF21}.Release|AVR.Build.0 = Release|AVR
+		{C14E13E8-2E40-4E9D-8986-04A753D62D12}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C14E13E8-2E40-4E9D-8986-04A753D62D12}.Debug|AVR.Build.0 = Debug|AVR
+		{C14E13E8-2E40-4E9D-8986-04A753D62D12}.Release|AVR.ActiveCfg = Release|AVR
+		{C14E13E8-2E40-4E9D-8986-04A753D62D12}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
