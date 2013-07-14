@@ -1,5 +1,8 @@
-.o
-.d
-.atsuo
+*.o
+*.d
+# .hex
+# .eep
+# .elf
+*.atsuo
 Debug
 Release
