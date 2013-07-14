@@ -1,0 +1,1709 @@
+%! program = pdflatex
+
+\documentclass[12pt,letterpaper,draft]{memoir} % for a short document
+
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{makeidx}
+\usepackage{etoolbox}
+
+% See the ``Memoir customise'' template for some common customisations
+% Don't forget to read the Memoir manual: memman.pdf
+
+\makepagestyle{manual}
+\makeevenhead{manual}{}{}{\rightmark}
+\makeoddhead{manual}{\rightmark}{}{}
+\makeheadrule{manual}{\textwidth}{0.4pt}
+\makeevenfoot{manual}{\thepage}{}{\leftmark}
+\makeoddfoot{manual}{\leftmark}{}{\thepage}
+\makefootrule{manual}{\textwidth}{0.4pt}{\footruleskip}
+
+\makeoddfoot{plain}{}{}{\thepage}
+\makeevenfoot{plain}{\thepage}{}{}
+\makefootrule{plain}{\textwidth}{0.4pt}{\footruleskip}
+
+
+\makeatletter
+\aliaspagestyle{title}{empty} % suppress the page number after \maketitle
+\let\origps@chapter\ps@chapter
+\preto\frontmatter{\let\ps@chapter\ps@empty\pagestyle{empty}}
+\preto\mainmatter{%
+  \cleardoublepage
+  \let\ps@chapter\origps@chapter\pagestyle{headings}}
+\makeatother
+
+
+\title{Aegaeon Family User's Manual\\Revision A}
+\author{Railstars Limited}
+%\date{} % Delete this line to display the current date
+
+\makeindex
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+\newpage
+
+
+\chapter*{Acknowledgments}
+
+Railstars wishes to thank a number of people who have made Aegaeon possible. First of all, our deepest gratitude to the fine folks at \url{http://jnsforum.com}, where this project was conceived, for all their support and encouragement. A huge thanks to our testers, Timothy Hatch and Ken Shores, without whose help many bugs would have remained unconvered. Ken's assistance in editing this document was also invaluable.
+
+Most of all, however, deepest thanks go to Amy Goodman-Wilson and Acadia Goodman-Wilson, whose love and support throughout this process (as well as their tolerance for flux fumes!) will be forever remembered.
+\newpage
+
+
+\tableofcontents* % the asterisk means that the contents itself isn't put into the ToC
+
+
+\pagestyle{manual}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+Thank you for your purchase of a Railstars Aegaeon digital decoder! With a little care and feeding, your decoder should offer a lifetime of service. We are certain you will be well-pleased.
+
+The Railstars Aegaeon family of digital decoders are the most advanced ultra-compact decoders on the market today. Despite their diminutive size, the Aegaeon family provides unprecedented fine-grain control over every aspect of their operation and configuration, as well as the same high level of robustness you expect from Railstars.
+
+This manual covers everything you need to know about the Aegaeon:L2, Aegaeon:M, and Aegaeon:C digital decoders. Chapter \ref{installation} covers installation of your decoder. Chapters \ref{generalconfiguration}, \ref{motorconfiguration}, and \ref{specialeffectsconfiguration} cover the wide range of configuration options available on your decoder. Chapter \ref{operations} covers operating your decoder on your layout. Finally, Chapter \ref{troubleshooting} covers the steps you should take when something goes wrong.
+
+\section{What's In a Name?}
+
+The Aegaeon family of digital decoders is named for the moon of Saturn. This natural satellite is Saturn's smallest moon, and is considered the source of one of Saturn's rings. The moon, in turn, was named for one of the hundred-armed giants of Greek mythology, the hecatonchires, who helped overthrow the Titans. Seems a fitting name to us!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Tools \& Installation}
+\label{installation}
+Each of the various decoders in the Aegaeon family serves a specific purpose, and therefore each is installed in a slightly different manner. The following sections will help you to choose the best decoder for your project, and guide you through the installation proceedure.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Choosing the Right Decoder}
+
+Each member of the Aegaeon family is designed for a specific purpose. Choose the right decoder for the right task.
+
+\begin{description}
+\item[Aegaeon:L2] is designed to drive a single motor and up to two LEDs or bulbs.
+\item[Aegaeon:M] is designed to drive a single motor, without any lighting.
+\item[Aegaeon:C] is designed for lit cab cars, passenger cars with marker lights, or lit dummy locomotives---anything without a motor. The :C is especially designed for models whose lighting circuits are too small or complicated to cut up (most other DCC decoders require you to partially dismantle the lighting circuits).
+\end{description}
+
+Each of these decoders is best suited to a particular kind of model:
+\begin{description}
+\item[Locomotive with headlights] Aegaeon:L2
+\item[Locomotive without headlights] Aegaeon:M
+\item[``Helper'' motorized boxcar] Aegaeon:M
+\item[Self-propelled passenger unit] Aegaeon:M (if unlit) or Aegaeon:L2 (if lit)
+\item[Business car with marker lights] Aegaeon:C
+\item[Observation passenger car with marker lights] Aegaeon:C
+\item[Unpowered cab unit] Aegaeon:C
+\item[Dummy locomotive with lights] Aegaeon:C
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tools}
+
+If you have never installed a wire-in decoder before, you will find that a good set of tools and a familiarization with the procedure will make the job immeasurably easier. If you have never soldered before, you might find purchasing a beginner's electronics kit (such as those available from Velleman or Sparkfun) excellent practice without risking your expensive models first.
+
+\begin{description}
+\item[Soldering iron] with a reasonably fine tip and a good, wet sponge for cleaning the tip. An inexpensive 30W iron from Radio Shack is a fine starting point.
+\item[Solder] containing either 60/40 or (preferably) 63/37 tin/lead ratio, with a rosin core. 0.8mm (0.032in) diameter is about right.
+\item[Wire strippers] capable of stripping 30AWG wire.
+\item[Safety goggles] because hot solder in the eyes stings pretty bad.
+\item[Anti-static or grounding strap] to prevent static shocks from destroying your investment.
+\item[Needle-nosed pliers] for when your fingers are too big and soft to hold on tight.
+\item[Third hand]---not a real one, although that can be helpful too, but the kind that features several alligator clips on a positionable rail. Look to the local fly-fishing outfitter for an inexpensive model.
+\item[Heat-proof work surface] such as an old cutting board. Please do not use this cutting board for food after it has been used for electronics work! Lead poisoning is serious stuff.
+\item[Kapton tape] or polyamide tape is useful for electrically isolating large surfaces.
+\item[Soldering heat sinks] which look like small, flat-surfaced alligator clips, and are useful for when you have to solder to a surface that makes contact with something meltable nearby.
+\item[Continuity checker of multimeter] for checking your solder connections and testing for short circuits.
+\item[Jeweler's screw-drivers] in both Phillips (cross) and flat heads.
+\item[Spudger] for prying at plastic shells and smoothing wires. This is a pencil-like tool made from nylon, usually with a pointed end and a flatted end. Optional, but helpful.
+\item[Jeweler's files] in case you need to make small modifications to the metal frame.
+\item[Dremel] or similar, with bits for grinding soft metal. Such a tool is for milling out a larger space in any internal metal frame, which is often necessary in many small-scale locomotives.
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preparing the Model}
+
+If you have never had your model apart before, this is a good time to familiarize yourself with how the model comes apart and fits together. One common mistake is to reach a point where an installation is nearly complete, only to find that the plastic shell no longer fits back on the model!
+
+While the model is apart, assess it for potential locations to site the decoder. Consider not just the open spaces inside the model, but areas in the frame that could be milled away to create space for the decoder too. Be sure to give an eye to where and how the various wires will run, and whether you will need to cut channels for them in any of the parts to ensure good fit.
+
+While the model is apart, check to see if the manufacturer has placed a capacitor across the motor brushes. Most capacitors appear as a flat tan disk. Although such are rare, if you do see one, it should be removed.
+
+Once the decisions have been made, and you are certain how the model goes together, we can begin with the installation itself.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installing Aegaeon:M}
+
+The Aegaeon:M is designed to be a reasonably easy decoder to install. Installation consists of the following steps:
+\begin{enumerate}
+\item Measure stall current.
+\item Make space for the decoder.
+\item Make space for the wires and trim to length.
+\item Isolate the motor from the frame.
+\item Solder decoder to the frame or brass/copper pickups.
+\item Solder decoder to the motor.
+\item Route wires.
+\item Test.
+\item Reassemble model.
+\end{enumerate}
+
+\subsection{Measure Stall Current}
+Aegaeon:M is designed to provide as much as 800mA of current continuously, although most N and HO motors draw far less than that under normal operating conditions. The worst-case draw of a motor is its ``stall current'', that is, the current that it draws when full power is applied, but the motor shaft is held firmly still (which, please note, does not constitute ``normal operating conditions''!). Most modern models will have a stall current well below 800mA, but it is easy to check if you have a multimeter or ammeter.
+
+With the ammeter or multimeter wired in series between the power pack and the track, apply full DC voltage while holding the locomotive firmly down on the tracks. The goal is to prevent the wheels from spinning or slipping, thus stalling the motor. Observe the meter's reading. If it is greater than 800mA, consider using a more powerful decoder than the Aegaeon:M.
+
+\subsection{Make Space for the Decoder}
+Many larger models will have plenty of open space inside of them where the decoder could be sited. However in N and Z scales, the options are (both literally and figuratively) much narrower. In many cases, you will have to create a pocket for the decoder by milling out a portion of the metal frame. If you have a hard time determining where to site your Aegaeon:M, consider visiting the Railstars Support Site at \url{http://support.railstars.com}. This website offers a range of pictorial instructions for installing Aegaeon decoders, as well as a friendly support forum where you can ask other Aegaeon users for advice.
+
+\subsection{Make Space for the Wires and Trim to Length}
+Siting the decoder is only half the battle. The Aegaeon:M has four wires that must also be positioned. It is quite likely that you may have to cut channels in the metal frame or internal plastic supports to make room for the wires---they may look small, but space is tight inside your model! Holding the Aegaeon in place with a little double-sided tape, develop a careful plan for routing each lead. Once you have a satisfactory notion of where each will go, trim back any excess length. Otherwise, all that extra wire is going to need space of its own.
+
+Part of this step is identifying where each of the four wires can be most easily connected to the model. The Red and Black wires collect the DCC signal and power from the tracks, and will need to be wired to the internal current collectors (some times called pick-ups). The Orange and Gray wires control the motor, and will need to be wired to the motor brushes. See Figure \ref{M-wiring} for an example of how to wire the Aegaeon:M.
+
+TODO figure \label{M-wiring}
+
+\subsection{Isolate the Motor from the Frame}
+Normally, the motor's brushes make electrical contact with the two rails (usually indirectly via the frame, or other metal conductors within the model). Installing the Aegaeon:M requires that we break this connection, so that the decoder can control the motor directly. Find the points of electrical contact between the motor brushes and the rest of the model (often inside the metal frame, but sometimes with soldered wires or other mechanisms). Trim back any wires or long leads connecting the motor to the rest of the model, and use Kpaton tape as insulation where the electrical contact is achieved via press-fit (a single layer of tape will suffice).
+
+Sometimes it is not obvious how to isolate the motor. If you find yourself stumped, don't forget about the Raisltars Support Site at \url{http://support.railstars.com}, where you can view pictorial installation guides and ask for advice from other Aegaeon users.
+
+Make sure that the motor really is isolated, using a continuity tester where possible. On some models, it may be nearly impossible to test that the motor is isolated. One simple, but not perfectly reliable, method is to reassemble the model, and see if you can make it move with a standard DC throttle. If the motor does not respond to the throttle, there is a good chance is has been successully isolated; if the motor \textit{does} respond, you have not yet achieved the necessary isolation.
+
+\subsection{Solder Red and Black Wires to the Pickups}
+Once the motor is isolated, begin connecting the decoder by soldering in the Red and Black wires. You should have, in an earlier step, identified the best place to connect these wires. Now, the time has come to solder these wires to the internal current collectors that make electrical contact with the rails.
+
+\subsection{Solder Orange and Gray Wires to the Motor Brushes}
+
+The Orange and Gray wires control the motor. Now that we are certain that the motor is isolated from the rails, and the decoder is connected to the rails, solder the Orange and Gray wires to the motor leads.
+
+Once connected, this is a good time to make your first real test. You do not need to fully reassemble the model for this step; but you will need to be able to place it on a programming track. Once on the programming track, attempt to read one of the CVs (see \S\ref{WhatIsACV} for details on what a CV is, and how to read them). If you can read the selected CV, the test is passed. If you cannot, then either the decoder is not making good electrical contact with the rails, or with the motor. In this case, use a continuity checker to determine where the break in the circuit might be.
+
+Once you can read CVs, try placing your model on the main line and controlling it with your DCC throttle. The model should respond to speed commands normally. If not, this is a good sign that your connections are perhaps loose, or you have a cold solder joint that needs to be reworked.
+
+\subsection{Route Wires and Affix Decoder}
+
+Once you are certain that the decoder is wired in securely and properly, route the wires into the channels (if you needed to make channels). A spudger comes in handy for telling wires just where they need to go, and pressing them flat into the channels. Use a little double-sided tape to secure the decoder in place, making sure that it is not touching any metal surface; use some Kapton tape if necessary to provide some electrical isolation. You can tape the metal surfaces in the mode near the decoder site, or wrap the decoder in the tape.
+
+\subsection {Test. Test. Test.}
+
+Once everything is in place, repeat all of the tests above. Try reading and writing CVs; give the model a spin on the main line. Everything should run as expected. If not, don't be discouraged! Better to find out that something has gone wrong now, than after the model has been put back together! Again, if something isn't working, a continuity checker is going to be your best tool for isolating problems.
+
+\subsection{Final Reassembly and Test Again}
+
+Even once the model has passed all the tests with flying colors, your work is not yet done. Reassembling the model is not always easy. It might reveal that you didn't leave enough room for the decoder, or the wires. It might also reveal that one of the connections is still a bit loose, and comes apart under pressure from the plastic shell. Both problems are often easy to spot, because the plastic shell will bulge from the pressure of the installed decoder.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installing Aegaeon:C}
+
+The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to install. Installation consists of the following steps:
+\begin{enumerate}
+\item Make space for the decoder.
+\item Make space for the wires and trim to length.
+\item Isolate the lighting board from the frame.
+\item Solder decoder to the frame or brass/copper pickups.
+\item Solder decoder to the lighting board.
+\item Route wires.
+\item Test.
+\item Reassemble model.
+\end{enumerate}
+
+TODO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installing Aegaeon:L2}
+
+The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install. Installation consists of the following steps:
+\begin{enumerate}
+\item Make space for the decoder.
+\item Make space for the wires and trim to length.
+\item Isolate the motor from the frame.
+\item Isolate the lighting board(s).
+\item Solder decoder to the frame or brass/copper pickups.
+\item Solder decoder to the motor.
+\item Solder decoder to the lighting board(s).
+\item Route wires.
+\item Test.
+\item Reassemble model.
+\end{enumerate}
+
+TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
+
+\section{It Doesn't Work!}
+
+Sometimes an install doesn't go as expected, and problems arise. If you've followed the directions, and your Aegaeon isn't responding as you expect, or at all, please have a careful read of Chapter \ref{troubleshooting}, and especially \S\ref{FAQ}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{General Configuration}
+\label{generalconfiguration}
+Your Aegaeon decoder will work great straight from the box, but you can tailor its behavior to your specific needs, and the needs of your model, by changing the configuration options provided by the decoder. Such configuration is achieved by storing numbers within special registers called Configuration Variables (or CVs for short).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What is a `CV'?}
+\label{WhatIsACV}
+\index{configuration variable}
+DCC decoders are configured by writing numerical values to variables within the decoder. These variables, called \textbf{Configuration Variables}, or \textbf{CVs} for short, hold a number between 0 and 255, and keep their values permanently or until overwritten with new values. Each CV has a particular meaning, use, and range of valid values. In the next several sections, each CV available on Aegaeon is discussed in great detail.
+
+The specifics of how to read and write values from and to a particular CV depend upon the DCC system you are using: You should consult your system's manual for details. However, it is worth spending a little time learning about the mechanisms defined by the NMRA and employed by the various manufacturers.
+
+\subsection{Service Mode}
+
+Most DCC systems provide a special output---sometimes called the `service track' or `programming track'---for configuring decoders. These special outputs permit configuring decoders in what is known as `service mode'. Service mode is the most reliable way to configure a decoder, because it permits verification of each step, as well as the reading of the values stored in each CV. All DCC decoders, including the Aegaeon family, can be configured in service mode.
+
+\subsection{Operations Mode}
+
+Some DCC systems permit configuration of decoders while in operation on the layout. This is sometimes called `programming on the main' or `operations mode programming'. The Aegaeon family of decoders can be programmed in operations mode.
+
+Operations mode, while certainly very convenient, is not as reliable as service mode configuration. Operations mode does not provide a general method for verification that a configuration operation succeeded, or for reading the value stored in a CV. Moreover, you must know the decoder's address (see \S\ref{PrimaryAddress}) to be able to configure it using operations mode. If you have forgotten the decoder's address, you \textit{must} use service mode to successfully reset or configure it.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Primary Address}
+\label{PrimaryAddress}
+All decoders must be assigned a primary address; this address need not be unique. The address is used to send specific commands to each decoder (or set of decoders with the same address). Aegaeon ships with a default address of 3. As with most modern decoders, Aegaeon gives you two options for setting the decoder address: A short address and a long address. The short address is an older mechanism, and is limited to an upper bound of 127. The long address is a newer mechanism, and is limited to an upper bound of 10239. Which address is used is governed by the setting of CV 29 ``Main Configuration'' (see \S\ref{CV29}).
+
+\subsection{Short Address}
+\label{CV1}
+Most command stations provide an automated method for setting the short address without having to set the CVs directly. In case yours does not, here is the CV table
+\index{configuration variable!CV 001@CV 1}\index{address!short}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 1 --- Short Address}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Short Address& 1--127 & 3 &\\ \hline
+\end{tabular}
+\end{center}
+
+The short address can be entered directly into CV 1 without further calculation. The range of valid addresses is 1--127. Addresses outside this range cannot be written. Please note that some manufacturers' systems do not support short addresses outside of a certain range. For example, Digitrax command stations do not permit short addresses larger than 99. If you want to use an address greater than 99, please make sure your system supports it before attempting to write to this CV.
+
+\subsection{Long Address}
+\index{configuration variable!CV 017@CV 17}\index{address!long}
+\label{CV17}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 17 --- Long Address 1}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Long Address High & 192--231 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 018@CV 18}
+\label{CV18}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 18 --- Long Address 2}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Long Address Low & 0--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+The range of valid long addresses is 1--10239. Please note that some manufacturers' systems do not permit long addresses outside of a certain range; for example, some systems exclude the use of long addresses 1--127. Digitrax systems do not permit addresses greater than 9999.
+
+The long address is larger than can be contained in a single CV, and so must be split up. Given a desired long address, it is somewhat tricky to calculate the values for \textbf{CV 17} and \textbf{CV 18}, and we strongly recommend you use an on-line calculator for this purpose, such as the one available at \url{http://railstars.com/long-address-calculator}.
+
+Notice that you \textit{must} enter the value for CV 17 first, and the value for CV 18 second.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Decoder Identification}
+
+\subsection{Manufacturer Identification}
+\label{ManufacturerIdentification}\index{manufacturer identification}
+There are three read-only CVs that provide information on the manufacturer and the firmware used in the decoder. These CVs cannot be written (although see \S\ref{DecoderReset} before you try!).
+
+\index{configuration variable!CV 008@CV 8}
+\label{CV8}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{CV 8 --- Manufacturer ID}} \\ \hline \hline
+\textit{Feature}& \textit{Default} & \textit{User} \\ \hline
+Railstars Limited & 91 & n/a\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 007@CV 7}\index{decoder family identification}
+\label{CV7}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{CV 7 --- Decoder Family Identification}} \\ \hline \hline
+\textit{Feature}& \textit{Default} & \textit{User} \\ \hline
+Aegaeon:L2 & 5 & n/a\\ \hline
+Aegaeon:M & 1 & n/a\\ \hline
+Aegaeon:C & 4 & n/a\\ \hline
+\end{tabular}
+\end{center}
+
+The firmware revision is subject to change as the firmware is updated by the manufacturer.
+\index{configuration variable!CV 058@CV 58}\index{firmware revision}
+\label{CV58}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{CV 58 --- Firmware Revision}} \\ \hline \hline
+\textit{Feature}& \textit{Default} & \textit{User} \\ \hline
+Revision Number & 1 & n/a\\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{User Identification}
+\label{UserIdentification}\index{user identification}
+Two CVs are provided for you to store arbitrary values; typically, these values are used to provide a way to uniquely identify the decoder in some way, or perhaps to record some piece of information of occasional use.
+
+\index{configuration variable!CV 105@CV 105}
+\label{CV105}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 105 --- User Identification 1}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Freeform data & 0--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 106@CV 106}
+\label{CV106}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 106 --- User Identification 2}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Freeform data & 0--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{When Things Go Wrong: Decoder Reset}
+\label{DecoderReset}\index{reset}
+If you make a mistake, or the decoder becomes difficult, you can perform a decoder reset. There are two kinds of reset: A full reset that restores the decoder to the factory settings, and a partial reset that preserves the Advanced Speed Curve (aka 28-Step Speed Table; see \S\ref{AdvancedSpeedCurve}), as this is tedious to have to re-enter. Notice that you may have to put the decoder on the service track to successfully reset it, although it can be done on the main if the decoder is responding to the proper address (and you know what that address is).
+
+To make the reset, you write a specific value into CV 8, the (read-only) CV that contains the manufacturer's ID. The value written here is not stored, but used as a trigger to perform the reset operation.
+
+\index{configuration variable!CV 008@CV 8}
+\begin{center}
+\begin{tabular}{|l|cc|}
+\hline
+\multicolumn{3}{|c|}{\textbf{CV 8 --- Reset}} \\ \hline \hline
+\textit{Feature}& \multicolumn{2}{c|}{\textit{Options}}  \\ \hline
+\multirow{2}{*}{Type of Reset}  & Factory Reset & 8\\ 
+& Partial Reset & 9 \\ \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic Configuration: CV 29}
+
+CV 29 controls the most basic functionality of the decoder. This CV is standardized by the NMRA, and actually controls a variety of unrelated attributes, each of which is discussed in detail below.
+
+\index{configuration variable!CV 029@CV 29}
+\label{CV29}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 29 --- Basic Configuration}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Direction of Travel} & \textbf{Forward}	 & \textbf{0} & \multirow{2}{*}{0} &\\
+& Reversed & 1 & & \\ \hline
+Speed Control & \textbf{28/128-Step} & \textbf{2} & 2 & 2\\ \hline
+\multirow{2}{*}{Run on DC} & Disabled & 0 & \multirow{2}{*}{4} & \\
+& \textbf{Enabled} & \textbf{4} & & \\ \hline
+\multirow{2}{*}{Speed Curve} & \textbf{Basic} & \textbf{0}  & \multirow{2}{*}{0}& \\
+& Advanced & 16 & &\\ \hline
+\multirow{2}{*}{Addressing} & \textbf{Short} & \textbf{0} & \multirow{2}{*}{0} & \\
+& Long & 32 & &\\ \hline \hline
+\multicolumn{3}{|r|}{\textit{Total}} & 6 &\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Direction of Travel}
+\label{DC29directionoftravel}\index{direction of travel}
+All DCC-equipped locomotives have a well-defined forward and reverse facing. The forward direction is determined by which motor terminal the orange lead is wired to---it should be wired to the right-hand, or engineer's side of the motor. However, there will be times when you need to define the forward direction, perhaps because you wired the motor incorrectly, or because the locomotive will normally be run in reverse, or some other reason. The Direction of Travel feature of CV 29 allows you to define which way is forward. If the locomotive runs in the opposite of the expected direction, change the option for this feature..
+
+\subsection{Speed Control}
+\label{CV29speedcontrol}\index{speed control}
+This feature is meant for compatibility with older command stations. Aegaeon does not permit modification of this feature, and it is only listed for completeness. %If your command station is of relatively recent vintage, leave this options set to \textit{28/128-step}. In short, there are three different ways that a command station can direct a decoder's speed---with a 14-step, a 28-step, or a 128-step instruction. Most contemporary command stations will issue 28- or 128-step instructions, where older command stations use the older 14-step instruction. Aegaeon will respond properly to 14-step instructions regardless of this option setting. However, the 14-step instruction also contains the state of lighting function \textbf{FL}. If, when using an older command station, the lights attached to your Aegaeon do not respond, consider selecting the \textit{13-Step} option for this feature.
+
+\subsection{Run on DC}
+\label{CV29runondc}\index{DC operations}
+When enabled, this feature permits the use of your Aegeaon-equipped locomotive on analog layouts. Aegaeon is designed for the smoothest possible low-speed response to analog throttles. As an alternative, you may disable this feature, in which case Aegaeon will bring the motor to a halt when it encounters an analog signal. This option permits you to automate stopping at signals and stations by switching the track between a DCC and a DC signal.
+
+\subsection{Speed Curve}
+\label{CV29SpeedCurve}
+Speed curves define the relationship between Speed Steps and motor voltage. By default, the highest speed step is mapped to 100\% voltage, and the lowest speed step to about 0.4\% voltage. You may define the mapping between speed steps and voltage in one of two ways: With a \textit{Basic Speed Curve}, or an \textit{Advanced Speed Curve}.
+
+\index{speed curve!basic}The Basic Speed Curve is the simplest to set up, and suffices for most applications. Here, you have three entries that tell the decoder how much voltage to apply to the motor at the first speed step, at the middle speed step (step TODO for 28-step instructions, and TODO of 128-step instructions), and at the largest speed step. Setting up the Basic Speed Curve is explained in \S\ref{BasicSpeedCurve} (pg. \pageref{BasicSpeedCurve}).
+
+\index{speed table!advanced}The Advanced Speed Curve is more involved to set up, but provides a great deal more flexibility in defining the relationship between speed steps and voltages, as it offers 28 points of control. The Advanced Speed Curve permits non-linear response curves, allowing, for example, finer control at low speeds. Setting up the Advanced Speed Curve is explained in \S\ref{AdvancedSpeedCurve} (pg. \pageref{AdvancedSpeedCurve}).
+
+\subsection{Addressing}
+\index{address}
+All decoders must be assigned an address. The address can take one of two distinct forms: Long Address or Short Address. The only difference between the two forms is the largest address that can be assigned. Aegaeon will automatically set this bit when you assign a short or long address to the decoder, so in general you need not worry about it. However, you can manually set which form of addressing you would like by setting this option yourself.
+
+Notice that if one of the assigned short or long address is `0', the non-zero address is used regardless of this feature's setting. If both addresses are assigned to `0', the Aegaeon defaults to having the short address 3. This is a fail-safe to prevent the decoder from becoming unreachable on the main line in case a mistake is made when setting the decoder's address.
+
+The observant will notice that there is an overlap in the range of these two addresses such that a long address of, e.g., 3 is \textit{distinct} from a short address of 3. This is an unfortunate side-effect of having two distinct address spaces. Most command stations will not permit you to assign a long address with a value within the valid range of short addresses---that is, will not permit you to assign a long address of, e.g., 3, forcing such addresses to be short.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Consisting}
+\label{consisting}
+Often it is desirable to run multiple locomotives or other rolling stock containing decoders as a single unit, called a consist. The Aegaeon family supports two mechanisms: permanent consisting, and advanced consisting.
+
+\subsection{Permanent Consisting}
+\index{consisting!permanent}
+Permanent consisting is the simplest way to define a consist. It is achieved simply by assigning the same address to each element of the consist. This method of consisting is recommended for multiple units such as commuter trains or high-speed rail where the configuration is fixed and several decoders might be used. Permanent consisting insures that the entire train behaves as a solitary unit, each decoder acting in lock-step with the others. It also eases configuration, as often you will have multiple decoders that must be configured identically---with permanent consisting, you need only issue configuration commands once, as all of the decoders are programmed in parallel.
+
+\subsection{Advanced Consisting}
+\label{AdvancedConsisting}\index{consisting!advanced}
+Advanced consisting is slightly more complex, but also more flexible. This is the recommended method for temporarily consisting several locomotives, as this method allows you to define the behavior of the locomotive in a consist separately from the behavior when running solo. 
+
+Advanced consisting is activated by writing a non-zero value into CV 19, Consist Address. This is a secondary address; you can issue commands to the decoder using either the primary address (see \S\ref{PrimaryAddress}) or the consist address. Commands issued to the consist address are acted upon by \textit{all} decoders with that consist address. Assigning a value to CV 19 also activates the consist-specific lighting and motor behaviors, if configured (see \S\ref{LightingInConsist} and \S\ref{MotorControlInConsist}). The valid range of consist addresses is 1--127. In addition, the consist address also determines the direction of travel for the locomotive in the consist, as sometimes you will want to place a locomotive reversed within the consist.
+
+\index{configuration variable!CV 019@CV 19}
+\label{CV19}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 19 --- Consist Address}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Address} & \textbf{Inactive} & \textbf{0} & \multirow{2}{*}{0} & \\
+									  & Active & 1--127 & & \\ \hline
+\multirow{2}{*}{Direction of Travel} & \textbf{Forward}	 & \textbf{0} & \multirow{2}{*}{0} &\\
+																		& Reversed & 128 & & \\ \hline \hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Odds and Ends}
+\subsection{Timeout}
+\index{timeout}
+A decoder which is not being actively used, yet remains running on the layout can be a liability. The timeout, defined by CV 11, is the amount of time that a decoder that has not received any commands will continue running at its current speed. Once the timeout limit is reached, the decoder will bring the motor to an emergency stop. A value of ``0'' disables this feature so that the decoder will continue running indefinitely in the abscence of explicit commands.
+
+\index{configuration variable!CV 011@CV 11}
+\label{CV11}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 11 --- Timeout}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+Timeout,& \textbf{Disabled}	 & \textbf{0} & \multirow{2}{*}{0} &\\
+in seconds & Active & 1--255 & & \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Decoder Lock}
+Some models will have multiple decoders in them. Decoder lock is a feature that is designed to help you configure each of the decoders in that one model individually without having to remove them one at a time. CV 16 is the \textit{lock}, and contains a value that is unique to each decoder inside the model (they do not have to be globally unique, just among the decoders inside the model)---this CV \textit{must} be set prior to installing the decoder. Once the decoder is installed, \textit{do not reconfigure CV 16!}---if you do, you will have to extract the decoder and reprogram it on its own. CV 15 is the \textit{key}: Aegaeon (and other decoders that implement this feature) will only accept CV programming commands when the value in the key (CV 15) matches the value in the lock (CV 16). Thus, to configure a locked decoder, program first the key to match the lock of the decoder you wish to access.
+
+Notice that this feature is disabled when the key, CV 16, is programmed to 0, the factory default.
+
+\index{configuration variable!CV 016@CV 16}\index{decoder lock}
+\label{CV16}
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 16 --- Decoder Lock}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Lock Address} & \textbf{Disabled} & \textbf{0} & \multirow{2}{*}{0} & \\
+ & Enabled & 1--255 &  &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 015@CV 15}
+\label{CV15}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 15 --- Decoder Key}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Key Value & 1--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Operations Mode Acknowledgment}
+Because programming CVs in Operations Mode offers no feedback to your programmer when CV programming is successful, Aegaeon can optionally provide visual feedback to you. Aegaeon:M and :L2 decoders give a short pulse to the motor, while Aegaeon:C flashes the headlights to indicate that programming a CV was successful. This feature is on by default---CV 47 controls the behavior of this feature.
+
+Please note that this feature is \textit{not} to be confused with Lenz RailCom\textsuperscript{\textregistered}  feedback or Digitrax Transponding feedback. This basic acknowledgement is meant only to provide a visual cue to the user.
+
+\index{configuration variable!CV 047@CV 47}\index{operations mode acknowledgment}
+\label{CV47}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 47 --- Operations Mode Acknowledgment}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Acknowledgement} & \textbf{On}	 & \textbf{1} & \multirow{2}{*}{1} &\\
+													& Off & 0 & & \\ \hline
+\end{tabular}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Motor Configuration}
+\label{motorconfiguration}
+This chapter applies only to the Aegaeon:L2 and :M decoders.
+
+The Aegaeon:L2 and :M decoders provide a number of options for configuring the motor behavior, allowing you to tailor the decoder to the model and enhancing the operation of your model, including:
+
+\begin{itemize}
+\item Basic (3-Step) and Advanced (28-Step) Speed Curves
+\item Independent forward and reverse trim
+\item Independent acceleration and deceleration (momentum)
+\item Feedback control of the motor (BEMF)
+\begin{itemize}
+\item With separate settings for solo and consisted operation
+\end{itemize}
+\item Triggerable shunting mode (half speed)
+\item Selectable motor control frequency
+\item Configurable kick-start pulse to overcome stiction
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tailoring to the Motor}
+\label{TailoringToMotor}
+
+\subsection{Motor Control Frequency}
+\label{MotorControlFrequency}\index{motor!frequency}
+Aegaeon, like all decoders, uses pulsed voltages for precise motor control. The frequency of these pulses can be selected within Aegaeon with a CV setting. 32KHz mode, the default, provides the quietest operation, at the cost, in some motors, of somewhat decreased torque (pulling ability). 16KHz mode increases the available torque slightly, but at the cost of a little bit of high-pitched hum from the motor. Most motors will respond to either mode more or less equally well; only adjust this setting if you are experiencing a significant loss of pulling power with Aegaeon installed.
+
+\index{configuration variable!CV 059@CV 59}
+\label{CV59}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 59 --- Motor Control Frequency}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Frequency}	& \textbf{32KHz}	& \textbf{1} 	& \multirow{2}{*}{1} 	&\\
+			& 16KHz 		& 0 			& 				& \\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Kick Start}
+\label{KickStart}\index{motor!static friction}\index{kick start!see {motor,static friction}}
+Many DC motors, especially in older models, tend to stick a bit when accelerating from a dead stop. This phenomenon is often called `static friction', or `stiction' for short. You can observe it at work by applying throttle until the locomotive first begins to move, then backing the throttle off---if the locomotive slows down, and keeps running, then you've got static friction, and should consider applying a kick start.
+
+Kick-starting the motor is a method of overcoming static friction by applying a brief pulse of full voltage, to jolt the motor into action, and then immediately backing the throttle to the desired speed. Aegaeon allows you to configure the length of the pulse. When adjusting this feature, we recommend starting from a value of one, and gradually working upwards, rather than jumping directly to a larger value. Reasonable values will probably lie between 1 and 10.
+
+\index{configuration variable!CV 065@CV 65}
+\label{CV65}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 65 --- Kick Start}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Pulse length in ms & 0--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Motor Trim}
+\label{MotorTrim}\index{motor!trim}
+Often, a DC motor does not spin at the same rate when moving forward as when moving in reverse. Sometimes this difference can be quite large, in fact. Forward and Reverse Trim settings make it easy to tune the motor so that it will spin at the same rate in both directions. Typically, you will only need to set one or the other of these settings, but both are provided for your convenience.
+
+The final amount of trim is determined by dividing the value of the trim setting by 128. Thus, for example, a value of 64 results in a 50\% reduction in speed; a value of 192 results in a 150\% increase in speed.
+
+\index{configuration variable!CV 066@CV 66}
+\label{CV66}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 66 --- Forward Trim}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{4}{*}{Trim Amount}	& Disabled		& \textbf{0} 	& \multirow{4}{*}{0} 	&\\
+			& Decrease speed 	& 1--127 		& 				& \\
+			& No trim (disabled) 	& 128 		& 				& \\
+			& Increase speed 	& 129--255 	& 				& \\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 095@CV 95}
+\label{CV95}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 95 --- Reverse Trim}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{4}{*}{Trim Amount}	& Disabled		& \textbf{0} 	& \multirow{4}{*}{0} 	&\\
+			& Decrease speed 	& 1--127 		& 				& \\
+			& No trim (disabled) 	& 128 		& 				& \\
+			& Increase speed 	& 129--255 	& 				& \\ \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Momentum}
+\label{Momentum}\index{momentum}\index{inertia!see {momentum}}\index{acceleration!see {momentum}}\index{deceleration!see {momentum}}
+One of the great features of DCC is that it allows you to simulate the momentum of hauling a heavy train. Even if you would rather not perform a simulation, a small amount of momentum will help increase the life of your DC motor by shielding it from sudden changes in voltage, without affecting its responsiveness. Every motor is different, and every train is different, so some experimentation will be necessary to determine what feels right to you. 
+
+Momentum is simulated by applying a fixed acceleration or deceleration rate to the motor. The acceleration and deceleration rates are calculated by taking the value in the setting, and multiplying by 0.896 $\mathit{speed steps}/s^2$. A value of 0 turns this feature off.
+
+
+\index{configuration variable!CV 003@CV 3}
+\label{CV3}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 3 --- Acceleration Rate}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Acceleration rate & 0--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 004@CV 4}
+\label{CV4}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 4 --- Deceleration Rate}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Deceleration rate & 0--255 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic Speed Curve}
+\label{BasicSpeedCurve}\index{speed curve!basic}\index{speed table!see {speed curve}}
+
+Speed curves, sometimes called speed tables, allow you to tailor the motor's response to a given throttle position. Normally, the response is linear---the motor's speed increases proportional to the throttle setting. Sometimes, however, you would like to change this response curve. For example, if your motor does \textit{not} linearly respond to the throttle, you can use these values to attain a linear response. Or perhaps you want finer control over low speed operations, at the expense of coarser control over high speed operations.
+
+The Basic Speed Curve gives you three settings to tune; if you require finer control, consider activating the Advanced Speed Curve discussed in \S\ref{AdvancedSpeedCurve}. To activate the Basic Speed Curve, please see Basic Configuration in CV29 in \S\ref{CV29SpeedCurve}.
+
+The start voltage is the voltage applied to the motor at the first speed step beyond stop. The mid-range voltage is the voltage applied to the motor at the middle speed step. The maximum voltage is the voltage applied to the motor at full throttle. In general, a value of 0 means zero voltage, and 255 means full voltage.
+
+\index{configuration variable!CV 002@CV 2}
+\label{CV2}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 2 --- Start Voltage}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Voltage & 0--255 & 1 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 006@CV 6}
+\label{CV6}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 6 --- Mid-Range Voltage}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Voltage}		& Half-voltage		& \textbf{0} or 1 & \multirow{2}{*}{0} 	&\\
+			& User setting	 	& 2--255 		& 				& \\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 005@CV 5}
+\label{CV5}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 5 --- Maximum Voltage}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Voltage}		& Full-voltage		& \textbf{0} or 1 & \multirow{2}{*}{0} 	&\\
+			& User setting	 	& 2--255 		& 				& \\ \hline
+\end{tabular}
+\end{center}
+
+TODO insert some charts with examples
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Advanced Speed Curve}
+\label{AdvancedSpeedCurve}\index{speed curve!advanced}
+
+Speed curves, sometimes called speed tables, allow you to tailor the motor's response to a given throttle position. Normally, the response is linear---the motor's speed increases proportional to the throttle setting. Sometimes, however, you would like to change this response curve. For example, if your motor does \textit{not} linearly respond to the throttle, you can use these values to attain a linear response. Or perhaps you want finer control over low speed operations, at the expense of coarser control over high speed operations.
+
+The Advanced Speed Curve gives you twenty-eight settings to tune; if you do not require such fine control, consider activating the Basic Speed Curve discussed in \S\ref{BasicSpeedCurve}. To activate the Advanced Speed Curve, please see Basic Configuration in CV29 in \S\ref{CV29SpeedCurve}.
+
+The first setting in the Advanced Speed Curve is the voltage applied to the motor at the first speed step beyond stop. Each CV after the first defines the motor voltage at the next speed step in 28-step mode. In 128-step mode, the values between CVs are interpolated. Thus, CV 68 is for step 6 (of 128), CV 69 for step 11, with the appropriate values for steps 7--10 automatically calculated.
+
+Because setting up the Advanced Speed Curve is so tedious, you might consider using DecoderPro\textsuperscript{\textregistered}, freely available as part of the JMRI\textsuperscript{\textregistered} software suite (available at \url{jmri.sourceforge.net/download/}), to automate this process. Moreover, if you wish to preserve your hard work through a decoder reset, use the partial reset method described in \S\ref{DecoderReset}.
+
+\index{configuration variable!CV 067@CV 67}\index{configuration variable!CV 068@CV 68}
+\index{configuration variable!CV 068@CV 69}\index{configuration variable!CV 070@CV 70}
+\index{configuration variable!CV 071@CV 71}\index{configuration variable!CV 072@CV 72}
+\index{configuration variable!CV 073@CV 73}\index{configuration variable!CV 074@CV 74}
+\index{configuration variable!CV 075@CV 75}\index{configuration variable!CV 076@CV 76}
+\index{configuration variable!CV 077@CV 77}\index{configuration variable!CV 078@CV 78}
+\index{configuration variable!CV 079@CV 79}\index{configuration variable!CV 080@CV 80}
+\index{configuration variable!CV 081@CV 81}\index{configuration variable!CV 082@CV 82}
+\index{configuration variable!CV 083@CV 83}\index{configuration variable!CV 084@CV 84}
+\index{configuration variable!CV 085@CV 85}\index{configuration variable!CV 086@CV 86}
+\index{configuration variable!CV 087@CV 87}\index{configuration variable!CV 088@CV 88}
+\index{configuration variable!CV 089@CV 89}\index{configuration variable!CV 090@CV 90}
+\index{configuration variable!CV 091@CV 91}\index{configuration variable!CV 092@CV 92}
+\index{configuration variable!CV 093@CV 93}\index{configuration variable!CV 094@CV 94}
+\label{CV67}\label{CV68}
+\label{CV69}\label{CV70}
+\label{CV71}\label{CV72}
+\label{CV73}\label{CV74}
+\label{CV75}\label{CV76}
+\label{CV77}\label{CV78}
+\label{CV79}\label{CV80}
+\label{CV81}\label{CV82}
+\label{CV83}\label{CV84}
+\label{CV85}\label{CV86}
+\label{CV87}\label{CV88}
+\label{CV89}\label{CV90}
+\label{CV91}\label{CV92}
+\label{CV93}\label{CV94}
+\begin{center}
+\begin{longtable}{|l|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 67--94 --- Advanced Speed Table}} \\ \hline \hline
+\textit{CV}	& \textit{Step}	& \textit{Voltage}	& \textit{Default}	& \textit{User}	\\ \hline
+67		& 1			& 0--255			& 1				&			\\ \hline
+68		& 2			& 0--255			& 10				&			\\ \hline
+69		& 3			& 0--255			& 19				&			\\ \hline
+70		& 4			& 0--255			& 29				&			\\ \hline
+71		& 5			& 0--255			& 38				&			\\ \hline
+72		& 6			& 0--255			& 48				&			\\ \hline
+73		& 7			& 0--255			& 57				&			\\ \hline
+74		& 8			& 0--255			& 66				&			\\ \hline
+75		& 9			& 0--255			& 76				&			\\ \hline
+76		& 10			& 0--255			& 85				&			\\ \hline
+77		& 11			& 0--255			& 95				&			\\ \hline
+78		& 12			& 0--255			& 104			&			\\ \hline
+79		& 13			& 0--255			& 113			&			\\ \hline
+80		& 14			& 0--255			& 123			&			\\ \hline
+81		& 15			& 0--255			& 132			&			\\ \hline
+82		& 16			& 0--255			& 142			&			\\ \hline
+83		& 17			& 0--255			& 151			&			\\ \hline
+84		& 18			& 0--255			& 160			&			\\ \hline
+85		& 19			& 0--255			& 170			&			\\ \hline
+86		& 20			& 0--255			& 179			&			\\ \hline
+87		& 21			& 0--255			& 189			&			\\ \hline
+88		& 22			& 0--255			& 198			&			\\ \hline
+89		& 23			& 0--255			& 207			&			\\ \hline
+90		& 24			& 0--255			& 217			&			\\ \hline
+91		& 25			& 0--255			& 226			&			\\ \hline
+92		& 26			& 0--255			& 236			&			\\ \hline
+93		& 27			& 0--255			& 245			&			\\ \hline
+94		& 28			& 0--255			& 255			&			\\ \hline
+\end{longtable}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Feedback Control (BEMF)}
+\label{BEMF}\index{BEMF|see {feedback control}}\index{feedback control}
+
+Feedback control---sometimes mistakenly called `BEMF'---is a method for regulating a motor's speed using a feedback loop. The motor speed is continuously monitored, and compared to the desired speed; the applied voltage is adjusted up or down to bring the monitored speed to the desired speed as quickly as possible. Because a DC motor and a DC dynamo are essentially the same thing, the speed of a DC motor can be measured by allowing it to freewheel, and observing the generated voltage. This voltage, called back-EMF (or BEMF for short) is only one of many methods generally available to measure a DC motor's speed, but the only one available for most model trains.
+
+The advantages of feedback control are many: The locomotive will accelerate quickly to the desired speed regardless whether it is running light or hauling a long string of cars, running uphill or downhill. Additionally, low speed performance may be improved in many cases, as feedback control can help to smoothly overcome static friction (stiction), and maintain a smooth crawl.
+
+Many feedback algorithms exist; Aegaeon uses one called \textsc{pi+}. The \textsc{pi+} algorithm has three tunable parameters that will need adjusting to your particular motor. The defaults were chosen to give reasonable results out of the box; nevertheless, you should consider tuning them.
+
+\index{feedback control!proportional term}The first term is called the \textit{proportional} term, and controls the speed with which the algorithm corrects errors. A value too small leads to ineffective feedback control. A value too large leads to jerky, uneven performance.
+
+\index{configuration variable!CV 061@CV 61}
+\label{CV61}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 61 --- Feedback Control Proportional Term}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Strength & 0--255 & 50 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{feedback control!integral term}The second term is called the \textit{integral} term, and helps smooth out the correction. A value too small will fail to correct for jerky, uneven performance. A value too large will result in too slow a correction in error.
+
+\index{configuration variable!CV 062@CV 62}
+\label{CV62}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 62 --- Feedback Control Integral Term}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Strength & 0--255 & 24 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{feedback control!stiffness term}\label{MotorControlInConsist}The third term is called the \textit{stiffness} term, and is used to scale the effects of the \textit{integral} term. Stiffness determines how readily the decoder overcomes sudden changes in motor speed. A large value increases the stiffness, the decoder's resistance to changes. A small value decreases the stiffness. In general, larger values of stiffness are good for running solo, but lead to fighting in consists---an unacceptable pushing and pulling against each other. For this reason, Aegaeon provides two different stiffness settings, one for use when running solo, and one automatically activated with advanced consisting (see \S\ref{AdvancedConsisting}).
+
+\index{configuration variable!CV 063@CV 63}
+\label{CV63}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 63 --- Feedback Control Stiffness Term (Solo)}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Strength & 0--255 & 255 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 064@CV 64}
+\label{CV64}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 64 --- Feedback Control Stiffness Term (Consist)}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Strength & 0--255 & 152 &\\ \hline
+\end{tabular}
+\end{center}
+
+
+\label{FeedbackActivation}\index{feedback control!activation}Two more settings are available to tune the feedback control performance. The Feedback Cutout determines the speed (in 128-speed steps) at or above which the feedback control algorithm is shut off. This is useful if you only wish to use feedback control for low speed operations, or find that you prefer the non-feedback controlled performance at higher speeds. A value of 0 turns feedback control off entirely. A value of, for example, 10 turns feedback control off at speed step 10 and above. A value of 126 activates it for all speeds.
+
+If you are using 28-speed step control, you will have to calculate the proper value; the cut off value will be 4.5 times the 28-step speed step.
+
+\index{configuration variable!CV 010@CV 10}
+\label{CV10}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 10 --- Feedback Control Cutout}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Speed & 0--127 & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{feedback control!sampling frequency}The feedback control must shut off the control voltage to the motor to measure the BEMF. For this reason, continuous sampling is impossible. Rather, the feedback controller takes samples at a fixed interval. This interval is adjustable. Setting the value too low will reduce the available torque; setting it too high will result in slow response to changing conditions. Setting the value below approximately 10ms, however, results in undefined behavior and is strongly recommended against.
+
+\index{configuration variable!CV 060@CV 60}
+\label{CV60}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 60 --- Feedback Sampling Interval}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Interval in ms & 10--255 & 100 &\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Tuning the Feedback Control Parameters}
+
+There is a specific method that should be employed for tuning the feedback control terms in CV 61--64. TODO
+
+\section{Shunting Mode}
+\label{ShuntingMode}
+
+Shunting mode allows you finer control over low speed operations, such as in a yard, by halving the motor speed. By default, Function 5 is used to trigger shunting mode. See \S\ref{remapping} for the settings that permit you to reassign this functionality to a different function button.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Special Effects Configuration}
+\label{specialeffectsconfiguration}
+This chapter applies mainly to the Aegaeon:L2 and :C decoders, although it also covers the special Shunting Mode available on the Aegaeon:M.
+
+The Aegaeon:L2 and :C decoders provide a pair of highly configurable lighting outputs. The lighting outputs can be used to drive LEDs or bulbs. Each lighting output has the following options available:
+\begin{itemize}
+\item Configurable brightness and Rule 17 dimmed brightness
+\item Configurable directionality (on forwards, on reverse, on both, on neither)
+\item Rule 17 dimming (any combination of: dim in reverse, dim in forward, dim when stopped, dim on command)
+\item Optional simulated soft-start effect
+\item Animations, with configurable time duration:
+\begin{itemize}
+\item strobe
+\item double strobe
+\item rotary beacon
+\item firebox / random flicker
+\item Mars light
+\item Gyra light
+\item left and right ditch lights
+\end{itemize}
+\item Animations can optionally be set to be trigged by a function
+\end{itemize}
+
+\section{Outputs and Functions}
+\index{functions}\index{outputs}
+
+There is an important distinction between Outputs and Functions.
+
+Most decoders, Aegaeon included, provide one or more \textit{Outputs} for controlling special effects. In most cases, these outputs will have physical representation in the form of function wires on the decoder. Sometimes, however, the Output will be tied to a purely logical representation, internal to the operation of the decoder. The Outputs on Aegaeon are numbered from 1 to 7 (see \S\ref{outputs} below).
+
+Functions, on the other hand, are messages sent by a throttle in response to button presses. The buttons on a throttle are labeled from 0 to 10 or perhaps as high as 28. The NMRA defines a default mapping of Functions to Outputs (see \S\ref{remapping} for details), while also providing a mechanism for remapping the Function to Output connections, at least within certain bounds.
+
+\section{Decoder Outputs}
+\label{outputs}
+
+Aegaeon:L2 and :C provide for seven distinct Outputs, each of which can be assigned to a range of function buttons (see \S\ref{remapping} for details on how to do this). Notice that on Aegaeon:L2, ``white wire'' below means that the output attached to the white wire will be activated. On Aegaeon:C, it means that the white wire is made positive relative to the yellow wire.
+
+\begin{center}
+\begin{tabular}{|c|r|}
+\hline
+Output 1 & white wire \\ \hline
+Output 2 & yellow wire \\ \hline
+Output 3 & white wire animation \\ \hline
+Output 4 & yellow wire animation \\ \hline
+Output 5 & white wire Rule 17 dimming \\ \hline
+Output 6 & yellow wire Rule 17 dimming \\ \hline
+Output 7 & shunting mode (:L2 only) (see \S\ref{ShuntingMode})\\ \hline
+\end{tabular}
+\end{center}
+
+Aegaeon:M provides a much more limited range of Outputs:
+
+\begin{center}
+\begin{tabular}{|c|r|}
+\hline
+Output 1 & (no connection) \\ \hline
+Output 2 & (no connection) \\ \hline
+Output 3 & (no connection) \\ \hline
+Output 4 & (no connection) \\ \hline
+Output 5 & (no connection) \\ \hline
+Output 6 & (no connection) \\ \hline
+Output 7 & shunting mode (see \S\ref{ShuntingMode})\\ \hline
+\end{tabular}
+\end{center}
+
+\section{Lighting Brightness}
+
+The brightness for each of the two lighting outputs (Outputs 1 and 2) can be controlled independently. In addition, the dimmed or Rule 17 brightness for each output can be set as well (see \S\ref{Rule17} for more derails on Rule 17 dimming).
+
+\index{configuration variable!CV 049@CV 49}
+\label{CV49}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 49 --- Output 1 Brightness}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Brightness & 0--255 & 255 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 050@CV 50}
+\label{CV50}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 50 --- Output 1 Dimmed Brightness}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Brightness & 0--255 & 255 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 054@CV 54}
+\label{CV54}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 54 --- Output 2 Brightness}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Brightness & 0--255 & 255 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 055@CV 55}
+\label{CV55}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 55 --- Output 2 Dimmed Brightness}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Brightness & 0--255 & 255 &\\ \hline
+\end{tabular}
+\end{center}
+
+\section{Lighting Directionality, Rule 17, and Soft Start}
+
+Each of the two lighting outputs can be set to turn on and off automatically with the direction of the train. The lights can also always be controlled with function buttons. Te lights are on Outputs 1 and 2, both of which by default map to Function 0 (sometimes called Function L).
+
+\label{configRule17}Additionally, each output can be configured to dim under certain circumstances: when the locomotive is moving forwards, when the locomotive is moving in reverse, or when the locomotive is stopped. Rule 17 dimming can always be activated through Outputs 5 and 6, which by default map to Functions 3 and 4. For more on Rule 17 dimming, what it is, and how you might use it in your models, see \S\ref{Rule17}.
+
+\label{configSoftStart}\index{lighting!soft start}Finally, each output can be configured to simulate the presence of a soft start device. Soft start devices limit the current drawn by a locomotive's headlight, and hence lead to a slow, smooth ramping of the bulb's brightness. This option simulates that slow startup.
+
+\index{configuration variable!CV 048@CV 48}
+\label{CV48}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 48 --- Directionality, Rule 17 Dimming,}} \\
+\multicolumn{5}{|c|}{\textbf{and Soft start for Output 1}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{On Forward}	& \textbf{On}	& \textbf{1} 	& \multirow{2}{*}{1} 	&\\
+			& Off 		& 0 			& 				& \\ \hline
+\multirow{2}{*}{On Reverse}	& On			& 2 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Forward Stopped}	& On			& 4 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Reverse Stopped}	& On			& 8 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Forward}	& On			& 16 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Reverse}	& On			& 32 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Soft Start Effect}	& On			& 64 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 1 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 053@CV 53}
+\label{CV53}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 53 --- Directionality, Rule 17 Dimming,}} \\
+\multicolumn{5}{|c|}{\textbf{and Soft start for Output 2}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{On Forward}	& On			& 1 	& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 			& 				& \\ \hline
+\multirow{2}{*}{On Reverse}	& \textbf{On}	& \textbf{2} 			& \multirow{2}{*}{2} 	&\\
+			& Off 		& 0 	& 	& \\ \hline
+\multirow{2}{*}{Dim Forward Stopped}		& On		& 4 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Reverse Stopped}		& On			& 8 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Forward}	& On			& 16 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Dim Reverse}	& On			& 32 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline
+\multirow{2}{*}{Soft Start Effect}	& On			& 64 			& \multirow{2}{*}{0} 	&\\
+			& \textbf{Off} 	& \textbf{0} 	& 				& \\ \hline\hline
+
+\multicolumn{3}{|r|}{\textit{Total}} & 2 &\\ \hline
+\end{tabular}
+\end{center}
+
+\section{Lighting Animations}
+
+Each of the two outputs can be optionally assigned an animation designed to simulate some physical device such as a strobe or firebox. Furthermore, these animations can be static (on whenever the lighting output is on), or controlled by a function button such that the output alternates between steady on and animated, depending on the push of a button. This is particularly useful in the case of ditch lights and Mars or Gyra lights, which the engineer has the option of turning on and off independently of the light itself. The choice of animation and whether that animation is triggerable is controlled by Output Animation (CV 51 and 56). The animation triggers are on Outputs 3 and 4, which by default map to Functions 1 and 2.
+
+The speed of each outputs animations can also be adjusted. Each animation comprises 64 frames; by default, each frame lasts 62ms, giving a total animation period of 2 seconds. If you find the animations to be too fast or too slow, you can adjust the Animation Period (CV 52 and 57) settings.
+
+The animations on both lighting Outputs are designed to work in sync, so that for example the left and right ditch lights will always flash in opposition. If you find this synchronization unwelcome, consider adjusting on or both of the Animation Periods (CV 52 and 57) to pull them out of sync.
+
+Not sure what a Gyra Light is? What use is a random flicker? To learn more about prototypical uses for the animations, turn to \S\ref{animations}
+
+\index{configuration variable!CV 051@CV 51}
+\label{CV51}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 51 --- Output 1 Animation}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{9}{*}{Animation}		& \textbf{Off}		& \textbf{0} 		& \multirow{9}{*}{0} 	&\\
+			& Strobe 			& 1 		& 				& \\ 
+			& Double Strobe	& 2 		& 				& \\ 
+			& Rotary Beacon 	& 3 		& 				& \\ 
+			& Firebox / Random Flicker 			& 4 		& 				& \\ 
+			& Left Ditch Light 	& 5 		& 				& \\ 
+			& Right Ditch Light 	& 6 		& 				& \\
+			& Mars Light 		& 7 		& 				& \\
+			& Gyra Light 		& 8 		& 				& \\ \hline
+\multirow{2}{*}{Triggerable}	& \textbf{No}		& \textbf{0} 		& \multirow{2}{*}{0} 	&\\
+			& Yes	 		& 128	& 				& \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 052@CV 52}
+\label{CV52}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 52 --- Output 1 Animation Period}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Period in ms & 0--255 & 62 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 056@CV 56}
+\label{CV56}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 56 --- Output 2 Animation}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{9}{*}{Animation}		& \textbf{Off}		& \textbf{0} 		& \multirow{9}{*}{0} 	&\\
+			& Strobe 			& 1 		& 				& \\ 
+			& Double Strobe	& 2 		& 				& \\ 
+			& Rotary Beacon 	& 3 		& 				& \\ 
+			& Firebox / Random Flicker 			& 4 		& 				& \\ 
+			& Left Ditch Light 	& 5 		& 				& \\ 
+			& Right Ditch Light 	& 6 		& 				& \\
+			& Mars Light 		& 7 		& 				& \\
+			& Gyra Light 		& 8 		& 				& \\ \hline
+\multirow{2}{*}{Triggerable}	& \textbf{No}		& \textbf{0} 		& \multirow{2}{*}{0} 	&\\
+			& Yes	 		& 128	& 				& \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 057@CV 57}
+\label{CV57}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{CV 57 --- Output 2 Animation Period}} \\ \hline \hline
+\textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
+Period in ms & 0--255 & 62 &\\ \hline
+\end{tabular}
+\end{center}
+
+
+\section{Function Control of Lighting}
+
+Aegaeon offers a highly flexible system for configuring how the lighting and other special effects are triggered. You can customize which function buttons on your thorttle operate the lighting, how the lighting operations behave when in an Advanced Consist, and how they behave when running on DC (and hence beyond the reach of the function buttons on your DCC throttle).
+
+\subsection{Mapping Functions to Outputs}
+\label{remapping}\index{lighting!mapping to functions}\index{function mapping}
+
+Each of the seven Outputs provided by Aegaeon are mapped to the Function buttons on your throttle as below. If this mapping does not suit, it can be adjusted to better fit your desired operating scheme.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textit{Output} & \textit{Description} & \textit{Default} & \textit{Available} \\ \hline
+1 & white wire & F0 (FL) & F0--F3 \\ \hline
+2 & yellow wire & F0 (FL) & F0--F3\\ \hline
+3 &  white wire animation trigger & F1 & F0--F3\\ \hline
+4 & yellow wire animation trigger & F2 & F0--F8\\ \hline
+5 & white wire Rule 17 dimming & F3 & F0--F8\\ \hline
+6 & yellow wire Rule 17 dimming & F4 & F0--F8\\ \hline
+7 & shunting mode & F5 & F0--F8\\ \hline
+\end{tabular}
+\end{center}
+
+(If you are wondering why Outputs 1, 2, and 3 can only be mapped to a much smaller range than the rest, blame the NMRA; this was not our decision to make.)
+
+Each Function button can be assigned to trigger zero or more Outputs. The procedure for doing this is as follows. For each Function buttons, decide which Outputs (perhaps more than one) that that Function should trigger, locate the appropriate CV tables below, and add up the rows for the selected Outputs to determine the value to program to that CV.
+
+Bear in mind that only the :L2 supports all seven Outputs. See \S\ref{outputs} for details.
+
+(The astute will observe that many decoders, and indeed the NMRA specifications for function remapping, draw a distinction between F0 when running forwards and when running backwards, as though these were two distinct Functions. In fact, they are not, and the Aegaeon family of decoders does not recognize this distinction. Thus, Aegaeon uses only CV 34 to remap F0, and ignores CV 33. If you are not sure what this means, or why we raise this issue, then you might be happier if you ignored this parenthetical note.)
+
+\index{configuration variable!CV 034@CV 34}
+\label{CV34}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 34 --- F0 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{White Wire} & Not Mapped to F0 & 0	& 	\multirow{2}{*}{1}&\\
+                             & \textbf{Mapped to F0} & \textbf{1} & & \\ \hline
+\multirow{2}{*}{Yellow Wire} & Not Mapped to F0 & 0	& 	\multirow{2}{*}{2}&\\
+                             & \textbf{Mapped to F0} & \textbf{2} & & \\ \hline
+\multirow{2}{*}{White Wire Animation Trigger} & \textbf{Not Mapped to F0} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F0 & 4 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F0} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F0 & 8 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F0} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F0 & 16 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F0} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F0 & 32 & & \\ \hline
+\multirow{2}{*}{Shunting Mode}  & \textbf{Not Mapped to F0} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F0 & 64 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 3 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 035@CV 35}
+\label{CV35}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 35 --- F1 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{White Wire} & \textbf{Not Mapped to F1} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                            & Mapped to F1 & 1 & & \\ \hline
+\multirow{2}{*}{Yellow Wire} & \textbf{Not Mapped to F1} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                            & Mapped to F1 & 2 & & \\ \hline
+\multirow{2}{*}{White Wire Animation Trigger} & Not Mapped to F1 & 0	& 	\multirow{2}{*}{4}& \\
+                           & \textbf{Mapped to F1} & \textbf{4} & & \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F1} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F1 & 8 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F1} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F1 & 16 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F1} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F1 & 32 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F1} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F1 & 64 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 4 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 036@CV 36}
+\label{CV36}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 36 --- F2 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{White Wire} & \textbf{Not Mapped to F2} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                            & Mapped to F2 & 1 & & \\ \hline
+\multirow{2}{*}{Yellow Wire} & \textbf{Not Mapped to F2} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                            & Mapped to F2 & 2 & & \\ \hline
+\multirow{2}{*}{White Wire Animation Trigger} & \textbf{Not Mapped to F2} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F2 & 4 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & Not Mapped to F2 & 0	& 	\multirow{2}{*}{8}& \\
+                           & \textbf{Mapped to F2} & \textbf{8} & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F2} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F2 & 16 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F2} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F2 & 32 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F2} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F2 & 64 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 8 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 037@CV 37}
+\label{CV37}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 37 --- F3 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{White Wire} & \textbf{Not Mapped to F3} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                            & Mapped to F3 & 1 & & \\ \hline
+\multirow{2}{*}{Yellow Wire} & \textbf{Not Mapped to F3} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                            & Mapped to F3 & 2 & & \\ \hline
+\multirow{2}{*}{White Wire Animation Trigger} & \textbf{Not Mapped to F3} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F3 & 4 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F3} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F3 & 8 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & Not Mapped to F3 & 0	& 	\multirow{2}{*}{16}& \\
+                             & \textbf{Mapped to F3} & \textbf{16} & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F3} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F3 & 32 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F3} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F3 & 64 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 16 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 038@CV 38}
+\label{CV38}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 38 --- F4 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F4} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F4 & 1 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F4} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F4 & 2 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & Not Mapped to F4 & 0	& 	\multirow{2}{*}{4}&\\
+                             & \textbf{Mapped to F4} & \textbf{4} & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F4} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F4 & 8 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 4 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 039@CV 39}
+\label{CV39}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 39 --- F5 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F5} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F5 & 1 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F5} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F5 & 2 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F5} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F5 & 4 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & Not Mapped to F5 & 0	& 	\multirow{2}{*}{8}&\\
+                             & \textbf{Mapped to F5} & \textbf{8} & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 8 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 040@CV 40}
+\label{CV40}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 40 --- F6 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F6} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F6 & 1 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F6} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F6 & 2 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F6} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F6 & 4 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F6} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F6 & 8 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 041@CV 41}
+\label{CV41}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 41 --- F7 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F7} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F7 & 1 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F7} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F7 & 2 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F7} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F7 & 4 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F7} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F7 & 8 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 042@CV 42}
+\label{CV42}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 42 --- F8 Output Mapping}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{Yellow Wire Animation Trigger} & \textbf{Not Mapped to F8} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Mapped to F8 & 1 & & \\ \hline
+\multirow{2}{*}{White Wire Rule 17 Dimming} & \textbf{Not Mapped to F8} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                             & Mapped to F8 & 2 & & \\ \hline
+\multirow{2}{*}{Yellow Wire Rule 17 Dimming} & \textbf{Not Mapped to F8} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F8 & 4 & & \\ \hline
+\multirow{2}{*}{Shunting Mode} & \textbf{Not Mapped to F8} & \textbf{0}	& 	\multirow{2}{*}{0}&\\
+                             & Mapped to F8 & 8 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Assigning Functions to an Advanced Consist}
+\label{LightingInConsist}
+When part of an Advanced Consist (see \S\ref{AdvancedConsisting}), the various Functions can only be controlled from the decoder's Primary Address. Sometimes, however, you would prefer to control certain Functions from the Advanced Consist Address. You can set this up with Consist Function Control. A Function under control of the Consist Address cannot be controlled from the Primary Address, and \textit{vice versa}.
+
+\index{configuration variable!CV 021@CV 21}
+\label{CV21}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 21 --- Consist Control of F1--F8}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{F1} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 1 & & \\ \hline
+\multirow{2}{*}{F2} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 2 & & \\ \hline
+\multirow{2}{*}{F3} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 4 & & \\ \hline
+\multirow{2}{*}{F4} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 8 & & \\ \hline
+\multirow{2}{*}{F5} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 16 & & \\ \hline
+\multirow{2}{*}{F6} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 32 & & \\ \hline
+\multirow{2}{*}{F7} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 64 & & \\ \hline
+\multirow{2}{*}{F8} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 128 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 022@CV 22}
+\label{CV22}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 22 --- Consist Control of F0}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{F0} & \textbf{Primary Address Control} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & Consist Address Control & 1 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Function Status in DC Mode}
+
+When running your train with analog DC, you cannot control the lighting functions using the function keys on your throttle. Aegaeon allows you to set up the default Function behaviors when running on DC. Functions can be set to turn off when running on DC (the default), or to automatically turn on when running on DC. Notice that in DC mode, any direction- or speed-dependent behaviors will continue to operate as normal.
+
+\index{configuration variable!CV 013@CV 13}
+\label{CV13}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 13 --- DC Control of F1--F8}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{F1} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 1 & & \\ \hline
+\multirow{2}{*}{F2} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 2 & & \\ \hline
+\multirow{2}{*}{F3} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 4 & & \\ \hline
+\multirow{2}{*}{F4} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 8 & & \\ \hline
+\multirow{2}{*}{F5} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 16 & & \\ \hline
+\multirow{2}{*}{F6} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 32 & & \\ \hline
+\multirow{2}{*}{F7} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 64 & & \\ \hline
+\multirow{2}{*}{F8} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 128 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+\index{configuration variable!CV 014@CV 14}
+\label{CV14}
+\begin{center}
+\begin{tabular}{|l|lc|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{CV 14 --- DC Control of F0}} \\ \hline \hline
+\textit{Feature} & \multicolumn{2}{c|}{\textit{Options}} & \textit{Default} & \textit{User} \\ \hline
+\multirow{2}{*}{F0} & \textbf{Off on DC} & \textbf{0}	& 	\multirow{2}{*}{0}& \\
+                           & On on DC & 1 & & \\ \hline\hline
+\multicolumn{3}{|r|}{\textit{Total}} & 0 &\\ \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Operations}
+\label{operations}
+
+The Aegaeon family of digital decoders operate the same as any digital decoder.
+
+\section{Setting the Speed}
+
+TODO notice that at the very least, the momentum settings for the :C are important too, if you want to keep automatic-direction headlights in sync with rest of train.
+
+\section{Operating the Special Effects}
+
+\subsection{Activating the Lights}
+\label{softstart}
+
+\subsection{Triggering Animations}
+\label{animations}
+
+\subsection{Rule 17 Dimming}
+\label{Rule17}
+
+\section{Care and Feeding}
+
+Although designed for maximal robustness, Aegaeon nevertheless requires a certain degree of care. When handling, for example during installation, always be sure to ground yourself first to prevent frying Aegaeon with a static shock. Below are some important considerations when caring for your decoder.
+
+\subsection{Operating Voltage}
+
+All Aegaeon decoders are rated for a \textit{maximum} voltage of 28V. Running Aegaeon in an environment with sustained voltages of 28V or more \textit{will} shorten the life of your decoder---perhaps to only a few seconds!
+
+If you aren't sure what voltage your system uses, there are several things you might try to find out. You can measure the voltage directly if you have a multimeter or DC voltmeter handy.
+
+Set your multimeter to DC voltage measurement, and place the black probe on a grounded point on your booster, and the red probe on one or the other rails; multiply the resulting reading by two. For example, if you read 7V with this method, then the true voltage is somewhere around 14V.
+
+\subsubsection{Long Feeder Runs and Voltage Spikes}
+Even if you feel secure, whether by measurement or specification, that your boosters provide a voltage well below the 28V limit, if your layout incorporates long feed runs you are leaving open the possibility of difficult to detect and potentially hazardous voltage spikes---perhaps 60V or more! DCC requires \textit{short} feeders; long feeders (several meters long) can create a type of interference know as \textit{reflections}, which can momentarily double or even quadruple the voltage on the rails. If your layout incorporates such long feeders, you have two options to avoid such reflections, and hence to avoid damaging your decoders.
+
+The first is to shorten the feeders by using a distributed network of boosters (such as the Railstars RAILboosster), instead of a single monolithic central booster. This is the best solution, but also the costliest in time and money.
+
+The second is to terminate the long feeders by connecting a 100ohm TODO resistor and 0.1microfarad TODO capacitor between the two feeder wires are the far end of the feeder, as per the illustration in Figure TODO.
+
+TODO illustration.
+
+For more information on the hazards of long feeder runs, see Alan Gartner's excellent website ``Wiring for DCC'', \url{http://www.wiringfordcc.com/track_2.htm#c2}.
+
+\subsection{Short Circuits}
+
+Although Aegaeon can withstand brief short circuits during normal operation, as with all decoders, care should nevertheless be taken to avoid exposing Aegaeon to prolonged short circuit conditions. All command stations and boosters on the market today have some form of current-limiting device or breaker on them, so the risk here is quite low with DCC, although short circuits on a DC system remain a risk to any digital decoder.
+
+\subsection{Cleanliness}
+
+DCC is very sensitive to dirt on the tracks or wheels, much more so than analog DC control. Even track that appears clean might yet have enough dirt to cause significant stuttering during operation. We strongly recommend you keep your track and wheels as clean as you can manage for the smoothest, most trouble-free operation. Dedicated cleanning stock is a good choice on larger layouts, although smaller ones are perhaps best cleaned by hand. Opinions on the best cleaning agents vary---wildly!---and so we refrain from making any particular recommendations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Troubleshooting}
+\label{troubleshooting}
+
+When things go wrong on a digital layout, the reason can be maddeningly difficult to ascertain. In most cases, a simple reset should do the trick; in others a more involved procedure may be called for. This chapter will give an overview to diagnosing and solving problems that might arise with your Aegaeon digtal decoder.
+
+\section{First Resort: Power Cycle}
+
+The first thing to try, in case of odd or unexpected behavior from your Aegaeon decoder, is to cut all power to your layout, count to ten, and power it back up. The fix might be as simple as that. Make sure that the layout is actually receiving power by trying to run a second, known-good train.
+
+\section{Second Resort: Try a Reset}
+
+Assuming there is no smoke escaping the decoder---which would indicate a serious hardware fault condition---the first thing to try when things aren't working right is a Hard Reset. This restores the contents of the decoder's memory to the same condition it was in when it left the factory. To perform a Hard Reset, follow the instructions in \S\ref{DecoderReset}---basically, on the programming track, write a value ``8'' to CV 8.
+
+After a Hard Reset, don't forget that your Aegaeon will default to Primary Address 3. If a Hard Reset does not resolve the issue, have a look at the following section.
+
+\section{Problems and Solutions}
+\label{FAQ}
+
+\begin{description}
+\item[The lights work, but the motor won't turn when I apply power.] There are several reasons why this might happen, ranging from configuration issues (which should be cleard by a Hard Reset) to wiring issues.
+
+	\begin{itemize}
+	\item Make sure you are using the correct address! After a Hard Reset, Aegaeon defaults to address 3.
+	\item Check that your command station is sending speed packets in the format that Aegaeon is expecting; the setting for this is in CV 29 (\S\ref{CV29speedcontrol}).
+   \item Make sure that the voltage values in CVs 2, 6 and 5 (see \S\S\ref{CV2}, \ref{CV6}, \ref{CV5}) are set to provide a reasonably large voltage to the motor.
+	\item Check that the motor leads are soldered solidly to the motor brushes.
+	\end{itemize}
+
+\item[The motor seems to work, but the lights never come on.] There are several reasons why this might happen ,ranging from configuration issues (which should be cleared by a Hard Reset) to wiring issues.
+
+	\begin{itemize}
+	\item Make sure you are using the correct address! After a Hard Reset, Aegaeon defaults to address 3.
+   \item Make sure that the configuration values in the special effects CVs described in \S\ref{specialeffectsconfiguration} are configured to actually turn on the lights.
+	\item Check that the yellow, white (and possibly blue) leads are soldered solidly to the lights.
+	\end{itemize}
+
+\end{description}
+
+If your problem isn't described or solved here, check the Railstars Support Website at \url{http://support.railstars.com} for the latest troubleshooting docments, FAQs, and our ever-friendly suport forum.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\chapter{CV List}
+
+\begin{center}
+\begin{longtable}{|c|l|c|c|c|}
+\hline
+Number&Name&Default&User&Page \\ \hline\hline
+1&Short Address&3&&pg. \pageref{CV1} \\ \hline
+2&Basic Speed Curve 1&1&&pg. \pageref{CV2} \\ \hline
+3&Acceleration Rate&0&&pg. \pageref{CV3} \\ \hline
+4&Deceleration Rate&0&&pg. \pageref{CV4} \\ \hline
+5&Basic Speed Curve 3&0&&pg. \pageref{CV5} \\ \hline
+6&Basic Speed Curve 2&0&&pg. \pageref{CV6} \\ \hline
+7&Decoder Family Identification&5/1/4&&pg. \pageref{CV7} \\ \hline
+8&Manufacturer ID / Decoder Reset&91&&pg. \pageref{CV8} \\ \hline
+10&Motor Feedback Cutout Speed&0&&pg. \pageref{CV10} \\ \hline
+11&Packet Timeout Value&0&&pg. \pageref{CV11} \\ \hline
+13&DC Mode Function Status for F1--F8&0&&pg. \pageref{CV13} \\ \hline
+14&DC Mode Function Status for FL, F9--F12&3&&pg. \pageref{CV14} \\ \hline
+15&Decoder Lock Value&0&&pg. \pageref{CV15} \\ \hline
+16&Decoder Lock Set&0&&pg. \pageref{CV16} \\ \hline
+17&Long Address 1&0&&pg. \pageref{CV17} \\ \hline
+18&Long Address 2&0&&pg. \pageref{CV18} \\ \hline
+19&Consist Address&0&&pg. \pageref{CV19} \\ \hline
+21&F1--F8 Active in Consist&0&&pg. \pageref{CV21} \\ \hline
+22&Fl, F9--F12 Active in Consist&0&&pg. \pageref{CV22} \\ \hline
+29&Basic Configuration&6&&pg. \pageref{CV29} \\ \hline
+34&Output Location FL&3&&pg. \pageref{CV34} \\ \hline
+35&Output Location F1&4&&pg. \pageref{CV35} \\ \hline
+36&Output Location F2&8&&pg. \pageref{CV36} \\ \hline
+37&Output Location F3&16&&pg. \pageref{CV37} \\ \hline
+38&Output Location F4&4&&pg. \pageref{CV38} \\ \hline
+39&Output Location F5&8&&pg. \pageref{CV39} \\ \hline
+40&Output Location F6&16&&pg. \pageref{CV40} \\ \hline
+41&Output Location F7&32&&pg. \pageref{CV41} \\ \hline
+42&Output Location F8&64&&pg. \pageref{CV42} \\ \hline
+47&Operations Mode Basic Ack Enable&1&&pg. \pageref{CV47} \\ \hline
+48&Output 1 Directionality and Rule17 Options&1&&pg. \pageref{CV48} \\ \hline
+49&Output 1 Maximum Brightness&255&&pg. \pageref{CV49} \\ \hline
+50&Output 1 Dimmed Brightness&255&&pg. \pageref{CV50} \\ \hline
+51&Output 1 FX&0&&pg. \pageref{CV51} \\ \hline
+52&Output 1 FX Period&62&&pg. \pageref{CV52} \\ \hline
+53&Output 2 Directionality and Rule17 Options&2&&pg. \pageref{CV53} \\ \hline
+54&Output 2 Maximum Brightness&255&&pg. \pageref{CV54} \\ \hline
+55&Output 2 Dimmed Brightness&255&&pg. \pageref{CV55} \\ \hline
+56&Output 2 FX&0&&pg. \pageref{CV56} \\ \hline
+57&Output 2 FX Period&62&&pg. \pageref{CV57} \\ \hline
+58&Firmware Revision&1&&pg. \pageref{CV58} \\ \hline
+59&Motor Drive Frequency&1&&pg. \pageref{CV59} \\ \hline
+60&Motor Feedback Sampling Period&100&&pg. \pageref{CV60} \\ \hline
+61&Motor Feedback P-Gain&50&&pg. \pageref{CV61} \\ \hline
+62&Motor Feedback I-Gain&24&&pg. \pageref{CV62} \\ \hline
+63&Motor Feedback F-Gain&255&&pg. \pageref{CV63} \\ \hline
+64&Motor Feedback F-Gain in Consist&152&&pg. \pageref{CV64} \\ \hline
+65&Motor Kick Start Time&0&&pg. \pageref{CV65} \\ \hline
+66&Forward Trim&0&&pg. \pageref{CV66} \\ \hline
+67&Advanced Speed Curve 1&1&&pg. \pageref{CV67} \\ \hline
+68&Advanced Speed Curve 2&10&&pg. \pageref{CV68} \\ \hline
+69&Advanced Speed Curve 3&19&&pg. \pageref{CV69} \\ \hline
+70&Advanced Speed Curve 4&29&&pg. \pageref{CV70} \\ \hline
+71&Advanced Speed Curve 5&38&&pg. \pageref{CV71} \\ \hline
+72&Advanced Speed Curve 6&48&&pg. \pageref{CV72} \\ \hline
+73&Advanced Speed Curve 7&57&&pg. \pageref{CV73} \\ \hline
+74&Advanced Speed Curve 8&66&&pg. \pageref{CV74} \\ \hline
+75&Advanced Speed Curve 9&76&&pg. \pageref{CV75} \\ \hline
+76&Advanced Speed Curve 10&85&&pg. \pageref{CV76} \\ \hline
+77&Advanced Speed Curve 11&95&&pg. \pageref{CV77} \\ \hline
+78&Advanced Speed Curve 12&104&&pg. \pageref{CV78} \\ \hline
+79&Advanced Speed Curve 13&113&&pg. \pageref{CV79} \\ \hline
+80&Advanced Speed Curve 14&123&&pg. \pageref{CV80} \\ \hline
+81&Advanced Speed Curve 15&132&&pg. \pageref{CV81} \\ \hline
+82&Advanced Speed Curve 16&142&&pg. \pageref{CV82} \\ \hline
+83&Advanced Speed Curve 17&151&&pg. \pageref{CV83} \\ \hline
+84&Advanced Speed Curve 18&160&&pg. \pageref{CV84} \\ \hline
+85&Advanced Speed Curve 19&170&&pg. \pageref{CV85} \\ \hline
+86&Advanced Speed Curve 20&179&&pg. \pageref{CV86} \\ \hline
+87&Advanced Speed Curve 21&189&&pg. \pageref{CV87} \\ \hline
+88&Advanced Speed Curve 22&198&&pg. \pageref{CV88} \\ \hline
+89&Advanced Speed Curve 23&207&&pg. \pageref{CV89} \\ \hline
+90&Advanced Speed Curve 24&217&&pg. \pageref{CV90} \\ \hline
+91&Advanced Speed Curve 25&226&&pg. \pageref{CV91} \\ \hline
+92&Advanced Speed Curve 26&236&&pg. \pageref{CV92} \\ \hline
+93&Advanced Speed Curve 27&245&&pg. \pageref{CV93} \\ \hline
+94&Advanced Speed Curve 28&255&&pg. \pageref{CV94} \\ \hline
+95&Reverse Trim&0&&pg. \pageref{CV95} \\ \hline
+105&User CV 1&0&&pg. \pageref{CV105} \\ \hline
+106&User CV 2&0&&pg. \pageref{CV106} \\ \hline
+\end{longtable}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Specifications}
+
+\subsection*{Maximum Ratings}
+
+These ratings represent the absolute maximum that your Aegaeon decoder should be subjected to. Sustained exposure to conditions at or near these ratings will degrade the operational lifetime of your decoder.
+
+\begin{center}
+\begin{longtable}{|l|c|c|}
+\hline
+\textit{Condition} & \textit{Max} & \textit{Units}\\ \hline
+$V_{\mathrm{RMS}}$\footnote{As measured at the rails.} & 30 & V \\ \hline
+Motor: $I_{\mathrm{continuous}}$ & 800 & mA \\ \hline
+Motor: $I_{\mathrm{peak}}$ & 1500 & mA \\ \hline
+Lighting: $I_{\mathrm{continuous}}$ & 150 & mA \\ \hline
+Lighting: $I_{\mathrm{peak}} $ & 800 & mA \\ \hline
+\end{longtable}
+\end{center}
+
+\subsection*{Dimensions}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textit{Dimension} & \textit{Value} & \textit{Units}\\ \hline
+Width & 6.8 & mm \\
+       &0.267 & in \\ \hline
+Length & 11 & mm \\
+       & 0.433 & in \\ \hline
+Thickness & 3TODO & mm \\
+          & 18 & in \\ \hline
+\end{tabular}
+\end{center}
+
+\printindex
+
+\newpage
+
+This document copyright \copyright \ 2013 Railstars Limited.
+
+This document was typeset in Computer Modern with the \LaTeX \ document processing system.
+
+RailCom\textsuperscript{\textregistered} is a registered trademark of Lenz Elektronik GmbH.
+
+JMRI\textsuperscript{\textregistered} and DecoderPro\textsuperscript{\textregistered} are registered trademarks of Robert G Jacobsen.
+
+RAILbooster\textsuperscript{\texttrademark}, Aegaeon\textsuperscript{\texttrademark}, Aegaeon:L2\textsuperscript{\texttrademark}, Aegaeon:M\textsuperscript{\texttrademark}, and Ae\-gae\-on:C\textsuperscript{\texttrademark}  are trademarks of Railstars Limited.
+
+\end{document}
