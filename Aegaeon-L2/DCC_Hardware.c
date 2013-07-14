@@ -44,11 +44,15 @@ void DCC_Hardware_Initialize(void)
      *	Enable both the Input Capture and the Output Capture interrupts.
      *	The latter is used for timeout (0% and 100%) checkin
      */
+	#ifdef __DEBUG
+	TIMSK1 |= (1 << ICIE1); //if debugging, enable input capture interupt only; output match will be triggered during single-stepping and that causes problems
+	#else
     TIMSK1 |= (1 << ICIE1) | (1 << OCIE1A); //enable input capture enable, and output match enable. Output match is for DC timeout.
-
+	#endif
+	
     //DDRA |= (1<<DDA1) | (1<<DDA2);
     DIDR0 = (1 << ADC2D) | (1 << ADC1D); //disable digital inputs on AIN1 (negative input to comparator)
-    ACSR = (1 << ACBG) | (1 << ACIC) | (1 << ACIS1) | (1 << ACIS0); //use internal bandgap reference instead of AAIN0 as positive input; means we need only connect DCC signal to negative input, sweet!
+    ACSR = (1 << ACBG) | (1 << ACIC) | (1 << ACIS1) | (1 << ACIS0); //use internal bandgap reference instead of AIN0 as positive input; means we need only connect DCC signal to negative input, sweet!
 
     //initialize ADC
 }

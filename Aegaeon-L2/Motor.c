@@ -97,7 +97,7 @@ void Motor_Initialize(void)
 
     TCCR0A = (1 << WGM00); // phase correct PWM
     if(eeprom_read_byte((const uint8_t*)CV_MOTOR_FREQUENCY)) // positive value = high frequency, use fast PWM
-        TCCR0A |= (1 << WGM01);
+    TCCR0A |= (1 << WGM01);
     TCCR0B = (1 << CS00); //use /1 prescaler
 
     TCNT0 = 0;

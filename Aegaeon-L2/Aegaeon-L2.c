@@ -59,7 +59,10 @@ volatile DCC_Packet_t DCC_rx_buffer[2];
 
 int main(void)
 {
-    //OSCCAL = eeprom_read_byte((const uint8_t*)0x1FF);   //<-- THE PROBLEM IS HERE!?
+	#ifndef __DEBUG
+    OSCCAL = eeprom_read_byte((const uint8_t*)0x1FF);   //<-- THE PROBLEM IS HERE!?
+	#endif
+	
     //wdt_enable(WDTO_2S); //set a very long timeout.
 
 	cli();
