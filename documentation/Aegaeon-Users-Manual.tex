@@ -166,7 +166,7 @@ Siting the decoder is only half the battle. The Aegaeon:M has four wires that mu
 
 Part of this step is identifying where each of the four wires can be most easily connected to the model. The Red and Black wires collect the DCC signal and power from the tracks, and will need to be wired to the internal current collectors (some times called pick-ups). The Orange and Gray wires control the motor, and will need to be wired to the motor brushes. See Figure \ref{M-wiring} for an example of how to wire the Aegaeon:M.
 
-TODO figure \label{M-wiring}
+%TODO figure \label{M-wiring}
 
 \subsection{Isolate the Motor from the Frame}
 Normally, the motor's brushes make electrical contact with the two rails (usually indirectly via the frame, or other metal conductors within the model). Installing the Aegaeon:M requires that we break this connection, so that the decoder can control the motor directly. Find the points of electrical contact between the motor brushes and the rest of the model (often inside the metal frame, but sometimes with soldered wires or other mechanisms). Trim back any wires or long leads connecting the motor to the rest of the model, and use Kapton tape as insulation where the electrical contact is achieved via press-fit (a single layer of tape will suffice).
@@ -201,6 +201,7 @@ Even once the model has passed all the tests with flying colors, your work is no
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installing Aegaeon:C}
 
+% TODO write this
 The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to install. Installation consists of the following steps:
 \begin{enumerate}
 \item Make space for the decoder.
@@ -213,10 +214,12 @@ The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to 
 \item Reassemble model.
 \end{enumerate}
 
-TODO
+% TODO write this
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installing Aegaeon:L2}
+
+% TODO write this
 
 The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install. Installation consists of the following steps:
 \begin{enumerate}
@@ -232,7 +235,7 @@ The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install
 \item Reassemble model.
 \end{enumerate}
 
-TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
+% TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
 
 \section{It Doesn't Work!}
 
@@ -441,6 +444,7 @@ When enabled, this feature permits the use of your Aegeaon-equipped locomotive o
 \label{CV29SpeedCurve}
 Speed curves define the relationship between Speed Steps and motor voltage. By default, the highest speed step is mapped to 100\% voltage, and the lowest speed step to about 0.4\% voltage. You may define the mapping between speed steps and voltage in one of two ways: With a \textit{Basic Speed Curve}, or an \textit{Advanced Speed Curve}.
 
+%TODO fix this
 \index{speed curve!basic}The Basic Speed Curve is the simplest to set up, and suffices for most applications. Here, you have three entries that tell the decoder how much voltage to apply to the motor at the first speed step, at the middle speed step (step TODO for 28-step instructions, and TODO of 128-step instructions), and at the largest speed step. Setting up the Basic Speed Curve is explained in \S\ref{BasicSpeedCurve} (pg. \pageref{BasicSpeedCurve}).
 
 \index{speed table!advanced}The Advanced Speed Curve is more involved to set up, but provides a great deal more flexibility in defining the relationship between speed steps and voltages, as it offers 28 points of control. The Advanced Speed Curve permits non-linear response curves, allowing, for example, finer control at low speeds. Setting up the Advanced Speed Curve is explained in \S\ref{AdvancedSpeedCurve} (pg. \pageref{AdvancedSpeedCurve}).
@@ -719,7 +723,7 @@ Voltage & 0--255 & 1 &\\ \hline
 \end{tabular}
 \end{center}
 
-TODO insert some charts with examples
+%TODO insert some charts with examples
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Advanced Speed Curve}
@@ -889,7 +893,8 @@ Interval in ms & 10--255 & 100 &\\ \hline
 
 \subsection{Tuning the Feedback Control Parameters}
 
-There is a specific method that should be employed for tuning the feedback control terms in CV 61--64. TODO
+There is a specific method that should be employed for tuning the feedback control terms in CV 61--64.
+% TODO write that method
 
 \section{Shunting Mode}
 \label{ShuntingMode}
@@ -1485,7 +1490,7 @@ The Aegaeon family of digital decoders operate the same as any digital decoder.
 
 \section{Setting the Speed}
 
-TODO notice that at the very least, the momentum settings for the :C are important too, if you want to keep automatic-direction headlights in sync with rest of train.
+%TODO notice that at the very least, the momentum settings for the :C are important too, if you want to keep automatic-direction headlights in sync with rest of train.
 
 \section{Operating the Special Effects}
 
@@ -1515,9 +1520,10 @@ Even if you feel secure, whether by measurement or specification, that your boos
 
 The first is to shorten the feeders by using a distributed network of boosters (such as the Railstars RAILbooster), instead of a single monolithic central booster. This is the best solution, but also the costliest in time and money.
 
+%TODO dcc feeder termination
 The second is to terminate the long feeders by connecting a 100ohm TODO resistor and 0.1microfarad TODO capacitor between the two feeder wires are the far end of the feeder, as per the illustration in Figure TODO.
 
-TODO illustration.
+% TODO illustration.
 
 For more information on the hazards of long feeder runs, see Alan Gartner's excellent website ``Wiring for DCC'', \url{http://www.wiringfordcc.com/track_2.htm#c2}.
 
@@ -1697,6 +1703,7 @@ Width & 6.8 & mm \\
        &0.267 & in \\ \hline
 Length & 11 & mm \\
        & 0.433 & in \\ \hline
+       %TODO thickness
 Thickness & 3TODO & mm \\
           & 18 & in \\ \hline
 \end{tabular}
