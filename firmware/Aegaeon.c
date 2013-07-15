@@ -66,12 +66,11 @@ int main(void)
     //wdt_enable(WDTO_2S); //set a very long timeout.
 
 	cli();
-    /////////WHEN DEBUGGING DISABLE MATCH INTERRUPT ON TIMER1!!!
     
     //set all unused pins to inputs, enable pullups.
     //at boot time, all pins are set to inputs
     //the pins not used are: PA0, PA1, PA4, PA5 (:M and :C only), PA6 (:M and :C only), PB0, and PB3 (reset)
-    PORTB |= ( (1 << PA0) | (1 << PA1) | (1 << PA4) );
+    PORTA |= ( (1 << PA0) | (1 << PA1) | (1 << PA4) );
     PORTB |= ( (1 << PB0) | (1 << PB3) );
         
     //MCUSR = 0;

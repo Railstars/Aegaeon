@@ -1,19 +1,15 @@
 #ifndef __MOTOR_H__
 #define __MOTOR_H__
 
+#ifdef __AEGAEON_C
+#define MOTOR_IS_FORWARD (TCCR0A & (1 << COM0B1))
+#else
+#define MOTOR_IS_FORWARD (_current_speed > 0)
+#endif
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
-//    typedef struct
-//    {
-    //        float integral;
-    //        float pgain;
-    //        float igain;
-    //        float dgain;
-    //        uint8_t deadband;
-    //        uint8_t last_error;
-//    } PID_t;
 
 void Motor_Initialize(void);
 void Motor_Update(void);

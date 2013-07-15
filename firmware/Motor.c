@@ -105,38 +105,26 @@ void Motor_Initialize(void)
 
     TIMSK0 |= (1 << TOIE0); //enable overflow interrupt so we can count micros
 
+#ifndef __AEGAEON_C
     //enable the ADC for BEMF measurement
     DIDR0 |= (1 << ADC3D);
     ADCSRA |= (1 << ADEN) | (1 << ADIE) | (1 << ADPS2) | (1 << ADPS0); //enable ADC, enable interrupt, set prescalar to 32 to get a clock of 250KHz. See pg 135 of ATtiny84a manual
     ADCSRB |= (1 <<  ADLAR); //left justified ADC output for 8-bit reads
     ADMUX = 0x03; //enable ADC3 for analog conversion, use VCC as reference.
-    /*
-            _millis_counter = 0;
-        _micros_rollover = 0;
-            _micros_counter = 0;
-            PA5_match_buf = 0;
-            PA6_match_buf = 0;
-            PA5_match = 0;
-            PA6_match = 0;
-            softcount = 0;
-            _goal_speed = 0; //forward, stop
-            _current_speed = 0;
-            //_voltage_level = 0;
-            _max_speed = 0;
-            _jog_time = 0;
-     */
+#endif
+
     _current_speed = _goal_speed = 1; //forward stop
     min_ADC = 0x93;
 }
 
-//volatile int8_t _bemf_adjust;
-
+#ifndef __AEGAEON_C
 ISR(ADC_vect) //ISR for ADC conversion complete
 {
     sample = (uint8_t)((1036*(ADCH - min_ADC))>>8);
     _prev_bemf_time = millis(); //set the time of last measurement
     sample_ready = 1;
 }
+#endif
 
 ISR(TIM0_OVF_vect)
 {
@@ -148,7 +136,7 @@ ISR(TIM0_OVF_vect)
         _micros_rollover -= 1000;
     }
 
-#ifndef __AEGAEON_M
+#ifdef __AEGAEON_L2
     //also handle FX
     if (softcount++ == 0)
     {
@@ -197,12 +185,14 @@ uint32_t micros(void)
 
 void Motor_EStop(int8_t dir)
 {
+	#ifndef __AEGAEON_C
     //NMRA requires that we remove power from motor. We do this by disconnecting PA7 so we can force it low, then bring PB1 and PB2 high.
     //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
     //set OC0A first to avoid a shoot-through condition
     TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
     PORTB |= (1 << PB2) | (1 << PB1); //force PWM lines HIGH, turns off motor.
     PORTA |= (1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
+	#endif
     
     if (dir >= 0)
         _current_speed = _goal_speed = 1; //immediate forward stop
@@ -289,6 +279,8 @@ void Motor_Update(void)
     //check to see if we need to start an AD conversion
     uint8_t abs_speed = _current_speed;
     if(_current_speed < 0) abs_speed = -1*_current_speed;
+	
+#ifndef __AEGAEON_C
     if ((abs_speed < BEMF_cutoff) & (time_delta_32(millis(), _prev_bemf_time) >= BEMF_period))
     {
         //first, set the h-bridge to coast
@@ -301,7 +293,10 @@ void Motor_Update(void)
         //start an AD conversion
         ADCSRA |= (1 << ADSC);
     }
+#endif
 
+
+#ifndef __AEGAEON_C	//hackish
     //first, determine whether we need to do anything
     //we only act if
     // a) BEMF is disabled or not active
@@ -310,10 +305,10 @@ void Motor_Update(void)
     // ~(E&A) | R
     else if ((abs_speed >= BEMF_cutoff) | sample_ready) //if BEMF is inactive, or there is a sample ready
     {
+#endif
         uint32_t time = micros();
         uint32_t delta = time_delta_32(time, _prev_time);
         _prev_time = time;
-
         //first calculate next speed step
         if (_goal_speed != _current_speed) //need to update the current speed!
         {
@@ -446,30 +441,35 @@ void Motor_Update(void)
                 //set REVERSE ENABLE
                 PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through
                 PORTA |=  (1 << PA7);
+#ifdef __AEGAEON_C
+				voltage = Output_Match_Buf[1];
+#else
                 voltage = DCC_speed_table[(_current_speed * -1) - 1]; // + _voltage_adjust;
                 if (DCC_reverse_trim)
                 {
                     voltage = (voltage * DCC_reverse_trim) >> 7 ; // / 128;
                 }
+#endif
             }
             else
             {
                 //set FORWARD ENABLE
                 PORTA &= ~(1 << PA7); //must bring this pin low first, to avoid shoot-through
                 PORTB |=  (1 << PB1);
-                //_voltage_level = DCC_speed_table[_current_speed]; //THIS also needs to be converted to the range 0..126 from 1..127
+#ifdef __AEGAEON_C
+				voltage = Output_Match_Buf[0];
+#else
                 voltage = DCC_speed_table[_current_speed - 1]; // + _voltage_adjust;
                 if (DCC_forward_trim)
                 {
                     voltage = (voltage * DCC_forward_trim) >> 7; // / 128;
                 }
-                //speed += _bemf_adjust;
+#endif
             }
 
+#ifndef __AEGAEON_C
             //If switching mode is enabled, half the voltage
             //TODO fix motor half speed issue!
-
-            //            if(Motor_Switch_Mode)
             if(FX_Active & FX_SHUNTING)
                 voltage = (uint8_t)(voltage) >> 1;
 
@@ -481,12 +481,16 @@ void Motor_Update(void)
                 voltage = PDFF(voltage, sample);
                 sample_ready = 0;
             }
+#endif
         }
         if (voltage < 0) voltage = 0;
         if (voltage > 255) voltage = 255;
         OCR0A = 0xFF - voltage;
         TCCR0A |= (1 << COM0A1); //force connection of PA7 to timer, in case it was disconnected earlier
+		
+#ifndef __AEGAEON_C	//hackish
     }
+#endif
 }
 
 void Motor_Jog(void)

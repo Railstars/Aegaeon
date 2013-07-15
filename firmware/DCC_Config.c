@@ -558,7 +558,7 @@ adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
         DCC_speed_table[126] = high;
     }
 
-    //finally, load up BEMF settings
+    //finally, load up settings
     BEMF_cutoff = eeprom_read_byte((const uint8_t *) CV_EMF_FEEDBACK_CUTOUT);
     if (BEMF_cutoff) // no sense in loading the gains if not going to use!
     {
@@ -583,7 +583,14 @@ void _load_FX(void)
         FX_Animation[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_FX + offset));
         if( (FX_Animation[i] & ~FX_TRIGGERABLE_MASK) >= FX_NUM_ANIMATIONS)
             FX_Animation[i] = (FX_Animation[i] & FX_TRIGGERABLE_MASK) | (FX_NUM_ANIMATIONS -1);
-        FX_Period[i] = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));        
+		#ifdef __AEGAEON_C
+		//for some reason, this is royally f'd up when we use OCRB to drive PWM directly! This calculation restores the balance. UGLY! FIND HARDWARE FIX!
+		uint16_t temp = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));
+		temp = temp * 62 / 100;
+		FX_Period[i] = (uint8_t)temp;
+		#else
+		FX_Period[i] = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));
+		#endif
     }
 }
 

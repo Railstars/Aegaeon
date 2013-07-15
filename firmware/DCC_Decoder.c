@@ -376,7 +376,7 @@ void DCC_Decoder_Update(void)
             if (time_delta_32(millis(), _time_of_last_packet) >= (timeout * 1000)) //more than timeout seconds since we last received a packet of any kind.
             //TODO change this to a read from CV 11!
             {
-                if (_current_speed > 0) //if forward
+                if (MOTOR_IS_FORWARD) //if forward
                 Motor_EStop(1); //bring it to a halt
                 else
                 Motor_EStop(-1);
