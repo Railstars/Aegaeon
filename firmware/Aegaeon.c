@@ -86,7 +86,9 @@ int main(void)
 	//DCC_Decoder_Initialize(); //nothing gets done here, everything is already initialized to 0!
     Motor_Initialize();
     //wdt_reset();
+	#ifndef __AEGAEON_M
 	FX_Initialize();
+	#endif
     //wdt_reset();
     //now set up watchdog timer
     //wdt_enable(WDTO_15MS);
@@ -100,7 +102,9 @@ int main(void)
         //wdt_reset(); //feed the watchdog
 		Motor_Update();
         //wdt_reset();
+		#ifndef __AEGAEON_M
         FX_Update();
+		#endif
         //wdt_reset(); //feed the watchdog
 	}
 }

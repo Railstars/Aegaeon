@@ -148,6 +148,7 @@ ISR(TIM0_OVF_vect)
         _micros_rollover -= 1000;
     }
 
+#ifndef __AEGAEON_M
     //also handle FX
     if (softcount++ == 0)
     {
@@ -167,6 +168,7 @@ ISR(TIM0_OVF_vect)
     {
         PORTA &= ~(1 << PA6);
     }
+#endif
 
 }
 
