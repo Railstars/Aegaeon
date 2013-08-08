@@ -639,8 +639,8 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </classes>
 <parts>
 <part name="P1" library="Railstars" deviceset="SIA929DJ" device=""/>
-<part name="N2" library="Railstars" deviceset="SSM6N55NU" device=""/>
 <part name="N1" library="Railstars" deviceset="SSM6N55NU" device=""/>
+<part name="N2" library="Railstars" deviceset="SSM6N55NU" device=""/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="M09" device=""/>
 <part name="JP2" library="SparkFun-Connectors" deviceset="M09" device=""/>
 </parts>
@@ -651,10 +651,10 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instances>
 <instance part="P1" gate="G$1" x="88.9" y="58.42"/>
 <instance part="P1" gate="G$2" x="104.14" y="48.26"/>
-<instance part="N2" gate="G$1" x="66.04" y="25.4"/>
-<instance part="N2" gate="G$2" x="91.44" y="25.4"/>
-<instance part="N1" gate="G$2" x="27.94" y="48.26"/>
-<instance part="N1" gate="G$1" x="27.94" y="27.94"/>
+<instance part="N1" gate="G$1" x="66.04" y="25.4"/>
+<instance part="N1" gate="G$2" x="91.44" y="25.4"/>
+<instance part="N2" gate="G$2" x="27.94" y="48.26"/>
+<instance part="N2" gate="G$1" x="27.94" y="27.94"/>
 <instance part="JP1" gate="G$1" x="20.32" y="-10.16"/>
 <instance part="JP2" gate="G$1" x="20.32" y="-45.72"/>
 </instances>
@@ -663,7 +663,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <nets>
 <net name="NG1" class="0">
 <segment>
-<pinref part="N1" gate="G$2" pin="G"/>
+<pinref part="N2" gate="G$2" pin="G"/>
 <wire x1="20.32" y1="48.26" x2="12.7" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -674,7 +674,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NG2" class="0">
 <segment>
-<pinref part="N1" gate="G$1" pin="G"/>
+<pinref part="N2" gate="G$1" pin="G"/>
 <wire x1="20.32" y1="27.94" x2="12.7" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -685,7 +685,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NG3" class="0">
 <segment>
-<pinref part="N2" gate="G$1" pin="G"/>
+<pinref part="N1" gate="G$1" pin="G"/>
 <wire x1="58.42" y1="25.4" x2="50.8" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -696,7 +696,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NG4" class="0">
 <segment>
-<pinref part="N2" gate="G$2" pin="G"/>
+<pinref part="N1" gate="G$2" pin="G"/>
 <wire x1="83.82" y1="25.4" x2="76.2" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -729,7 +729,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="ND2" class="0">
 <segment>
-<pinref part="N1" gate="G$1" pin="D"/>
+<pinref part="N2" gate="G$1" pin="D"/>
 <wire x1="27.94" y1="33.02" x2="27.94" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -740,7 +740,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NS2" class="0">
 <segment>
-<pinref part="N1" gate="G$1" pin="S"/>
+<pinref part="N2" gate="G$1" pin="S"/>
 <wire x1="27.94" y1="22.86" x2="27.94" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -751,7 +751,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NS1" class="0">
 <segment>
-<pinref part="N1" gate="G$2" pin="S"/>
+<pinref part="N2" gate="G$2" pin="S"/>
 <wire x1="27.94" y1="43.18" x2="27.94" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -762,7 +762,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="ND1" class="0">
 <segment>
-<pinref part="N1" gate="G$2" pin="D"/>
+<pinref part="N2" gate="G$2" pin="D"/>
 <wire x1="27.94" y1="53.34" x2="27.94" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -773,7 +773,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="ND3" class="0">
 <segment>
-<pinref part="N2" gate="G$1" pin="D"/>
+<pinref part="N1" gate="G$1" pin="D"/>
 <wire x1="66.04" y1="30.48" x2="66.04" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -784,7 +784,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NS3" class="0">
 <segment>
-<pinref part="N2" gate="G$1" pin="S"/>
+<pinref part="N1" gate="G$1" pin="S"/>
 <wire x1="66.04" y1="20.32" x2="66.04" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -795,7 +795,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="NS4" class="0">
 <segment>
-<pinref part="N2" gate="G$2" pin="S"/>
+<pinref part="N1" gate="G$2" pin="S"/>
 <wire x1="91.44" y1="20.32" x2="91.44" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -806,7 +806,7 @@ Standard 9-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="ND4" class="0">
 <segment>
-<pinref part="N2" gate="G$2" pin="D"/>
+<pinref part="N1" gate="G$2" pin="D"/>
 <wire x1="91.44" y1="30.48" x2="91.44" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 <segment>

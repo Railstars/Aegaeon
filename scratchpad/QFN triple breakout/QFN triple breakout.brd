@@ -484,29 +484,29 @@ Please make sure your boards conform to these design rules.</description>
 </autorouter>
 <elements>
 <element name="P1" library="Railstars" package="SC70-6L" value="SIA929DJ" x="5.08" y="7.62"/>
-<element name="N2" library="Railstars" package="UDFN6" value="SSM6N55NU" x="12.7" y="7.62"/>
-<element name="N1" library="Railstars" package="UDFN6" value="SSM6N55NU" x="20.32" y="7.62"/>
+<element name="N1" library="Railstars" package="UDFN6" value="SSM6N55NU" x="12.7" y="7.62"/>
+<element name="N2" library="Railstars" package="UDFN6" value="SSM6N55NU" x="20.32" y="7.62"/>
 <element name="JP1" library="SparkFun-Connectors" package="1X09" value="M09" x="2.54" y="2.54" smashed="yes"/>
 <element name="JP2" library="SparkFun-Connectors" package="1X09" value="M09" x="2.54" y="12.7" smashed="yes"/>
 </elements>
 <signals>
 <signal name="NG1">
-<contactref element="N1" pad="G2"/>
+<contactref element="N2" pad="G2"/>
 <contactref element="JP2" pad="8"/>
 <wire x1="20.32" y1="8.545" x2="20.32" y2="12.7" width="0.3048" layer="1"/>
 </signal>
 <signal name="NG2">
-<contactref element="N1" pad="G1"/>
+<contactref element="N2" pad="G1"/>
 <contactref element="JP1" pad="8"/>
 <wire x1="20.32" y1="6.695" x2="20.32" y2="2.54" width="0.3048" layer="1"/>
 </signal>
 <signal name="NG3">
-<contactref element="N2" pad="G1"/>
+<contactref element="N1" pad="G1"/>
 <contactref element="JP1" pad="5"/>
 <wire x1="12.7" y1="6.695" x2="12.7" y2="2.54" width="0.3048" layer="1"/>
 </signal>
 <signal name="NG4">
-<contactref element="N2" pad="G2"/>
+<contactref element="N1" pad="G2"/>
 <contactref element="JP2" pad="5"/>
 <wire x1="12.7" y1="8.545" x2="12.7" y2="12.7" width="0.3048" layer="1"/>
 </signal>
@@ -521,8 +521,8 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="5.08" y1="8.5325" x2="5.08" y2="12.7" width="0.3048" layer="1"/>
 </signal>
 <signal name="ND2">
-<contactref element="N1" pad="D1$1"/>
-<contactref element="N1" pad="D1"/>
+<contactref element="N2" pad="D1$1"/>
+<contactref element="N2" pad="D1"/>
 <contactref element="JP2" pad="7"/>
 <wire x1="19.67" y1="8.545" x2="19.67" y2="7.795" width="0.3048" layer="1"/>
 <wire x1="19.67" y1="7.795" x2="19.845" y2="7.62" width="0.3048" layer="1"/>
@@ -546,20 +546,20 @@ Please make sure your boards conform to these design rules.</description>
 </polygon>
 </signal>
 <signal name="NS2">
-<contactref element="N1" pad="S1"/>
+<contactref element="N2" pad="S1"/>
 <contactref element="JP1" pad="7"/>
 <wire x1="19.67" y1="6.695" x2="19.67" y2="4.43" width="0.3048" layer="1"/>
 <wire x1="19.67" y1="4.43" x2="17.78" y2="2.54" width="0.3048" layer="1"/>
 </signal>
 <signal name="NS1">
-<contactref element="N1" pad="S2"/>
+<contactref element="N2" pad="S2"/>
 <contactref element="JP2" pad="9"/>
 <wire x1="20.97" y1="8.545" x2="20.97" y2="10.81" width="0.3048" layer="1"/>
 <wire x1="20.97" y1="10.81" x2="22.86" y2="12.7" width="0.3048" layer="1"/>
 </signal>
 <signal name="ND1">
-<contactref element="N1" pad="D2"/>
-<contactref element="N1" pad="D2$2"/>
+<contactref element="N2" pad="D2"/>
+<contactref element="N2" pad="D2$2"/>
 <wire x1="20.97" y1="6.695" x2="20.97" y2="7.445" width="0.3048" layer="1"/>
 <wire x1="20.97" y1="7.445" x2="20.795" y2="7.62" width="0.3048" layer="1"/>
 <contactref element="JP1" pad="9"/>
@@ -583,8 +583,8 @@ Please make sure your boards conform to these design rules.</description>
 </polygon>
 </signal>
 <signal name="ND3">
-<contactref element="N2" pad="D1$1"/>
-<contactref element="N2" pad="D1"/>
+<contactref element="N1" pad="D1$1"/>
+<contactref element="N1" pad="D1"/>
 <contactref element="JP2" pad="4"/>
 <wire x1="12.05" y1="8.545" x2="12.05" y2="7.795" width="0.3048" layer="1"/>
 <wire x1="12.05" y1="7.795" x2="12.225" y2="7.62" width="0.3048" layer="1"/>
@@ -608,20 +608,20 @@ Please make sure your boards conform to these design rules.</description>
 </polygon>
 </signal>
 <signal name="NS3">
-<contactref element="N2" pad="S1"/>
+<contactref element="N1" pad="S1"/>
 <contactref element="JP1" pad="4"/>
 <wire x1="12.05" y1="6.695" x2="12.05" y2="4.43" width="0.3048" layer="1"/>
 <wire x1="12.05" y1="4.43" x2="10.16" y2="2.54" width="0.3048" layer="1"/>
 </signal>
 <signal name="NS4">
-<contactref element="N2" pad="S2"/>
+<contactref element="N1" pad="S2"/>
 <contactref element="JP2" pad="6"/>
 <wire x1="13.35" y1="8.545" x2="13.35" y2="10.81" width="0.3048" layer="1"/>
 <wire x1="13.35" y1="10.81" x2="15.24" y2="12.7" width="0.3048" layer="1"/>
 </signal>
 <signal name="ND4">
-<contactref element="N2" pad="D2"/>
-<contactref element="N2" pad="D2$2"/>
+<contactref element="N1" pad="D2"/>
+<contactref element="N1" pad="D2$2"/>
 <wire x1="13.35" y1="6.695" x2="13.35" y2="7.445" width="0.3048" layer="1"/>
 <wire x1="13.35" y1="7.445" x2="13.175" y2="7.62" width="0.3048" layer="1"/>
 <contactref element="JP1" pad="6"/>
