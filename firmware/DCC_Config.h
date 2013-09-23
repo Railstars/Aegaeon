@@ -4,12 +4,6 @@
 #ifndef __DCC_CONFIG_H__
 #define __DCC_CONDIG_H__
 
-//Pick the decoder you want here, or do it with a -D at compile time
-#define __AEGAEON_L2
-//#define __AEGAEON_M
-//#define __AEGAEON_C
-
-
 #ifdef __AEGAEON_L2
 #define DECODER_VERSION	0x05 //Aegaeon:L2
 #else
