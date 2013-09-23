@@ -67,6 +67,7 @@ int main(void)
 
 	cli();
     
+	//TODO uncertain about the necessity of the following
     //set all unused pins to inputs, enable pullups.
     //at boot time, all pins are set to inputs
     //the pins not used are: PA0, PA1, PA4, PA5 (:M and :C only), PA6 (:M and :C only), PB0, and PB3 (reset)
