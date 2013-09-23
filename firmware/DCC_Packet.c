@@ -378,7 +378,8 @@ int8_t DCC_Packet_Get_Speed(DCC_Packet_t *packet)
         else if (0x00 == (packet->data[packet->data_start + 1] & 0x7F)) //regular stop
             retval = 1;
         else
-            retval = (packet->data[packet->data_start + 1] & 0x7F); //Yields a speed in range 2--127, which is what we want, since we use 1 == stop
+			retval = (packet->data[packet->data_start + 1] & 0x7F); //Yields a speed in range 2--127, which is what we want, since we use 1 == stop
+
         if (~packet->data[packet->data_start + 1] & 0x80) //reverse
             retval *= -1;
         //TODO Check CV29 here. Really. Instead of in motor.

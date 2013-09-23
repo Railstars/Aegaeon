@@ -4,8 +4,26 @@
 #ifndef __DCC_CONFIG_H__
 #define __DCC_CONDIG_H__
 
+//Pick the decoder you want here, or do it with a -D at compile time
+#define __AEGAEON_L2
+//#define __AEGAEON_M
+//#define __AEGAEON_C
 
+
+#ifdef __AEGAEON_L2
 #define DECODER_VERSION	0x05 //Aegaeon:L2
+#else
+#ifdef __AEGAEON_M
+#define DECODER_VERSION 0x01 //Aegaeon:M
+#else
+#ifdef __AEGAEON_C
+#define DECODER_VERSION 0x04 //Aegaeon:C
+#else
+#error No decoder defined!
+#endif
+#endif
+#endif
+
 #define MANUFACTURER_ID	0x5B //Railstars Limited
 #define FIRMWARE_REVISION 0x01
 

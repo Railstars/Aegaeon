@@ -59,32 +59,36 @@ volatile DCC_Packet_t DCC_rx_buffer[2];
 
 int main(void)
 {
-    //OSCCAL = eeprom_read_byte((const uint8_t*)0x1FF);   //<-- THE PROBLEM IS HERE!?
+	#ifndef __DEBUG
+    OSCCAL = eeprom_read_byte((const uint8_t*)0x1FF);   //<-- THE PROBLEM IS HERE!?
+	#endif
+	
     //wdt_enable(WDTO_2S); //set a very long timeout.
 
-    cli();
-    /////////WHEN DEBUGGING DISABLE MATCH INTERRUPT ON TIMER1!!!
+	cli();
     
+	//TODO uncertain about the necessity of the following
     //set all unused pins to inputs, enable pullups.
     //at boot time, all pins are set to inputs
     //the pins not used are: PA0, PA1, PA4, PA5 (:M and :C only), PA6 (:M and :C only), PB0, and PB3 (reset)
-    PORTB |= ( (1 << PA0) | (1 << PA1) | (1 << PA4) | (1 << PA5) | (1 << PA6) );
+    PORTA |= ( (1 << PA0) | (1 << PA1) | (1 << PA4) );
     PORTB |= ( (1 << PB0) | (1 << PB3) );
-    
-    
+        
     //MCUSR = 0;
     
 
     
-    //first thing first, call the setup functions
-    DCC_Config_Initialize();
+	//first thing first, call the setup functions
+	DCC_Config_Initialize();
     //wdt_reset();
-    DCC_Hardware_Initialize();
+	DCC_Hardware_Initialize();
     //wdt_reset();
-    //DCC_Decoder_Initialize(); //nothing gets done here, everything is already initialized to 0!
+	//DCC_Decoder_Initialize(); //nothing gets done here, everything is already initialized to 0!
     Motor_Initialize();
     //wdt_reset();
-    //FX_Initialize();
+	#ifndef __AEGAEON_M
+	FX_Initialize();
+	#endif
     //wdt_reset();
     //now set up watchdog timer
     //wdt_enable(WDTO_15MS);
@@ -92,13 +96,15 @@ int main(void)
     sei();
     //wdt_enable(WDTO_15MS);
 
-    while(1)
-    {
-        DCC_Decoder_Update();
+	while(1)
+	{
+		DCC_Decoder_Update();
         //wdt_reset(); //feed the watchdog
-        Motor_Update();
+		Motor_Update();
         //wdt_reset();
-        //FX_Update();
+		#ifndef __AEGAEON_M
+        FX_Update();
+		#endif
         //wdt_reset(); //feed the watchdog
-    }
+	}
 }

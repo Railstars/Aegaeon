@@ -376,7 +376,7 @@ void DCC_Decoder_Update(void)
             if (time_delta_32(millis(), _time_of_last_packet) >= (timeout * 1000)) //more than timeout seconds since we last received a packet of any kind.
             //TODO change this to a read from CV 11!
             {
-                if (_current_speed > 0) //if forward
+                if (MOTOR_IS_FORWARD) //if forward
                 Motor_EStop(1); //bring it to a halt
                 else
                 Motor_EStop(-1);
@@ -398,8 +398,10 @@ void DCC_Decoder_Update(void)
             packet.data[i] = DCC_rx_buffer[ready_buf].data[i];
             //DCC_rx_buffer[ready_buf].data[i] = 0;
         }
-        //TODO comment out the following line during DEBUGing
+		#ifndef __DEBUG //if debugging, don't set interrupts here, do it below.
         sei();
+		#endif
+		
         //this part should be fast enough to complete before the next packet is done transmitting
         //This is rather involved...lots of possibilities.
         if (!DCC_Packet_Check_CRC(&packet))
@@ -420,5 +422,9 @@ void DCC_Decoder_Update(void)
         Ops_Mode_Process_Packet(&packet);
         else
         Service_Mode_Process_Packet(&packet);
+		
+		#ifdef __DEBUG
+		sei();
+		#endif
     }
 }
