@@ -48,7 +48,7 @@
 
 \chapter*{Acknowledgments}
 
-Railstars wishes to thank a number of people who have made Aegaeon possible. First of all, our deepest gratitude to the fine folks at \url{http://jnsforum.com}, where this project was conceived, for all their support and encouragement. A huge thanks to our testers, Timothy Hatch and Ken Shores, without whose help many bugs would have remained unconvered. Ken's assistance in editing this document was also invaluable.
+Many people have made Aegaeon possible, and deserve recognition. First of all, Railstars sends its deepest gratitude to the fine folks at \url{http://jnsforum.com}, where this project was conceived, for all their support and encouragement. Thanks especially to Stuart Baker for his feedback and advice during the design stages. A huge thanks to our testers, Timothy Hatch and Ken Shores, without whose help many bugs would have remained unconvered. Ken's assistance in editing this document was also invaluable. And a thanks to my regular employers, Screenhero, Inc., for their encouragement in completeing this project.
 
 Most of all, however, deepest thanks go to Amy Goodman-Wilson and Acadia Goodman-Wilson, whose love and support throughout this process (as well as their tolerance for flux fumes!) will be forever remembered.
 \newpage
@@ -63,7 +63,7 @@ Most of all, however, deepest thanks go to Amy Goodman-Wilson and Acadia Goodman
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
 
-Thank you for your purchase of a Railstars Aegaeon digital decoder! With a little care and feeding, your decoder should offer a lifetime of service. We are certain you will be well-pleased.
+Thank you for purchasing a Railstars Aegaeon digital decoder! With a little care and feeding, your decoder should offer a lifetime of service. We are certain you will be well-pleased.
 
 The Railstars Aegaeon family of digital decoders are the most advanced ultra-compact decoders on the market today. Despite their diminutive size, the Aegaeon family provides unprecedented fine-grain control over every aspect of their operation and configuration, as well as the same high level of robustness you expect from Railstars.
 
@@ -71,7 +71,7 @@ This manual covers everything you need to know about the Aegaeon:L2, Aegaeon:M, 
 
 \section{What's In a Name?}
 
-The Aegaeon family of digital decoders is named for the moon of Saturn. This natural satellite is Saturn's smallest moon, and is considered the source of one of Saturn's rings. The moon, in turn, was named for one of the hundred-armed giants of Greek mythology, the hecatonchires, who helped overthrow the Titans. Seems a fitting name to us!
+The Aegaeon family of digital decoders is named for one of Saturn's moons. This natural satellite is Saturn's smallest moon, and is considered the source of one of Saturn's rings. The moon was, in turn, named for one of the hundred-armed giants of Greek mythology, the hecatonchires, who helped overthrow the Titans. Seems a fitting name to us!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -166,10 +166,10 @@ Siting the decoder is only half the battle. The Aegaeon:M has four wires that mu
 
 Part of this step is identifying where each of the four wires can be most easily connected to the model. The Red and Black wires collect the DCC signal and power from the tracks, and will need to be wired to the internal current collectors (some times called pick-ups). The Orange and Gray wires control the motor, and will need to be wired to the motor brushes. See Figure \ref{M-wiring} for an example of how to wire the Aegaeon:M.
 
-TODO figure \label{M-wiring}
+%TODO figure \label{M-wiring}
 
 \subsection{Isolate the Motor from the Frame}
-Normally, the motor's brushes make electrical contact with the two rails (usually indirectly via the frame, or other metal conductors within the model). Installing the Aegaeon:M requires that we break this connection, so that the decoder can control the motor directly. Find the points of electrical contact between the motor brushes and the rest of the model (often inside the metal frame, but sometimes with soldered wires or other mechanisms). Trim back any wires or long leads connecting the motor to the rest of the model, and use Kpaton tape as insulation where the electrical contact is achieved via press-fit (a single layer of tape will suffice).
+Normally, the motor's brushes make electrical contact with the two rails (usually indirectly via the frame, or other metal conductors within the model). Installing the Aegaeon:M requires that we break this connection, so that the decoder can control the motor directly. Find the points of electrical contact between the motor brushes and the rest of the model (often inside the metal frame, but sometimes with soldered wires or other mechanisms). Trim back any wires or long leads connecting the motor to the rest of the model, and use Kapton tape as insulation where the electrical contact is achieved via press-fit (a single layer of tape will suffice).
 
 Sometimes it is not obvious how to isolate the motor. If you find yourself stumped, don't forget about the Raisltars Support Site at \url{http://support.railstars.com}, where you can view pictorial installation guides and ask for advice from other Aegaeon users.
 
@@ -201,6 +201,7 @@ Even once the model has passed all the tests with flying colors, your work is no
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installing Aegaeon:C}
 
+% TODO write this
 The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to install. Installation consists of the following steps:
 \begin{enumerate}
 \item Make space for the decoder.
@@ -213,10 +214,12 @@ The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to 
 \item Reassemble model.
 \end{enumerate}
 
-TODO
+% TODO write this
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installing Aegaeon:L2}
+
+% TODO write this
 
 The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install. Installation consists of the following steps:
 \begin{enumerate}
@@ -232,7 +235,7 @@ The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install
 \item Reassemble model.
 \end{enumerate}
 
-TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
+% TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
 
 \section{It Doesn't Work!}
 
@@ -431,7 +434,7 @@ All DCC-equipped locomotives have a well-defined forward and reverse facing. The
 
 \subsection{Speed Control}
 \label{CV29speedcontrol}\index{speed control}
-This feature is meant for compatibility with older command stations. Aegaeon does not permit modification of this feature, and it is only listed for completeness. %If your command station is of relatively recent vintage, leave this options set to \textit{28/128-step}. In short, there are three different ways that a command station can direct a decoder's speed---with a 14-step, a 28-step, or a 128-step instruction. Most contemporary command stations will issue 28- or 128-step instructions, where older command stations use the older 14-step instruction. Aegaeon will respond properly to 14-step instructions regardless of this option setting. However, the 14-step instruction also contains the state of lighting function \textbf{FL}. If, when using an older command station, the lights attached to your Aegaeon do not respond, consider selecting the \textit{13-Step} option for this feature.
+This feature is meant for compatibility with older command stations. Aegaeon does not permit modification of this feature, and it is only listed for completeness. Aegaeon decoders will, nevertheless, operate correctly on older command stations, so there is nothing to worry about! %If your command station is of relatively recent vintage, leave this options set to \textit{28/128-step}. In short, there are three different ways that a command station can direct a decoder's speed---with a 14-step, a 28-step, or a 128-step instruction. Most contemporary command stations will issue 28- or 128-step instructions, where older command stations use the older 14-step instruction. Aegaeon will respond properly to 14-step instructions regardless of this option setting. However, the 14-step instruction also contains the state of lighting function \textbf{FL}. If, when using an older command station, the lights attached to your Aegaeon do not respond, consider selecting the \textit{13-Step} option for this feature.
 
 \subsection{Run on DC}
 \label{CV29runondc}\index{DC operations}
@@ -441,6 +444,7 @@ When enabled, this feature permits the use of your Aegeaon-equipped locomotive o
 \label{CV29SpeedCurve}
 Speed curves define the relationship between Speed Steps and motor voltage. By default, the highest speed step is mapped to 100\% voltage, and the lowest speed step to about 0.4\% voltage. You may define the mapping between speed steps and voltage in one of two ways: With a \textit{Basic Speed Curve}, or an \textit{Advanced Speed Curve}.
 
+%TODO fix this
 \index{speed curve!basic}The Basic Speed Curve is the simplest to set up, and suffices for most applications. Here, you have three entries that tell the decoder how much voltage to apply to the motor at the first speed step, at the middle speed step (step TODO for 28-step instructions, and TODO of 128-step instructions), and at the largest speed step. Setting up the Basic Speed Curve is explained in \S\ref{BasicSpeedCurve} (pg. \pageref{BasicSpeedCurve}).
 
 \index{speed table!advanced}The Advanced Speed Curve is more involved to set up, but provides a great deal more flexibility in defining the relationship between speed steps and voltages, as it offers 28 points of control. The Advanced Speed Curve permits non-linear response curves, allowing, for example, finer control at low speeds. Setting up the Advanced Speed Curve is explained in \S\ref{AdvancedSpeedCurve} (pg. \pageref{AdvancedSpeedCurve}).
@@ -593,7 +597,7 @@ Aegaeon, like all decoders, uses pulsed voltages for precise motor control. The 
 
 
 \subsection{Kick Start}
-\label{KickStart}\index{motor!static friction}\index{kick start!see {motor,static friction}}
+\label{KickStart}\index{motor!static friction}\index{kick start!see {motor, static friction}}
 Many DC motors, especially in older models, tend to stick a bit when accelerating from a dead stop. This phenomenon is often called `static friction', or `stiction' for short. You can observe it at work by applying throttle until the locomotive first begins to move, then backing the throttle off---if the locomotive slows down, and keeps running, then you've got static friction, and should consider applying a kick start.
 
 Kick-starting the motor is a method of overcoming static friction by applying a brief pulse of full voltage, to jolt the motor into action, and then immediately backing the throttle to the desired speed. Aegaeon allows you to configure the length of the pulse. When adjusting this feature, we recommend starting from a value of one, and gradually working upwards, rather than jumping directly to a larger value. Reasonable values will probably lie between 1 and 10.
@@ -719,7 +723,7 @@ Voltage & 0--255 & 1 &\\ \hline
 \end{tabular}
 \end{center}
 
-TODO insert some charts with examples
+%TODO insert some charts with examples
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Advanced Speed Curve}
@@ -874,7 +878,7 @@ Speed & 0--127 & 0 &\\ \hline
 \end{tabular}
 \end{center}
 
-\index{feedback control!sampling frequency}The feedback control must shut off the control voltage to the motor to measure the BEMF. For this reason, continuous sampling is impossible. Rather, the feedback controller takes samples at a fixed interval. This interval is adjustable. Setting the value too low will reduce the available torque; setting it too high will result in slow response to changing conditions. Setting the value below approximately 10ms, however, results in undefined behavior and is strongly recommended against.
+\index{feedback control!sampling frequency}The feedback control must shut off the control voltage to the motor to measure the BEMF. For this reason, continuous sampling is impossible. Rather, the feedback controller takes samples at a fixed interval. This interval, specified in milliseconds, is adjustable. Setting the value too low will reduce the available torque; setting it too high will result in slow response to changing conditions. Setting the value below approximately 10ms, however, results in undefined behavior and is strongly recommended against.
 
 \index{configuration variable!CV 060@CV 60}
 \label{CV60}
@@ -889,7 +893,8 @@ Interval in ms & 10--255 & 100 &\\ \hline
 
 \subsection{Tuning the Feedback Control Parameters}
 
-There is a specific method that should be employed for tuning the feedback control terms in CV 61--64. TODO
+There is a specific method that should be employed for tuning the feedback control terms in CV 61--64.
+% TODO write that method
 
 \section{Shunting Mode}
 \label{ShuntingMode}
@@ -906,9 +911,16 @@ This chapter applies mainly to the Aegaeon:L2 and :C decoders, although it also 
 
 The Aegaeon:L2 and :C decoders provide a pair of highly configurable lighting outputs. The lighting outputs can be used to drive LEDs or bulbs. Each lighting output has the following options available:
 \begin{itemize}
-\item Configurable brightness and Rule 17 dimmed brightness
+\item Configurable full brightness
 \item Configurable directionality (on forwards, on reverse, on both, on neither)
-\item Rule 17 dimming (any combination of: dim in reverse, dim in forward, dim when stopped, dim on command)
+\item Rule 17 dimming, with any combination of:
+\begin{itemize}
+\item Dim in reverse
+\item Dim in forward
+\item Dim when stopped
+\item Dim on command
+\end{itemize}
+\item Configurable Rule 17 (dimmed) brightness
 \item Optional simulated soft-start effect
 \item Animations, with configurable time duration:
 \begin{itemize}
@@ -918,24 +930,24 @@ The Aegaeon:L2 and :C decoders provide a pair of highly configurable lighting ou
 \item firebox / random flicker
 \item Mars light
 \item Gyra light
-\item left and right ditch lights
+\item Left and right ditch lights
 \end{itemize}
-\item Animations can optionally be set to be trigged by a function
+\item Animations can be set to always-on, or triggered on command
 \end{itemize}
 
 \section{Outputs and Functions}
 \index{functions}\index{outputs}
 
-There is an important distinction between Outputs and Functions.
+First, let us draw a distinction between \textit{Outputs} and \textit{Functions}.
 
 Most decoders, Aegaeon included, provide one or more \textit{Outputs} for controlling special effects. In most cases, these outputs will have physical representation in the form of function wires on the decoder. Sometimes, however, the Output will be tied to a purely logical representation, internal to the operation of the decoder. The Outputs on Aegaeon are numbered from 1 to 7 (see \S\ref{outputs} below).
 
-Functions, on the other hand, are messages sent by a throttle in response to button presses. The buttons on a throttle are labeled from 0 to 10 or perhaps as high as 28. The NMRA defines a default mapping of Functions to Outputs (see \S\ref{remapping} for details), while also providing a mechanism for remapping the Function to Output connections, at least within certain bounds.
+Functions, on the other hand, are messages sent by a throttle in response to button presses. The buttons on a throttle are labeled from 0 to 10 or perhaps as high as 28. The NMRA defines a default mapping of Functions to Outputs (see \S\ref{remapping} for details), while also providing a mechanism for remapping the Function-to-Output connections, at least within certain bounds.
 
 \section{Decoder Outputs}
 \label{outputs}
 
-Aegaeon:L2 and :C provide for seven distinct Outputs, each of which can be assigned to a range of function buttons (see \S\ref{remapping} for details on how to do this). Notice that on Aegaeon:L2, ``white wire'' below means that the output attached to the white wire will be activated. On Aegaeon:C, it means that the white wire is made positive relative to the yellow wire.
+Most of the special effects configuration options adjust the behavior of Outputs (as opposed to Functions). Aegaeon:L2 and :C provide for seven distinct Outputs, each of which can be assigned to a range of function buttons (see \S\ref{remapping} for details on how to do this).
 
 \begin{center}
 \begin{tabular}{|c|r|}
@@ -949,6 +961,9 @@ Output 6 & yellow wire Rule 17 dimming \\ \hline
 Output 7 & shunting mode (:L2 only) (see \S\ref{ShuntingMode})\\ \hline
 \end{tabular}
 \end{center}
+
+Notice that on Aegaeon:L2, ``white wire'' above means that the output attached to the white wire will be activated. On Aegaeon:C, it means that the white wire is made positive relative to the yellow wire.
+
 
 Aegaeon:M provides a much more limited range of Outputs:
 
@@ -967,14 +982,14 @@ Output 7 & shunting mode (see \S\ref{ShuntingMode})\\ \hline
 
 \section{Lighting Brightness}
 
-The brightness for each of the two lighting outputs (Outputs 1 and 2) can be controlled independently. In addition, the dimmed or Rule 17 brightness for each output can be set as well (see \S\ref{Rule17} for more derails on Rule 17 dimming).
+The brightness for each of the two lighting outputs (Outputs 1 and 2) can be controlled independently. In addition, the dimmed or Rule 17 brightness for each output can be set as well (see \S\ref{Rule17} for more details on Rule 17 dimming).
 
-\index{configuration variable!CV 049@CV 49}
+\index{configuration variable!CV 049@CV 49}\index{lighting!setting the brightness of}
 \label{CV49}
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
-\multicolumn{4}{|c|}{\textbf{CV 49 --- Output 1 Brightness}} \\ \hline \hline
+\multicolumn{4}{|c|}{\textbf{CV 49 --- Output 1 Full Brightness}} \\ \hline \hline
 \textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
 Brightness & 0--255 & 255 &\\ \hline
 \end{tabular}
@@ -996,7 +1011,7 @@ Brightness & 0--255 & 255 &\\ \hline
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
-\multicolumn{4}{|c|}{\textbf{CV 54 --- Output 2 Brightness}} \\ \hline \hline
+\multicolumn{4}{|c|}{\textbf{CV 54 --- Output 2 Full Brightness}} \\ \hline \hline
 \textit{Feature} & \textit{Options} & \textit{Default} & \textit{User} \\ \hline
 Brightness & 0--255 & 255 &\\ \hline
 \end{tabular}
@@ -1015,11 +1030,11 @@ Brightness & 0--255 & 255 &\\ \hline
 
 \section{Lighting Directionality, Rule 17, and Soft Start}
 
-Each of the two lighting outputs can be set to turn on and off automatically with the direction of the train. The lights can also always be controlled with function buttons. Te lights are on Outputs 1 and 2, both of which by default map to Function 0 (sometimes called Function L).
+Each of the two lighting outputs (Outputs 1 and 2) can be set to turn on and off automatically with the direction of the train. The lights can also always be controlled with function buttons. (Both lights by default map to Function 0, sometimes called Function L; see \S\ref{remapping} for more details.)
 
-\label{configRule17}Additionally, each output can be configured to dim under certain circumstances: when the locomotive is moving forwards, when the locomotive is moving in reverse, or when the locomotive is stopped. Rule 17 dimming can always be activated through Outputs 5 and 6, which by default map to Functions 3 and 4. For more on Rule 17 dimming, what it is, and how you might use it in your models, see \S\ref{Rule17}.
+\label{configRule17}Additionally, each output can be configured to dim under certain circumstances: when the locomotive is moving forwards, when the locomotive is moving in reverse, or when the locomotive is stopped. Rule 17 dimming can always be activated through Outputs 5 and 6 ((which by default map to Functions 3 and 4). For more on Rule 17 dimming, what it is, and how you might use it in your models, see \S\ref{Rule17}.
 
-\label{configSoftStart}\index{lighting!soft start}Finally, each output can be configured to simulate the presence of a soft start device. Soft start devices limit the current drawn by a locomotive's headlight, and hence lead to a slow, smooth ramping of the bulb's brightness. This option simulates that slow startup.
+\label{configSoftStart}\index{lighting!soft start}Finally, each output can be configured to simulate the presence of a soft start device. Soft start devices limit the current drawn by a real locomotive's headlight, and hence yield a slow, smooth ramping of the bulb's brightness. This effect can be simulated by setting the option below.
 
 \index{configuration variable!CV 048@CV 48}
 \label{CV48}
@@ -1076,11 +1091,11 @@ Each of the two lighting outputs can be set to turn on and off automatically wit
 
 \section{Lighting Animations}
 
-Each of the two outputs can be optionally assigned an animation designed to simulate some physical device such as a strobe or firebox. Furthermore, these animations can be static (on whenever the lighting output is on), or controlled by a function button such that the output alternates between steady on and animated, depending on the push of a button. This is particularly useful in the case of ditch lights and Mars or Gyra lights, which the engineer has the option of turning on and off independently of the light itself. The choice of animation and whether that animation is triggerable is controlled by Output Animation (CV 51 and 56). The animation triggers are on Outputs 3 and 4, which by default map to Functions 1 and 2.
+Each of the two outputs can be optionally assigned an animation designed to simulate some physical device such as a strobe or firebox. Furthermore, these animations can be static (on whenever the lighting output is on), or trigged by a function button such that the output alternates between steady on and animated, depending on the push of a button. This is particularly useful in the case of ditch lights and Mars or Gyra lights, which the engineer has the option of turning on and off independently of the light itself. The choice of animation and whether that animation is triggerable is controlled by Output Animation (CV 51 and 56). The animation triggers are on Outputs 3 and 4 (which by default map to Functions 1 and 2).
 
-The speed of each outputs animations can also be adjusted. Each animation comprises 64 frames; by default, each frame lasts 62ms, giving a total animation period of 2 seconds. If you find the animations to be too fast or too slow, you can adjust the Animation Period (CV 52 and 57) settings.
+The speed of each output's animations can also be adjusted. Each animation comprises 64 frames; by default, each frame lasts 62ms, giving a total animation period of 2 seconds. If you find the animations to be too fast or too slow, you can adjust the Animation Period (CV 52 and 57) settings.
 
-The animations on both lighting Outputs are designed to work in sync, so that for example the left and right ditch lights will always flash in opposition. If you find this synchronization unwelcome, consider adjusting on or both of the Animation Periods (CV 52 and 57) to pull them out of sync.
+The animations on both lighting Outputs are designed to work in sync, so that for example the left and right ditch lights will always flash in opposition. If you find this synchronization unwelcome, consider adjusting one or both of the Animation Periods (CV 52 and 57) to pull them out of sync.
 
 Not sure what a Gyra Light is? What use is a random flicker? To learn more about prototypical uses for the animations, turn to \S\ref{animations}
 
@@ -1475,7 +1490,7 @@ The Aegaeon family of digital decoders operate the same as any digital decoder.
 
 \section{Setting the Speed}
 
-TODO notice that at the very least, the momentum settings for the :C are important too, if you want to keep automatic-direction headlights in sync with rest of train.
+%TODO notice that at the very least, the momentum settings for the :C are important too, if you want to keep automatic-direction headlights in sync with rest of train.
 
 \section{Operating the Special Effects}
 
@@ -1503,11 +1518,12 @@ Set your multimeter to DC voltage measurement, and place the black probe on a gr
 \subsubsection{Long Feeder Runs and Voltage Spikes}
 Even if you feel secure, whether by measurement or specification, that your boosters provide a voltage well below the 28V limit, if your layout incorporates long feed runs you are leaving open the possibility of difficult to detect and potentially hazardous voltage spikes---perhaps 60V or more! DCC requires \textit{short} feeders; long feeders (several meters long) can create a type of interference know as \textit{reflections}, which can momentarily double or even quadruple the voltage on the rails. If your layout incorporates such long feeders, you have two options to avoid such reflections, and hence to avoid damaging your decoders.
 
-The first is to shorten the feeders by using a distributed network of boosters (such as the Railstars RAILboosster), instead of a single monolithic central booster. This is the best solution, but also the costliest in time and money.
+The first is to shorten the feeders by using a distributed network of boosters (such as the Railstars RAILbooster), instead of a single monolithic central booster. This is the best solution, but also the costliest in time and money.
 
+%TODO dcc feeder termination
 The second is to terminate the long feeders by connecting a 100ohm TODO resistor and 0.1microfarad TODO capacitor between the two feeder wires are the far end of the feeder, as per the illustration in Figure TODO.
 
-TODO illustration.
+% TODO illustration.
 
 For more information on the hazards of long feeder runs, see Alan Gartner's excellent website ``Wiring for DCC'', \url{http://www.wiringfordcc.com/track_2.htm#c2}.
 
@@ -1687,6 +1703,7 @@ Width & 6.8 & mm \\
        &0.267 & in \\ \hline
 Length & 11 & mm \\
        & 0.433 & in \\ \hline
+       %TODO thickness
 Thickness & 3TODO & mm \\
           & 18 & in \\ \hline
 \end{tabular}
