@@ -18,6 +18,7 @@ The hardware features an Atmel ATtiny84A microcontroller, a high-current H-Bridg
 * 16KHz or 32KHz motor operating modes
 * Two high-current (300mA) function outputs
 * Debugging header for use with DEBUGwire devices like Atmel JTAGICE mk2
+* Trimming of internal RC oscillator is necessary for operation, requires Atmel AVRISP, a copy of stk500.exe, and MS DOS to calibrate. (Welcome to the 21st century!)
 
 
 Firmware
@@ -31,12 +32,12 @@ The firmware is written in pure C, and can be conditionally compiled for one of 
 * Button-controllable shunting mode
 * Configurable function directionality, brightness, and Rule 17 dimming effects
 * Configurable, button-controllable animations:
-* * Strobe
-* * Double strobe
-* * Rotary beacon
-* * Random flicker
-* * Left/right ditch lights
-* * Mars and Gyra lights
+    * Strobe
+    * Double strobe
+    * Rotary beacon
+    * Random flicker
+    * Left/right ditch lights
+    * Mars and Gyra lights
 * Optional soft-start lighting effect
 * Advanced consisting
 * Supports Paged, Direct, Physical, and Operations mode programming
