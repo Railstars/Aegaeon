@@ -57,8 +57,8 @@ void DCC_Packet_Zero(DCC_Packet_t *packet)
     packet->data[1] = 0x00;
     packet->data[2] = 0x00;
     packet->data[3] = 0x00;
-    packet->data[3] = 0x00;
     packet->data[4] = 0x00;
+    packet->data[5] = 0x00;
     packet->data_start = 0;
     packet->size = 0;
     packet->kind = DCC_PACKET_NONE_KIND;
