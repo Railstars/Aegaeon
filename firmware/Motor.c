@@ -135,7 +135,7 @@ ISR(TIM0_OVF_vect)
         _micros_rollover -= 1000;
     }
     
-#ifdef __AEGAEON_L2
+#ifndef __AEGAEON_M
     //also handle FX
     if (softcount++ == 0)
     {
