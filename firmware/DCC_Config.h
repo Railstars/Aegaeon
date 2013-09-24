@@ -4,6 +4,28 @@
 #ifndef __DCC_CONFIG_H__
 #define __DCC_CONDIG_H__
 
+//set up decoder options for conditional compilation
+
+//BEMF is only availabnle on decoders with motor outputs, at this time
+// the 'M and 'L2
+#if defined(__AEGAEON_M) || defined(__AEGAEON_L2)
+#define USE_BEMF
+#define USE_MOTOR
+#endif
+
+//FX are only available on decoders with function outputs, at this time,
+// The 'L2 and the 'C
+#if defined(__AEGAEON_M) || defined(__AEGAEON_L2)
+#define USE_FX
+#endif
+
+//Some decoders use H-Bridge to drivwe functions, currently only the C
+#if defined(__AEGAEON_C)
+#define USE_MOTOR_FOR_FX
+#endif
+
+
+
 #ifdef __AEGAEON_L2
 #define DECODER_VERSION	0x05 //Aegaeon:L2
 #else

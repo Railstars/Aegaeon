@@ -86,7 +86,7 @@ int main(void)
     //DCC_Decoder_Initialize(); //nothing gets done here, everything is already initialized to 0!
     Motor_Initialize();
     //wdt_reset();
-#ifndef __AEGAEON_M
+#ifdef USE_FX
     FX_Initialize();
 #endif
     //wdt_reset();
@@ -102,7 +102,7 @@ int main(void)
         //wdt_reset(); //feed the watchdog
         Motor_Update();
         //wdt_reset();
-#ifndef __AEGAEON_M
+#ifdef USE_FX
         FX_Update();
 #endif
         //wdt_reset(); //feed the watchdog

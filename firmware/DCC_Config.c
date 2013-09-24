@@ -583,14 +583,14 @@ void _load_FX(void)
         FX_Animation[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_FX + offset));
         if( (FX_Animation[i] & ~FX_TRIGGERABLE_MASK) >= FX_NUM_ANIMATIONS)
             FX_Animation[i] = (FX_Animation[i] & FX_TRIGGERABLE_MASK) | (FX_NUM_ANIMATIONS -1);
-#ifdef __AEGAEON_C
+#ifdef USE_MOTOR_FOR_FX
 		//for some reason, this is royally f'd up when we use OCRB to drive PWM directly! This calculation restores the balance. UGLY! FIND HARDWARE FIX!
 		uint16_t temp = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));
 		temp = temp * 62 / 100;
 		FX_Period[i] = (uint8_t)temp;
-#else
+#else //use motor for motor
 		FX_Period[i] = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));
-#endif
+#endif //USE_MOTOR_FOR_FX
     }
 }
 
