@@ -2,8 +2,8 @@
 
 void wdt_init(void)
 {
-	MCUSR = 0;
-	wdt_disable();
-
-	return;
+    MCUSR = 0;
+    wdt_disable();
+    
+    return;
 }

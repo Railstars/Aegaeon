@@ -8,9 +8,9 @@
 #define CV_VERIFY_KIND_MASK                                     0x20
 #define CV_BIT_MANIPULATION_MASK                                0x01
 #define DCC_PACKET_SOFT_RESET_KIND                              0x9E //both service mode and ops mode
-#define DCC_PACKET_HARD_RESET_KIND				0x9F //both service mode and ops mode
+#define DCC_PACKET_HARD_RESET_KIND                              0x9F //both service mode and ops mode
 #define DCC_PACKET_OPS_SOFT_RESET_KIND                          0x1E //both service mode and ops mode
-#define DCC_PACKET_OPS_HARD_RESET_KIND				0x1F //both service mode and ops mode
+#define DCC_PACKET_OPS_HARD_RESET_KIND                          0x1F //both service mode and ops mode
 
 
 
@@ -91,7 +91,7 @@
 #define DCC_PACKET_FUNC_F0_F4_MASK                                         0x0000001F
 #define DCC_PACKET_FUNC_F5_F8_MASK                                         0x000001E0
 #define DCC_PACKET_FUNC_F9_F12_MASK                                        0x00001E00
-#define DCC_PACKET_FUNC_F13_F20_MASK                                        0x001FE000
+#define DCC_PACKET_FUNC_F13_F20_MASK                                       0x001FE000
 #define DCC_PACKET_FUNC_F21_F28_MASK                                       0x1FE00000
 
 typedef struct

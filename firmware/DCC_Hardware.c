@@ -23,37 +23,37 @@ void DCC_Hardware_Initialize(void)
     //time_select = 0;
     //check = 0;
     //Preconditions* interrupts off.
-
+    
     /*
      * Nothing interesting to set in TCCR1A
      */
     //TCCR1A = 0;
-
+    
     /*
      * Setting the OCR (timeout) to 0 allows the full TCNT range for
      * the initial period.
      */
     OCR1A = 30000; //set for 30 seconds
-
+    
     /*
      * Set the interrupt sense and the prescaler
      */
     TCCR1B = (1 << ICNC1) | (1 << ICES1) | (0 << CS12) | (1 << CS11) | (0 << CS10); //set for noise canceling, initialize to rising edge trigger,  /8 prescalin
-
+    
     /*
      *	Enable both the Input Capture and the Output Capture interrupts.
      *	The latter is used for timeout (0% and 100%) checkin
      */
-	#ifdef __DEBUG
+#ifdef __DEBUG
 	TIMSK1 |= (1 << ICIE1); //if debugging, enable input capture interupt only; output match will be triggered during single-stepping and that causes problems
-	#else
+#else
     TIMSK1 |= (1 << ICIE1) | (1 << OCIE1A); //enable input capture enable, and output match enable. Output match is for DC timeout.
-	#endif
+#endif
 	
     //DDRA |= (1<<DDA1) | (1<<DDA2);
     DIDR0 = (1 << ADC2D) | (1 << ADC1D); //disable digital inputs on AIN1 (negative input to comparator)
     ACSR = (1 << ACBG) | (1 << ACIC) | (1 << ACIS1) | (1 << ACIS0); //use internal bandgap reference instead of AIN0 as positive input; means we need only connect DCC signal to negative input, sweet!
-
+    
     //initialize ADC
 }
 
@@ -79,8 +79,8 @@ ISR(TIM1_COMPA_vect)
     {
         new_speed = 1; //stop
     }
-
-
+    
+    
     uint8_t DC_FX = eeprom_read_byte((const uint8_t *) CV_ALTERNATE_MODE_FUNCTION_STATUS_FL_F9_F12) & 0x01;
     if (!_last_known_digital_speed) //we need to record current speed
         _last_known_digital_speed = _current_speed;
@@ -95,7 +95,7 @@ ISR(TIM1_COMPA_vect)
     }
     DC_FX |= (eeprom_read_byte((const uint8_t *) CV_ALTERNATE_MODE_FUNCTION_STATUS_F1_F8) & 0x03) << 2;
     FX_SetFunction(DC_FX, FX_GROUP_1, 0);
-
+    
     OCR1A = TCNT1 + 1000; //every millisecond, have a look
 }
 
@@ -111,7 +111,7 @@ ISR(TIM1_CAPT_vect)
     //tccr1b = TCCR1B;
     //TCCR1B = tccr1b ^ (1 << ICES1);            /* reverse sense so we get called on rising and falling edges */
     TCCR1B ^= (1 << ICES1);
-
+    
     //delay DC conversion another 30 seconds...
     OCR1A = TCNT1 + 30000; //ok if wraps around!
     if (_last_known_digital_speed) //converting back to DCC
@@ -123,7 +123,7 @@ ISR(TIM1_CAPT_vect)
     times[time_select] = time_delta_16(icr, prevtime);
     prevtime = icr;
     time_select = (time_select + 1) % 2;
-
+    
     if (check == time_select)
     {
         //beginning of new pulse. Let:s see what we have and record it

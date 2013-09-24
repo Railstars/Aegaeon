@@ -25,49 +25,49 @@ int16_t sum_err;
 
 uint8_t PDFF(int16_t set, int16_t measured)
 {
-//    int16_t i_set = set;
-//    int16_t i_measured = measured;
+    //    int16_t i_set = set;
+    //    int16_t i_measured = measured;
     if (0 == set) //setting a 0 voltage, don't bother.
     {
         //but do measure and set the minimum measured voltage!
         //min_ADC = measured;
         return 0;
     }
-
+    
     //check to see if BEMF is enabled
-
+    
     //check to see if we are above the cutoff speed
-
+    
     int16_t err = set - measured;
     sum_err += err;
     //prevent windup
     if (sum_err > 1024) sum_err = 1024;
     else if (sum_err < -1024) sum_err = 1024;
-
+    
     int16_t iterm;
     if(sum_err < 0)
     {
         iterm = -1 * (BEMF_Ki * sum_err) / 256;
-        iterm *= -1;
+        iterm *= -1;  //TODO WTF is this?
     }
     else
     {
         iterm = (BEMF_Ki * sum_err) / 256;
     }
-
+    
     int16_t fterm;
-     if(DCC_consist_address) //if in a consist
-     {
-             fterm = ((BEMF_Kf_consist * (uint16_t)set) / 256) - measured;
-     }
-     else
-     {
-             fterm = ((BEMF_Kf * (uint16_t)set) / 256) - measured;
-
-     }
-
+    if(DCC_consist_address) //if in a consist
+    {
+        fterm = ((BEMF_Kf_consist * (uint16_t)set) / 256) - measured;
+    }
+    else
+    {
+        fterm = ((BEMF_Kf * (uint16_t)set) / 256) - measured;
+        
+    }
+    
     int16_t pterm = (BEMF_Kp * fterm) / 256;
-
+    
     int16_t retval = iterm + pterm + set;
     if(retval < 0) return 0;
     else if(retval > 255) return 255;
@@ -76,16 +76,15 @@ uint8_t PDFF(int16_t set, int16_t measured)
 
 void Motor_Initialize(void)
 {
-
     //pre-condition: DCC_Config_Initialize has been called first. Interrupts have been disabled
-
+    
     //first, compute the accel and decel factors.
     //TODO THIS MAY HAVE TO BE CALLED BY DCC_Config if these CV values change!!
     // (the contents of CV#3*.896)/(number of speed steps in use) = accel factor in seconds/speed_step, a weird unit of measure.
-
+    
     //do other things to set up the hardware.
     //on ATtiny84A, setup TIMER0 for both motor control PWM on output compare B and a millis timer on compare match overflow
-
+    
     //set PA7, PB1 and PB2 to output, bring PA7 and PB1 low and PB2 HIGH (= BRAKE)
     DDRB |= (1 << DDB1) | (1 << DDB2);
     PORTB |= (1 << PB2); //set PWM HIGH!
@@ -93,18 +92,18 @@ void Motor_Initialize(void)
     PORTB &= ~(1 << PB2); //and set both direction bits LOW.
     DDRA |= (1 << DDA7);
     PORTA &= ~(1 << PA7);
-
-
+    
+    
     TCCR0A = (1 << WGM00); // phase correct PWM
     if(eeprom_read_byte((const uint8_t*)CV_MOTOR_FREQUENCY)) // positive value = high frequency, use fast PWM
-    TCCR0A |= (1 << WGM01);
+        TCCR0A |= (1 << WGM01);
     TCCR0B = (1 << CS00); //use /1 prescaler
-
+    
     TCNT0 = 0;
     OCR0A = 0xFF; //turn output off.
-
+    
     TIMSK0 |= (1 << TOIE0); //enable overflow interrupt so we can count micros
-
+    
 #ifndef __AEGAEON_C
     //enable the ADC for BEMF measurement
     DIDR0 |= (1 << ADC3D);
@@ -112,7 +111,7 @@ void Motor_Initialize(void)
     ADCSRB |= (1 <<  ADLAR); //left justified ADC output for 8-bit reads
     ADMUX = 0x03; //enable ADC3 for analog conversion, use VCC as reference.
 #endif
-
+    
     _current_speed = _goal_speed = 1; //forward stop
     min_ADC = 0x93;
 }
@@ -135,7 +134,7 @@ ISR(TIM0_OVF_vect)
         ++_millis_counter;
         _micros_rollover -= 1000;
     }
-
+    
 #ifdef __AEGAEON_L2
     //also handle FX
     if (softcount++ == 0)
@@ -147,7 +146,7 @@ ISR(TIM0_OVF_vect)
         if (Output_Match[1])
             PORTA |= (1 << PA6);
     }
-
+    
     if (Output_Match[0] == softcount) //just rolled over, turn output off
     {
         PORTA &= ~(1 << PA5);
@@ -157,13 +156,13 @@ ISR(TIM0_OVF_vect)
         PORTA &= ~(1 << PA6);
     }
 #endif
-
+    
 }
 
 uint32_t millis(void)
 {
     uint32_t m;
-
+    
     ATOMIC_BLOCK(ATOMIC_FORCEON)
     {
         m = _millis_counter;
@@ -174,7 +173,7 @@ uint32_t millis(void)
 uint32_t micros(void)
 {
     uint32_t m;
-
+    
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
     {
         m = _micros_counter;
@@ -185,20 +184,20 @@ uint32_t micros(void)
 
 void Motor_EStop(int8_t dir)
 {
-	#ifndef __AEGAEON_C
+#ifndef __AEGAEON_C
     //NMRA requires that we remove power from motor. We do this by disconnecting PA7 so we can force it low, then bring PB1 and PB2 high.
     //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
     //set OC0A first to avoid a shoot-through condition
     TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
     PORTB |= (1 << PB2) | (1 << PB1); //force PWM lines HIGH, turns off motor.
     PORTA |= (1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
-	#endif
+#endif
     
     if (dir >= 0)
         _current_speed = _goal_speed = 1; //immediate forward stop
     else
         _current_speed = _goal_speed = -1; //immediate reverse stop
-    //_voltage_level = _voltage_adjust = 0; //make sure we don't re-energize!   
+    //_voltage_level = _voltage_adjust = 0; //make sure we don't re-energize!
 }
 
 //in all of the following, 0 = stop; 1 is first movement step.
@@ -216,12 +215,12 @@ void Motor_Set_Speed_By_DCC_Speed_Step_28(int8_t notch)
     uint8_t new_notch = notch;
     if (notch < 0) new_notch = -notch;
     else new_notch = notch;
-
+    
     //if (new_notch <= 1) new_notch = 1;
     //else if (new_notch >= 29) new_notch = 127;
-    //else 
+    //else
     new_notch = ((new_notch - 1) *9) >> 1; //notch-1 * 4.5
-
+    
     if (notch < 0) //reverse it again
         new_notch = -new_notch;
     Motor_Set_Speed_By_DCC_Speed_Step_128(new_notch);
@@ -294,8 +293,8 @@ void Motor_Update(void)
         ADCSRA |= (1 << ADSC);
     }
 #endif
-
-
+    
+    
 #ifndef __AEGAEON_C	//hackish
     //first, determine whether we need to do anything
     //we only act if
@@ -314,38 +313,38 @@ void Motor_Update(void)
         {
             //not just if at a stop, but take into account the sign of goal_speed! Don't want a kick-start in reverse!
             if( (1 == abs_speed) &&
-            ( ((_current_speed > 0) && (_goal_speed > 0)) || ((_current_speed < 0) && (_goal_speed < 0))) &&
-            eeprom_read_byte((const uint8_t *) CV_KICK_START) ) //starting to move from a stop
+               ( ((_current_speed > 0) && (_goal_speed > 0)) || ((_current_speed < 0) && (_goal_speed < 0))) &&
+               eeprom_read_byte((const uint8_t *) CV_KICK_START) ) //starting to move from a stop
             {
                 _kick_start_time = millis();
             }
-
+            
             uint32_t factor;
             //Acceleration = movement /away/ from 0. //Deceleration = movement /toward/ 0.
             // SEVERAL CASES!
             // current speed > goal speed > 0 : DECEL
             // current speed > 0 > goal speed : DECEL //have to move towards 0 first
             // 0 > current speed > goal speed : ACCEL
-
+            
             // goal speed > 0 > current speed : DECEL //have to move towards 0 first
             // goal speed > current speed > 0 : ACCEL
             // 0 > goal speed > current speed : DECEL
-
+            
             if (_current_speed > _goal_speed)
             {
                 if (_current_speed < 0) //was < 0
-                factor = DCC_accel_rate;
+                    factor = DCC_accel_rate;
                 else
-                factor = DCC_decel_rate;
+                    factor = DCC_decel_rate;
             }
             else //_goal > current
             {
                 if (_current_speed > 0) //was > 0
-                factor = DCC_accel_rate;
+                    factor = DCC_accel_rate;
                 else
-                factor = DCC_decel_rate;
+                    factor = DCC_decel_rate;
             }
-
+            
             if (factor == 0) //instant speed, no momentum
             {
                 //move us to 0 or to _goal_speed, whichever is closer
@@ -410,13 +409,13 @@ void Motor_Update(void)
         {
             accum = 0; //reset the accumulator
         }
-
+        
         int16_t voltage = 0;
-
+        
         //NOW we set the motor voltage
-
+        
         //three different possibilities: Jogging the motor (highest priority, because this is communicating with CS), Kick-starting the motor, or setting the motor based on set speed step, either forwards or reverse
-
+        
         if (_jog_time)
         {
             voltage = 0xFF;
@@ -428,7 +427,7 @@ void Motor_Update(void)
         else if (_kick_start_time)
         {
             voltage = eeprom_read_byte((const uint8_t *) CV_KICK_START);
-
+            
             if (time_delta_32(_kick_start_time, millis()) >= 6)
             {
                 _kick_start_time = 0;
@@ -466,13 +465,13 @@ void Motor_Update(void)
                 }
 #endif
             }
-
+            
 #ifndef __AEGAEON_C
             //If switching mode is enabled, half the voltage
             //TODO fix motor half speed issue!
             if(FX_Active & FX_SHUNTING)
                 voltage = (uint8_t)(voltage) >> 1;
-
+            
             //now, if enabled and active, adjust the output voltage with PDFF
             abs_speed = _current_speed;
             if(_current_speed < 0) abs_speed = -1*_current_speed;

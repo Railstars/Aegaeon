@@ -25,16 +25,16 @@ volatile uint32_t _time_of_last_packet;
 
 //void DCC_Decoder_Initialize(void)
 //{
-    //	preamble_bits = 0;
-    //	input_state = DCC_PREAMBLE;
-    //	byte_counter = 0;
-    //	bit_counter = 0;
-    //	DCC_Packet_Zero(&(DCC_rx_buffer[0]));
-    //	DCC_Packet_Zero(&(DCC_rx_buffer[1]));
-    //	buf_sel = 0;
-    //	ready_buf = 0;
-    //	DCC_flags = 0;
-    //	_time_of_last_packet = 0;
+//	preamble_bits = 0;
+//	input_state = DCC_PREAMBLE;
+//	byte_counter = 0;
+//	bit_counter = 0;
+//	DCC_Packet_Zero(&(DCC_rx_buffer[0]));
+//	DCC_Packet_Zero(&(DCC_rx_buffer[1]));
+//	buf_sel = 0;
+//	ready_buf = 0;
+//	DCC_flags = 0;
+//	_time_of_last_packet = 0;
 //}
 
 #ifdef TESTING
@@ -43,9 +43,9 @@ extern uint8_t value;
 
 void DCC_Decoder_Process_Bit(uint8_t bit_val)
 {
-    #ifdef TESTING
+#ifdef TESTING
     value = bit_val;
-    #endif
+#endif
     //let's time this on the o-scope.
     if (input_state == DCC_PREAMBLE)
     {
@@ -100,7 +100,7 @@ void DCC_Decoder_Process_Bit(uint8_t bit_val)
                 //buf_sel = (buf_sel+1)%2;
                 DCC_rx_buffer[buf_sel].size = 0; //TODO can shorten!
                 for (i = 0; i < 6; ++i)
-                DCC_rx_buffer[buf_sel].data[i] = 0;
+                    DCC_rx_buffer[buf_sel].data[i] = 0;
             }
             else
             {
@@ -108,7 +108,7 @@ void DCC_Decoder_Process_Bit(uint8_t bit_val)
                 ++preamble_bits;
             }
             //reset to watch for preamble
-
+            
             input_state = DCC_PREAMBLE;
             return;
         }
@@ -119,7 +119,7 @@ void DCC_Decoder_Process_Bit(uint8_t bit_val)
         bit_counter = 0;
         return;
     }
-
+    
     //else, middle of reading a bit
     ++bit_counter;
     if (1 == bit_val) //we have a 1
@@ -128,7 +128,7 @@ void DCC_Decoder_Process_Bit(uint8_t bit_val)
         DCC_rx_buffer[buf_sel].data[byte_counter] |= (bit_val << (8 - bit_counter));
     }
     else
-    preamble_bits = 0;
+        preamble_bits = 0;
     return;
 }
 
@@ -136,12 +136,12 @@ void handleDirectModePacket(DCC_Packet_t *packet, uint8_t i)
 {
     uint8_t CV;
     uint8_t val;
-
+    
     if (packet->data[i] & 0x03) //CV address beyond 255 not supported
-    return;
-
+        return;
+    
     CV = packet->data[i+1] + 1;
-
+    
     if(packet->kind & CV_BIT_MANIPULATION_MASK)
     {
         uint8_t pos;
@@ -156,7 +156,7 @@ void handleDirectModePacket(DCC_Packet_t *packet, uint8_t i)
             DCC_Config_Verify_CV_Bit(CV, val, pos);
         }
     }
-
+    
     else //regular write or verify kind
     {
         val = packet->data[i+2];
@@ -189,17 +189,17 @@ void Ops_Mode_Process_Packet(DCC_Packet_t *packet)
     {
         return; //not addressed to us, ignore it. Notice that GetAddress reformats all broadcast packets so that they appear to be addressed to us.
     }
-
+    
     prev_packet_kind = packet->kind;
     switch (packet->kind & 0x1F)
     {
-        /**** Speed Commands ****/
+            /**** Speed Commands ****/
         case DCC_PACKET_E_STOP_KIND:
-        //check length
+            //check length
             Motor_EStop(DCC_Packet_Get_Speed(packet));
             break;
         case DCC_PACKET_ADVANCED_SPEED_KIND:
-        //if consist_address, only respond if packet_match & CONSIST_MATCH
+            //if consist_address, only respond if packet_match & CONSIST_MATCH
             if ((((DCC_consist_address & 0x7F) && (packet_match & CONSIST_MATCH)))
                 || (!(DCC_consist_address & 0x7F))) //ditch it
                 Motor_Set_Speed_By_DCC_Speed_Step_128(DCC_Packet_Get_Speed(packet));
@@ -209,15 +209,15 @@ void Ops_Mode_Process_Packet(DCC_Packet_t *packet)
                 || (!(DCC_consist_address & 0x7F))) //ditch it
                 Motor_Set_Speed_By_DCC_Speed_Step_28(DCC_Packet_Get_Speed(packet));
             break;
-        //   		case DCC_PACKET_RESTRICTED_SPEED_KIND:
-        //    		if (packet->data[packet->data_start + 1] & 0x80) //disable restricted speed
-        //        		Motor_Remove_Restriction();
-        //    		else
-        //	        	Motor_Set_Restriction(packet->data[packet->data_start + 1] & 0x1F);
-        //   		break;
-
-
-        /**** Function Commands ****/
+            //   		case DCC_PACKET_RESTRICTED_SPEED_KIND:
+            //    		if (packet->data[packet->data_start + 1] & 0x80) //disable restricted speed
+            //        		Motor_Remove_Restriction();
+            //    		else
+            //	        	Motor_Set_Restriction(packet->data[packet->data_start + 1] & 0x1F);
+            //   		break;
+            
+            
+            /**** Function Commands ****/
         case DCC_PACKET_FUNC_FL_F4_KIND:
             //gotta rearrange a bit
             tempa = (packet->data[packet->data_start] & 0x0F) << 2;
@@ -227,34 +227,34 @@ void Ops_Mode_Process_Packet(DCC_Packet_t *packet)
             }
             FX_SetFunction(tempa, FX_GROUP_1, packet_match == CONSIST_MATCH);
             break;
-
+            
         case DCC_PACKET_FUNC_F5_F8_KIND:
             tempa = packet->data[packet->data_start] & 0x0F;
             FX_SetFunction(tempa, FX_GROUP_2, packet_match == CONSIST_MATCH);
             break;
-        //case  DCC_PACKET_FUNC_F9_F12_KIND:
-        //    tempa = packet->data[packet->data_start] & 0x0F;
-        //    FX_SetFunction(tempa, FX_GROUP_3);
-        //    break;
-
-        /**** Service Mode-Related Commands ****/
+            //case  DCC_PACKET_FUNC_F9_F12_KIND:
+            //    tempa = packet->data[packet->data_start] & 0x0F;
+            //    FX_SetFunction(tempa, FX_GROUP_3);
+            //    break;
+            
+            /**** Service Mode-Related Commands ****/
         case DCC_PACKET_OPS_HARD_RESET_KIND:
             DCC_Config_Hard_Reset();
             //fall through;
         case DCC_PACKET_OPS_SOFT_RESET_KIND:
             soft_reset();
             break;
-
-        /**** Ops Mode Programming ****/
-        //		case DCC_PACKET_OPS_MODE_SHORT_CONFIG_KIND:
-        //    		if ((packet->data[packet->data_start] & 0x0F) == 0x02)
-        //        		tempa = CV_ACCELERATION_ADJUSTMENT;
-        //    		else if ((packet->data[packet->data_start] & 0x0F) == 0x03)
-        //          		tempa = CV_DECELERATION_ADJUSTMENT;
-        //    		else
-        //        		break; //can't act on it!
-        //    		DCC_Config_Write_CV(tempa, packet->data[packet->data_start + 1]);
-        //	    	break;
+            
+            /**** Ops Mode Programming ****/
+            //		case DCC_PACKET_OPS_MODE_SHORT_CONFIG_KIND:
+            //    		if ((packet->data[packet->data_start] & 0x0F) == 0x02)
+            //        		tempa = CV_ACCELERATION_ADJUSTMENT;
+            //    		else if ((packet->data[packet->data_start] & 0x0F) == 0x03)
+            //          		tempa = CV_DECELERATION_ADJUSTMENT;
+            //    		else
+            //        		break; //can't act on it!
+            //    		DCC_Config_Write_CV(tempa, packet->data[packet->data_start + 1]);
+            //	    	break;
         case DCC_PACKET_OPS_MODE_LONG_CONFIG_KIND:
         case DCC_PACKET_OPS_MODE_LONG_CONFIG_BIT_MANIPULATION_KIND:
             if( (packet->kind == prev_packet_kind) && (packet_match == ADDRESS_MATCH) ) //only allow ops mode writes to primary address, not consist address
@@ -262,21 +262,21 @@ void Ops_Mode_Process_Packet(DCC_Packet_t *packet)
                 handleDirectModePacket(packet, 1);
             }
             break;
-        //		case DCC_PACKET_SET_ADVANCED_ADDRESSING_KIND:
-        //    		if (packet->data[packet->data_start] & 0x01)
-        //        		DCC_Config_Write_CV(29, DCC_CV29 | 0x20);
-        //    		else
-        //        		DCC_Config_Write_CV(29, DCC_CV29 & ~0x20);
-        //    		break;
-
-        /**** Consisting Commands ****/
+            //		case DCC_PACKET_SET_ADVANCED_ADDRESSING_KIND:
+            //    		if (packet->data[packet->data_start] & 0x01)
+            //        		DCC_Config_Write_CV(29, DCC_CV29 | 0x20);
+            //    		else
+            //        		DCC_Config_Write_CV(29, DCC_CV29 & ~0x20);
+            //    		break;
+            
+            /**** Consisting Commands ****/
         case DCC_PACKET_CREATE_CONSIST_FACE_FORWARD_KIND:
-        tempa = 0x80;
-        //fall through
+            tempa = 0x80;
+            //fall through
         case DCC_PACKET_CREATE_CONSIST_FACE_REVERSE_KIND:
-        //count on tempa = 0 if we hit exactly here
-        DCC_Config_Write_CV(CV_CONSIST_ADDRESS, packet->data[packet->data_start + 1] | tempa);
-        break;
+            //count on tempa = 0 if we hit exactly here
+            DCC_Config_Write_CV(CV_CONSIST_ADDRESS, packet->data[packet->data_start + 1] | tempa);
+            break;
     }
     _time_of_last_packet = millis();
 }
@@ -294,9 +294,9 @@ void Service_Mode_Process_Packet(DCC_Packet_t *packet)
         uint8_t val;
         //uint8_t pos; //used by bit manip kind
         uint8_t service_mode_page = eeprom_read_byte((const uint8_t*) CV_PAGE); //used by service mode packet kind
-
+        
         //same packet! We can act on it now.
-
+        
         //for now, let's just keep it simple
         //uint8_t i = 1;
         switch (packet->kind & 0x0F) //bottom nibble indicates mode of operation
@@ -324,11 +324,11 @@ void Service_Mode_Process_Packet(DCC_Packet_t *packet)
                         break;
                     case 0x06: //version number, only on page 1, otherwise nothing
                         if (1 == service_mode_page)
-                        CV = 7;
+                            CV = 7;
                         break;
                     case 0x07: //manufacturer ID, only on page 1, otherwise nothing
                         if (1 == service_mode_page)
-                        CV = 8;
+                            CV = 8;
                         break;
                 }
                 if (CV != 0) //0 used to indicate no write
@@ -337,7 +337,7 @@ void Service_Mode_Process_Packet(DCC_Packet_t *packet)
                     //now check is this write or verify?
                     if (packet->data[0] & 0x08) //write
                     {
-                        if(CV == CV_PAGE) 
+                        if(CV == CV_PAGE)
                             eeprom_update_byte((const uint8_t*)CV_PAGE, val);
                         else
                             DCC_Config_Write_CV(CV, val);
@@ -349,8 +349,8 @@ void Service_Mode_Process_Packet(DCC_Packet_t *packet)
                 }
                 break;
         }
-
-
+        
+        
         _time_of_last_packet = millis();
     }
     //now, copy the packet into prev_packet
@@ -361,12 +361,12 @@ void DCC_Decoder_Update(void)
 {
     //TODO handle timeout properly, if so configured.
     //TODO handle service mode
-
+    
     //check timeouts
     if (DCC_SERVICE_MODE)
     {
         if (time_delta_32(millis(), _time_of_last_packet) > 20) //in service mode, time out after 20ms of no packets
-        DCC_flags |= 0x02; //move to ops mode
+            DCC_flags |= 0x02; //move to ops mode
     }
     else if (DCC_OPERATIONS_MODE)
     {
@@ -374,16 +374,16 @@ void DCC_Decoder_Update(void)
         if (timeout) // if 0, ignore timeout values
         {
             if (time_delta_32(millis(), _time_of_last_packet) >= (timeout * 1000)) //more than timeout seconds since we last received a packet of any kind.
-            //TODO change this to a read from CV 11!
+                //TODO change this to a read from CV 11!
             {
                 if (MOTOR_IS_FORWARD) //if forward
-                Motor_EStop(1); //bring it to a halt
+                    Motor_EStop(1); //bring it to a halt
                 else
-                Motor_EStop(-1);
+                    Motor_EStop(-1);
             }
         }
     }
-
+    
     if (DCC_flags & DCC_FLAGS_READY)
     {
         uint8_t i;
@@ -398,9 +398,9 @@ void DCC_Decoder_Update(void)
             packet.data[i] = DCC_rx_buffer[ready_buf].data[i];
             //DCC_rx_buffer[ready_buf].data[i] = 0;
         }
-		#ifndef __DEBUG //if debugging, don't set interrupts here, do it below.
+#ifndef __DEBUG //if debugging, don't set interrupts here, do it below.
         sei();
-		#endif
+#endif
 		
         //this part should be fast enough to complete before the next packet is done transmitting
         //This is rather involved...lots of possibilities.
@@ -408,7 +408,7 @@ void DCC_Decoder_Update(void)
         {
             return; //packet is corrupted, ignore it.
         }
-
+        
         DCC_Packet_Get_Kind(&packet);
         //We start in service mode by default. Determine if we need to transition to Ops mode
         //notice that an ops mode packet addressed to ANYONE is sufficient to trigger a transition
@@ -416,15 +416,15 @@ void DCC_Decoder_Update(void)
         {
             DCC_flags |= DCC_FLAGS_OPS_MODE_MASK;
         }
-
+        
         //now, depending on mode, pick the right state machine
         if (DCC_OPERATIONS_MODE)
-        Ops_Mode_Process_Packet(&packet);
+            Ops_Mode_Process_Packet(&packet);
         else
-        Service_Mode_Process_Packet(&packet);
+            Service_Mode_Process_Packet(&packet);
 		
-		#ifdef __DEBUG
+#ifdef __DEBUG
 		sei();
-		#endif
+#endif
     }
 }

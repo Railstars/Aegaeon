@@ -20,7 +20,7 @@ uint8_t const PROGMEM _defaults[] = {
     MANUFACTURER_ID, // MANUFACTURER_ID			8	//mandatory,	x,	RO, Uniform
     0x00, // TOTAL_PWM_PERIOD		9	//optional,		x,	RW
     0x00, // EMF_FEEDBACK_CUTOUT		10	//required,		x,	RW
-
+    
     0x00, // PACKET_TIME_OUT_VALUE	11	//optional,		x,	RW
     0x02, // POWER_SOURCE_CONVERSION	12	//optional,		x,	RW, Uniform
     0x00, // ALTERNATE_MODE_FUNCTION_STATUS_F1_F8		13	//optional,		x,	RW, Uniform
@@ -31,7 +31,7 @@ uint8_t const PROGMEM _defaults[] = {
     0x00, // EXTENDED_ADDRESS_LSB		18	//optional,		x,	RW, Uniform
     0x00, // CONSIST_ADDRESS			19	//optional,		x,	RW, Uniform
     0x00, // RESERVED				20	//RESERVED
-
+    
     0x00, // CONSIST_ADDRESS_ACTIVE_FOR_F1_F8		21	//optional,		x,	RW, Uniform
     0x00, // CONSIST_ADDRESS_ACTIVE_FOR_FL_F9_F12		22	//optional,		x,	RW, Uniform
     0x00, // ACCELERATION_ADJUSTMENT	23	//optional,		x,	RW, Uniform
@@ -42,7 +42,7 @@ uint8_t const PROGMEM _defaults[] = {
     0x00, // BI_DIRECTIONAL_COMMUNICIMATION_CONFIG		28	//optional,		x,	RW, Uniform
     0x06, // CONFIGURATION_DATA		29	//mandatory*,	x,	RW, Uniform
     0x00, // ERROR_INFORMATION		30	//optional,		x,	RW, Uniform
-
+    
     0x00, // INDEX_HIGH_BYTE			31	//optional,		x,	RW, Uniform
     0x00, // INDEX_LOW_BYTE			32	//optional,		x,	RW, Uniform
     0x00, // OUTPUT_LOCATION_FLF		33	//optional,		x,	RW, Uniform
@@ -53,22 +53,22 @@ uint8_t const PROGMEM _defaults[] = {
     0x04, // OUTPUT_LOCATION_FL4		38	//optional,		x,	RW, Uniform
     0x08, // OUTPUT_LOCATION_FL5		39	//optional,		x,	RW, Uniform
     0x10, // OUTPUT_LOCATION_FL6		40	//optional,		x,	RW, Uniform
-
+    
     0x20, // OUTPUT_LOCATION_FL7		41	//optional,		x,	RW, Uniform
     0x40, // OUTPUT_LOCATION_FL8		42	//optional,		x,	RW, Uniform
     0x00, // OUTPUT_LOCATION_FL9		43	//optional,		x,	RW, Uniform
     0x00, // OUTPUT_LOCATION_FL10	44	//optional,		x,	RW, Uniform
     0x00, // OUTPUT_LOCATION_FL11	45	//optional,		x,	RW, Uniform
     0x00, // OUTPUT_LOCATION_FL12	46	//optional,		x,	RW, Uniform
-
+    
     0x01, // CV_OPS_MODE_BASIC_ACK	47	//optional,		x,	RW
-
+    
     0x01, // CV_OUTPUT_1_DIRECTION_RULE17                48
     0xFF, // CV_OUTPUT_1_BRIGHTNESS         49	//optional,		x,	RW
     0xFF, // CV_OUTPUT_1_RULE_17_BRIGHTNESS	50	//optional,		x,	RW
     0x00, // CV_OUTPUT_1_FX             	51	//optional,		x,	RW
     0x3E, // CV_OUTPUT_1_PERIOD 			52, default 2 seconds
-
+    
     0x02, // CV_OUTPUT_2_DIRECTION_RULE17   53
     0xFF, // CV_OUTPUT_2_BRIGHTNESS     	54	//optional,		x,	RW
     0xFF, // CV_OUTPUT_2_RULE_17_BRIGHTNESS	default 0.2     55	//optional,		x,	RW
@@ -89,7 +89,7 @@ uint8_t const PROGMEM _defaults[] = {
     0x0A, // SPEED_TABLE_2			68	//optional,		x,	RW
     0x13, // SPEED_TABLE_3			69	//optional,		x,	RW
     0x1D, // SPEED_TABLE_4			70	//optional,		x,	RW
-
+    
     0x26, // SPEED_TABLE_5			71	//optional,		x,	RW
     0x30, // SPEED_TABLE_6			72	//optional,		x,	RW
     0x39, // SPEED_TABLE_7			73	//optional,		x,	RW
@@ -100,7 +100,7 @@ uint8_t const PROGMEM _defaults[] = {
     0x68, // SPEED_TABLE_12			78	//optional,		x,	RW
     0x71, // SPEED_TABLE_13			79	//optional,		x,	RW
     0x7B, // SPEED_TABLE_14			80	//optional,		x,	RW
-
+    
     0x84, // SPEED_TABLE_15			81	//optional,		x,	RW
     0x8E, // SPEED_TABLE_16			82	//optional,		x,	RW
     0x97, // SPEED_TABLE_17			83	//optional,		x,	RW
@@ -111,7 +111,7 @@ uint8_t const PROGMEM _defaults[] = {
     0xC6, // SPEED_TABLE_22			88	//optional,		x,	RW
     0xCF, // SPEED_TABLE_23			89	//optional,		x,	RW
     0xD9, // SPEED_TABLE_24			90	//optional,		x,	RW
-
+    
     0xE2, // SPEED_TABLE_25			91	//optional,		x,	RW
     0xEC, // SPEED_TABLE_26			92	//optional,		x,	RW
     0xF5, // SPEED_TABLE_27			93	//optional,		x,	RW
@@ -122,7 +122,7 @@ uint8_t const PROGMEM _defaults[] = {
     0x00, // RESERVED				98	//RESERVED
     0x00, // RESERVED				99	//RESERVED
     0x00, // RESERVED				100	//RESERVED
-
+    
     0x00, // RESERVED				101	//RESERVED
     0x00, // RESERVED				102	//RESERVED
     0x00, // RESERVED				103	//RESERVED
@@ -165,7 +165,7 @@ uint8_t const PROGMEM _animations[] = {
     0xFF,
     0x10,
     0x00,
-
+    
     /////Double Stobe
     0x00,
     0x00,
@@ -199,7 +199,7 @@ uint8_t const PROGMEM _animations[] = {
     0xFF,
     0x10,
     0x00,
-        
+    
     /////Rotary Beacon
 	0x98,
 	0xB0,
@@ -233,7 +233,7 @@ uint8_t const PROGMEM _animations[] = {
 	0x4E,
 	0x66,
 	0x7F,
-
+    
     /////Firebox
     0xE8,
     0xA5,
@@ -247,7 +247,7 @@ uint8_t const PROGMEM _animations[] = {
     0x68,
     0xD3,
     0x8F,
-    0x7C, 
+    0x7C,
     0x45,
     0x4E,
     0x35,
@@ -267,7 +267,7 @@ uint8_t const PROGMEM _animations[] = {
     0x9E,
     0xB1,
     0x6E,
-
+    
     /////Left Ditch
     0x00,
     0x00,
@@ -301,7 +301,7 @@ uint8_t const PROGMEM _animations[] = {
     0x00,
     0x00,
     0x00,
-
+    
     /////Right Ditch
     0xFF,
     0xFF,
@@ -335,7 +335,7 @@ uint8_t const PROGMEM _animations[] = {
     0xFF,
     0xFF,
     0xFF,
-
+    
     /////Mars
     0x20,
     0x20,
@@ -369,7 +369,7 @@ uint8_t const PROGMEM _animations[] = {
     0x20,
     0x20,
     0x20,
-
+    
     /////Gyra
     0x20,
     0x20,
@@ -428,7 +428,7 @@ static void _initialize_eeprom(void)
     }
     eeprom_update_byte((uint8_t*) CV_EXTENDED_ADDRESS_MSB_TEMP, 0x00);
     eeprom_update_byte((uint8_t*) CV_PAGE, 0x01);
-
+    
     //now, initialize FX animations
     for (i = 0; i < (FX_NUM_ANIMATIONS*0x20); ++i)
     {
@@ -440,7 +440,7 @@ static void _load_address(void)
 {
     //first, check to see if we are part of a consist
     DCC_consist_address = eeprom_read_byte((const uint8_t *) CV_CONSIST_ADDRESS);
-
+    
     if (CV29_LONG_ADDRESSING)
     {
         DCC_address = ((eeprom_read_byte((const uint8_t *) CV_EXTENDED_ADDRESS_MSB) & 0x3F) << 8) | eeprom_read_byte((const uint8_t *) CV_EXTENDED_ADDRESS_LSB);
@@ -449,13 +449,13 @@ static void _load_address(void)
         {
             return;
         }
-    }                    
-
+    }
+    
     //made it here, so we must need the short address instead
     DCC_address = eeprom_read_byte((const uint8_t *) CV_PRIMARY_ADDRESS);
     DCC_address_kind = DCC_SHORT_ADDRESS;
     if (DCC_address == 0x00)
-    DCC_address = 0x03;
+        DCC_address = 0x03;
 }
 
 static void _load_speed_table(void)
@@ -465,26 +465,26 @@ static void _load_speed_table(void)
     DCC_accel_rate = (uint32_t)eeprom_read_byte((const uint8_t *) CV_ACCELERATION_RATE) * 7111; //7111.1111111111113; // = .896 / 126 * 1000 * 1000;
     //check CV 23
     /*
-adjust = eeprom_read_byte((const uint8_t *)CV_ACCELERATION_ADJUSTMENT);
-    if (adjust & 0x80) //top bit set means subtract
-{
-        DCC_accel_rate -= (adjust & 0x7F) * 7111.1111111111113;
-        if (DCC_accel_rate <= 0) DCC_accel_rate = 0;
-}
-    else
-    DCC_accel_rate += (adjust & 0x7F) * 7111.1111111111113;
+     adjust = eeprom_read_byte((const uint8_t *)CV_ACCELERATION_ADJUSTMENT);
+     if (adjust & 0x80) //top bit set means subtract
+     {
+     DCC_accel_rate -= (adjust & 0x7F) * 7111.1111111111113;
+     if (DCC_accel_rate <= 0) DCC_accel_rate = 0;
+     }
+     else
+     DCC_accel_rate += (adjust & 0x7F) * 7111.1111111111113;
      */
     DCC_decel_rate = (uint32_t)eeprom_read_byte((const uint8_t *) CV_DECELERATION_RATE) * 7111; //7111.1111111111113; // = .896 / 126 * 1000 * 1000;
     //check CV 23
     /*
-adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
-    if (adjust & 0x80) //top bit set means subtract
-{
-    DCC_decel_rate -= (adjust & 0x7F) * 7111.1111111111113;
-        if (DCC_decel_rate <= 0) DCC_decel_rate = 0;
-}
-    else
-    DCC_decel_rate += (adjust & 0x7F) * 7111.1111111111113;
+     adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
+     if (adjust & 0x80) //top bit set means subtract
+     {
+     DCC_decel_rate -= (adjust & 0x7F) * 7111.1111111111113;
+     if (DCC_decel_rate <= 0) DCC_decel_rate = 0;
+     }
+     else
+     DCC_decel_rate += (adjust & 0x7F) * 7111.1111111111113;
      */
     DCC_forward_trim = eeprom_read_byte((const uint8_t *) CV_FORWARD_TRIM);
     //    if (DCC_forward_trim)
@@ -492,10 +492,10 @@ adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
     DCC_reverse_trim = eeprom_read_byte((const uint8_t *) CV_REVERSE_TRIM);
     //    if (DCC_reverse_trim)
     //        DCC_reverse_trim = DCC_reverse_trim * 0.0078125;
-
+    
     //next step: compute the speed table
     //two possible sources for the table, 3-step table and 28-step table. Either way, need to fit into the 128 steps we use internally
-
+    
     //INDEX 0 = STOP
     //INDEX 1 = FIRST
     //INDEX 126 = LAST
@@ -535,10 +535,10 @@ adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
         mid = eeprom_read_byte((const uint8_t *) CV_V_MID);
         if ((high == 0) || (high == 1)) //indicates to ignore the value
             high = 255;
-
+        
         if ((mid == 0) || (mid == 1)) //ignore it and recalculate;
             mid = (start + high) >> 1; //average of the two;
-
+        
         //DCC_speed_table[0] = 0;
         DCC_speed_table[1] = start;
         uint32_t delta = mid - start;
@@ -557,7 +557,7 @@ adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
         }
         DCC_speed_table[126] = high;
     }
-
+    
     //finally, load up settings
     BEMF_cutoff = eeprom_read_byte((const uint8_t *) CV_EMF_FEEDBACK_CUTOUT);
     if (BEMF_cutoff) // no sense in loading the gains if not going to use!
@@ -568,7 +568,7 @@ adjust = eeprom_read_byte((const uint8_t *)CV_DECELERATION_ADJUSTMENT);
         BEMF_Kf = eeprom_read_byte((const uint8_t *) CV_BEMF_FGAIN) + 1;
         BEMF_Kf_consist = eeprom_read_byte((const uint8_t *) CV_BEMF_FGAIN_CONSIST) + 1;
     }
-
+    
 }
 
 void _load_FX(void)
@@ -579,18 +579,18 @@ void _load_FX(void)
         const uint8_t offset = 5*i;
         FX[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_DIRECTION_RULE17 + offset));
         FX_Brightness[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_BRIGHTNESS + offset));
-        FX_Dim_Brightness[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_RULE_17_BRIGHTNESS + offset));    
+        FX_Dim_Brightness[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_RULE_17_BRIGHTNESS + offset));
         FX_Animation[i] = eeprom_read_byte((const uint8_t *) (CV_OUTPUT_1_FX + offset));
         if( (FX_Animation[i] & ~FX_TRIGGERABLE_MASK) >= FX_NUM_ANIMATIONS)
             FX_Animation[i] = (FX_Animation[i] & FX_TRIGGERABLE_MASK) | (FX_NUM_ANIMATIONS -1);
-		#ifdef __AEGAEON_C
+#ifdef __AEGAEON_C
 		//for some reason, this is royally f'd up when we use OCRB to drive PWM directly! This calculation restores the balance. UGLY! FIND HARDWARE FIX!
 		uint16_t temp = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));
 		temp = temp * 62 / 100;
 		FX_Period[i] = (uint8_t)temp;
-		#else
+#else
 		FX_Period[i] = eeprom_read_byte((const uint8_t*)(CV_OUTPUT_1_PERIOD + offset));
-		#endif
+#endif
     }
 }
 
@@ -599,17 +599,17 @@ void DCC_Config_Initialize(void)
 {
     //if this is the first time being called, we have some initialization to do!
     uint8_t i;
-
+    
     switch (eeprom_read_byte((const uint8_t *) 0x00))
     {
-    case 0xFF:
-        for (i = CV_SPEED_TABLE_1; i <= CV_SPEED_TABLE_28; ++i)
-        {
-            eeprom_update_byte((uint8_t *) i, _defaults[i]); //eeprom_read_byte((const uint8_t*) (i + CV_DEFAULT_OFFSET)));
-        }
-        //fall through
-    case 0xFE:
-        _initialize_eeprom();
+        case 0xFF:
+            for (i = CV_SPEED_TABLE_1; i <= CV_SPEED_TABLE_28; ++i)
+            {
+                eeprom_update_byte((uint8_t *) i, _defaults[i]); //eeprom_read_byte((const uint8_t*) (i + CV_DEFAULT_OFFSET)));
+            }
+            //fall through
+        case 0xFE:
+            _initialize_eeprom();
     }
     DCC_Config_Load_RAM_Cache();
 }
@@ -625,28 +625,28 @@ void DCC_Config_Verify_CV(uint8_t CV, uint8_t value)
         {
             Motor_Jog();
         }
-    } 
+    }
 }
 
 void DCC_Config_Write_CV( uint8_t CV, uint8_t value )
 {
     uint8_t lock = eeprom_read_byte((const uint8_t *) CV_DECODER_LOCK_LOCK);
     if( !lock || (lock == eeprom_read_byte((const uint8_t *) CV_DECODER_LOCK_KEY)) ||  (CV == CV_DECODER_LOCK_KEY)) //if decoder is locked, and key is not set to broadcast
-    {    
+    {
         uint16_t CV_temp = CV;
         uint8_t new_value = value;
-//        if (CV_temp > CV_USER_ID_2) //we don't implement any CV_temp beyond 106
-//            return 0;
-            //Check against reserved ranges
-
+        //        if (CV_temp > CV_USER_ID_2) //we don't implement any CV_temp beyond 106
+        //            return 0;
+        //Check against reserved ranges
+        
         if ((CV_temp == 20) || (CV_temp == 26) || (CV_temp == 28) || (CV == 33) || ((CV_temp >= 96) && (CV_temp <= 104)) ||  (CV_temp == CV_MANUFACTURER_VERSION) ||  (CV_temp == CV_FIRMWARE_REVISION) ||  (CV_temp > CV_USER_ID_2) ) //reserved ranges
             return;
-
-            //TODO check to see if this is a RO value, in which case, don't write!
-//        else if (CV_temp == CV_MANUFACTURER_VERSION)
-//            return 0; //TODO What else?
-
-            //Is this a reset command?
+        
+        //TODO check to see if this is a RO value, in which case, don't write!
+        //        else if (CV_temp == CV_MANUFACTURER_VERSION)
+        //            return 0; //TODO What else?
+        
+        //Is this a reset command?
         else if (CV_temp == CV_MANUFACTURER_ID)
         {
             if (value == 0x08)
@@ -663,12 +663,12 @@ void DCC_Config_Write_CV( uint8_t CV, uint8_t value )
             }
             return;
         }
-
+        
         else if (CV_temp == 29) //special rules prevent us from modifying unsupported bits
         {
             new_value |= new_value & CV29_MASK;
         }
-
+        
         else if (CV_temp == CV_PRIMARY_ADDRESS)
         {
             if ((new_value > 127) || (new_value == 0)) //invalid!!
@@ -677,33 +677,33 @@ void DCC_Config_Write_CV( uint8_t CV, uint8_t value )
             eeprom_update_byte((uint8_t *) 29, DCC_CV29 & ~0x20);
             eeprom_update_byte((uint8_t *) 19, 0x00);
         }
-
+        
         else if (CV_temp == CV_EXTENDED_ADDRESS_LSB)
         {
             //pull CV_temp 17 from cache
             uint8_t MSB = eeprom_read_byte((const uint8_t *) CV_EXTENDED_ADDRESS_MSB_TEMP);
             if ((MSB == 0) && (new_value == 0)) //zero address, invalid! Ignore
                 return;
-
+            
             eeprom_update_byte((uint8_t *) CV_EXTENDED_ADDRESS_MSB, MSB);
             //then let the LSB be written naturally.
         }
-
+        
         else if (CV_temp == CV_EXTENDED_ADDRESS_MSB) //cache this one, don't write it directly
         {
             CV_temp = CV_EXTENDED_ADDRESS_MSB_TEMP; //stash it somewhere else
         }
-
+        
         //if we made it to here, just write the damned byte, then issue a response
         eeprom_update_byte((uint8_t *) CV_temp, new_value);
         if (eeprom_read_byte((const uint8_t *) CV_temp) != new_value) //make sure the write took
         {
             return; //write failed, bail
         }
-
+        
         //Refresh the RAM cache
         DCC_Config_Load_RAM_Cache();
-
+        
         //made it this far, let's give set up ack pulse if configured to do so
         Motor_Jog();
     }
@@ -729,12 +729,12 @@ void DCC_Config_Verify_CV_Bit(uint8_t CV, uint8_t val, uint8_t pos)
 void DCC_Config_Load_RAM_Cache(void)
 {
     //here is where everything in EEPROM that we need frequent access to gets loaded
-
+    
     DCC_CV29 = eeprom_read_byte((const uint8_t *) CV_CONFIGURATION_DATA);
     _load_address();
-
+    
     _load_speed_table();
-
+    
     //load FX
     _load_FX();
 }

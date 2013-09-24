@@ -13,23 +13,25 @@
 #include <avr/eeprom.h>
 #include <stdint.h>
 
-extern    int8_t _goal_speed, _current_speed;
+//TODO this is a mess. Must we handle it this way? Seems like there must be a better way to handle this.
+
+extern int8_t _goal_speed, _current_speed;
 //extern    int8_t _max_speed;
-extern    uint8_t DCC_CV29;
-extern    uint8_t DCC_consist_address;
-extern    uint8_t DCC_address_kind;
-extern    uint8_t BEMF_cutoff, BEMF_period;
-extern    int16_t BEMF_Kp, BEMF_Ki;
-extern    uint16_t BEMF_Kf, BEMF_Kf_consist;
-extern    uint16_t DCC_address;
-extern    uint32_t _prev_time;
-extern    uint32_t _jog_time;
+extern uint8_t DCC_CV29;
+extern uint8_t DCC_consist_address;
+extern uint8_t DCC_address_kind;
+extern uint8_t BEMF_cutoff, BEMF_period;
+extern int16_t BEMF_Kp, BEMF_Ki;
+extern uint16_t BEMF_Kf, BEMF_Kf_consist;
+extern uint16_t DCC_address;
+extern uint32_t _prev_time;
+extern uint32_t _jog_time;
 extern uint32_t _kick_start_time;
-extern    uint32_t DCC_accel_rate;
-extern    uint32_t DCC_decel_rate;
-extern    uint32_t accum;
-extern    uint32_t DCC_forward_trim;
-extern    uint32_t DCC_reverse_trim;
+extern uint32_t DCC_accel_rate;
+extern uint32_t DCC_decel_rate;
+extern uint32_t accum;
+extern uint32_t DCC_forward_trim;
+extern uint32_t DCC_reverse_trim;
 extern uint8_t FX_Active;
 extern uint8_t FX[2];
 extern uint8_t FX_Brightness[2];
