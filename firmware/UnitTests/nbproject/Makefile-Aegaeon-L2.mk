@@ -73,13 +73,11 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=/usr/local/share/CppUTest/lib/libCppUTest.a
+LDLIBSOPTIONS=-lCppUTest
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/unittests
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/unittests: /usr/local/share/CppUTest/lib/libCppUTest.a
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/unittests: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}

@@ -89,7 +89,7 @@
         </ccTool>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>/usr/local/share/CppUTest/lib/libCppUTest.a</linkerLibFileItem>
+            <linkerLibLibItem>CppUTest</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
