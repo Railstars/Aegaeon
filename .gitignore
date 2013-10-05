@@ -4,5 +4,8 @@
 # .eep
 # .elf
 *.atsuo
+*.b#?
+*.s#?
+.DS_Store
 Debug
 Release
