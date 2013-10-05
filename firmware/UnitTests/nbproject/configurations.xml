@@ -40,6 +40,7 @@
     <itemPath>../FX.c</itemPath>
     <itemPath>../FX.h</itemPath>
     <itemPath>FX_Test.cpp</itemPath>
+    <itemPath>HardwareDefs.h</itemPath>
     <itemPath>../Motor.c</itemPath>
     <itemPath>../Motor.h</itemPath>
     <itemPath>Motor_Test.cpp</itemPath>
@@ -60,12 +61,13 @@
     <conf name="Aegaeon-L2" type="1">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>default</compilerSet>
+        <compilerSet>CLang|CLang</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
+          <standard>2</standard>
           <incDir>
             <pElem>/usr/local/include/CppUTest</pElem>
             <pElem>.</pElem>
@@ -77,6 +79,7 @@
           </preprocessorList>
         </cTool>
         <ccTool>
+          <standard>4</standard>
           <incDir>
             <pElem>/usr/local/share/CppUTest/include</pElem>
             <pElem>..</pElem>
@@ -150,6 +153,8 @@
       <item path="DCC_Packet_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FX_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="HardwareDefs.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Motor_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
