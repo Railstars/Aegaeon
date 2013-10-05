@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="AVR" displayName="AVR" projectFiles="true">
+      <itemPath>AVR/eeprom.c</itemPath>
+      <itemPath>AVR/eeprom.h</itemPath>
+      <itemPath>AVR/interrupt.c</itemPath>
+      <itemPath>AVR/interrupt.h</itemPath>
+      <itemPath>AVR/io.c</itemPath>
+      <itemPath>AVR/io.h</itemPath>
+      <itemPath>AVR/pgmspace.c</itemPath>
+      <itemPath>AVR/pgmspace.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="util" displayName="util" projectFiles="true">
+      <itemPath>util/atomic.c</itemPath>
+      <itemPath>util/atomic.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+    <itemPath>Aegaeon-L.c</itemPath>
+    <itemPath>DCC_Config.c</itemPath>
+    <itemPath>DCC_Config.h</itemPath>
+    <itemPath>DCC_Config_Test.cpp</itemPath>
+    <itemPath>DCC_Decoder.c</itemPath>
+    <itemPath>DCC_Decoder.h</itemPath>
+    <itemPath>DCC_Decoder_Test.cpp</itemPath>
+    <itemPath>DCC_Hardware.c</itemPath>
+    <itemPath>DCC_Hardware.h</itemPath>
+    <itemPath>DCC_Hardware_Test.cpp</itemPath>
+    <itemPath>DCC_Packet.c</itemPath>
+    <itemPath>DCC_Packet.h</itemPath>
+    <itemPath>DCC_Packet_Test.cpp</itemPath>
+    <itemPath>FX.c</itemPath>
+    <itemPath>FX.h</itemPath>
+    <itemPath>FX_Test.cpp</itemPath>
+    <itemPath>Motor.c</itemPath>
+    <itemPath>Motor.h</itemPath>
+    <itemPath>Motor_Test.cpp</itemPath>
+    <itemPath>NMRAMotorDecoder_Test.cpp</itemPath>
+    <itemPath>RunAllTests.cpp</itemPath>
+    <itemPath>Sanity_Test.cpp</itemPath>
+    <itemPath>globals.h</itemPath>
+    <itemPath>/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder/reset.c</itemPath>
+    <itemPath>reset.h</itemPath>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>AVR</Elem>
+    <Elem>util</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>/usr/local/share/CppUTest/include</pElem>
+            <pElem>/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>TESTING</Elem>
+          </preprocessorList>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/local/share/CppUTest/include</pElem>
+            <pElem>/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>TESTING</Elem>
+          </preprocessorList>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibFileItem>/usr/local/share/CppUTest/lib/libCppUTest.a</linkerLibFileItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+    </conf>
+  </confs>
+</configurationDescriptor>
