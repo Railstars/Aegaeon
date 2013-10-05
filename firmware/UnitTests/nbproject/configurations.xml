@@ -48,8 +48,8 @@
     <itemPath>Sanity_Test.cpp</itemPath>
     <itemPath>globals.h</itemPath>
     <itemPath>../globals.h</itemPath>
-    <itemPath>reset.c</itemPath>
-    <itemPath>reset.h</itemPath>
+    <itemPath>../reset.c</itemPath>
+    <itemPath>../reset.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>AVR</Elem>
@@ -67,8 +67,9 @@
       <compileType>
         <cTool>
           <incDir>
-            <pElem>/usr/local/share/CppUTest/include</pElem>
-            <pElem>/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder</pElem>
+            <pElem>/usr/local/include/CppUTest</pElem>
+            <pElem>./UnitTest</pElem>
+            <pElem>.</pElem>
           </incDir>
           <preprocessorList>
             <Elem>TESTING</Elem>
@@ -118,6 +119,10 @@
       </item>
       <item path="../globals.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="../reset.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../reset.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="AVR/eeprom.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVR/eeprom.h" ex="false" tool="3" flavor2="0">
@@ -153,10 +158,6 @@
       <item path="Sanity_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="globals.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="reset.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="reset.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="util/atomic.c" ex="false" tool="0" flavor2="0">
       </item>

@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/1472/DCC_Packet.o \
 	${OBJECTDIR}/_ext/1472/FX.o \
 	${OBJECTDIR}/_ext/1472/Motor.o \
+	${OBJECTDIR}/_ext/1472/reset.o \
 	${OBJECTDIR}/AVR/eeprom.o \
 	${OBJECTDIR}/AVR/interrupt.o \
 	${OBJECTDIR}/AVR/io.o \
@@ -55,7 +56,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/NMRAMotorDecoder_Test.o \
 	${OBJECTDIR}/RunAllTests.o \
 	${OBJECTDIR}/Sanity_Test.o \
-	${OBJECTDIR}/reset.o \
 	${OBJECTDIR}/util/atomic.o
 
 
@@ -88,57 +88,62 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/unittests: ${OBJECTFILES}
 ${OBJECTDIR}/_ext/1472/Aegaeon.o: ../Aegaeon.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/Aegaeon.o ../Aegaeon.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/Aegaeon.o ../Aegaeon.c
 
 ${OBJECTDIR}/_ext/1472/DCC_Config.o: ../DCC_Config.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Config.o ../DCC_Config.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Config.o ../DCC_Config.c
 
 ${OBJECTDIR}/_ext/1472/DCC_Decoder.o: ../DCC_Decoder.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Decoder.o ../DCC_Decoder.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Decoder.o ../DCC_Decoder.c
 
 ${OBJECTDIR}/_ext/1472/DCC_Hardware.o: ../DCC_Hardware.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Hardware.o ../DCC_Hardware.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Hardware.o ../DCC_Hardware.c
 
 ${OBJECTDIR}/_ext/1472/DCC_Packet.o: ../DCC_Packet.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Packet.o ../DCC_Packet.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/DCC_Packet.o ../DCC_Packet.c
 
 ${OBJECTDIR}/_ext/1472/FX.o: ../FX.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/FX.o ../FX.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/FX.o ../FX.c
 
 ${OBJECTDIR}/_ext/1472/Motor.o: ../Motor.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1472
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/Motor.o ../Motor.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/Motor.o ../Motor.c
+
+${OBJECTDIR}/_ext/1472/reset.o: ../reset.c 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1472
+	${RM} $@.d
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1472/reset.o ../reset.c
 
 ${OBJECTDIR}/AVR/eeprom.o: AVR/eeprom.c 
 	${MKDIR} -p ${OBJECTDIR}/AVR
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/eeprom.o AVR/eeprom.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/eeprom.o AVR/eeprom.c
 
 ${OBJECTDIR}/AVR/interrupt.o: AVR/interrupt.c 
 	${MKDIR} -p ${OBJECTDIR}/AVR
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/interrupt.o AVR/interrupt.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/interrupt.o AVR/interrupt.c
 
 ${OBJECTDIR}/AVR/io.o: AVR/io.c 
 	${MKDIR} -p ${OBJECTDIR}/AVR
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/io.o AVR/io.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/io.o AVR/io.c
 
 ${OBJECTDIR}/AVR/pgmspace.o: AVR/pgmspace.c 
 	${MKDIR} -p ${OBJECTDIR}/AVR
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/pgmspace.o AVR/pgmspace.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/AVR/pgmspace.o AVR/pgmspace.c
 
 ${OBJECTDIR}/DCC_Config_Test.o: DCC_Config_Test.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -185,15 +190,10 @@ ${OBJECTDIR}/Sanity_Test.o: Sanity_Test.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -DTESTING -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/Sanity_Test.o Sanity_Test.cpp
 
-${OBJECTDIR}/reset.o: reset.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/reset.o reset.c
-
 ${OBJECTDIR}/util/atomic.o: util/atomic.c 
 	${MKDIR} -p ${OBJECTDIR}/util
 	${RM} $@.d
-	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/share/CppUTest/include -I/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder -MMD -MP -MF $@.d -o ${OBJECTDIR}/util/atomic.o util/atomic.c
+	$(COMPILE.c) -g -DTESTING -D__AEGAEON_L2 -I/usr/local/include/CppUTest -I./UnitTest -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/util/atomic.o util/atomic.c
 
 # Subprojects
 .build-subprojects:

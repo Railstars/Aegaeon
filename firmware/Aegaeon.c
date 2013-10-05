@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/eeprom.h>
-#include <avr/wdt.h>
+//#include <avr/wdt.h>
 
 #include <stdint.h>
 #include "DCC_Hardware.h"
@@ -59,8 +59,10 @@ volatile DCC_Packet_t DCC_rx_buffer[2];
 
 int main(void)
 {
+#ifndef TESTING
 #ifndef __DEBUG
     OSCCAL = eeprom_read_byte((const uint8_t*)0x1FF);   //<-- THE PROBLEM IS HERE!?
+#endif
 #endif
     
     //wdt_enable(WDTO_2S); //set a very long timeout.

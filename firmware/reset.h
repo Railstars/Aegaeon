@@ -1,6 +1,19 @@
 #ifndef __RESET_H__
 #define __RESET_H__
 
+#ifdef TESTING
+
+#ifdef	__cplusplus
+extern "C" {
+#endif //__cplusplus
+
+void soft_reset(void);
+
+#ifdef	__cplusplus
+}
+#endif //__cplusplus
+
+#else
 //from http://www.nongnu.org/avr-libc/user-manual/FAQ.html#faq_softreset
 
 #include <avr/wdt.h>
@@ -18,4 +31,6 @@ do                          \
 	}                       \
 } while(0)
 
-#endif
+#endif //TESTING
+
+#endif //__RESET_H__

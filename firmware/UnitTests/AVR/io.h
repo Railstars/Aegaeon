@@ -16,8 +16,24 @@
 
 #define DDA5    5
 #define DDA6    6
+
+#define PA0     0
+#define PA1     1
+#define PA2     2
+#define PA3     3
+#define PA4     4
 #define PA5     5
 #define PA6     6
+#define PA7     7
+
+#define PB0     0
+#define PB1     1
+#define PB2     2
+#define PB3     3
+#define PB4     4
+#define PB5     5
+#define PB6     6
+#define PB7     7
 
 extern uint8_t TCCR0A, TCCR0B, TCNT0, OCR0B, OCR0A, DDRA, DDRB, TIMSK0, PORTA, PORTB, TCNT1;
 
