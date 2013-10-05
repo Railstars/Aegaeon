@@ -24,30 +24,31 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>Aegaeon-L.c</itemPath>
-    <itemPath>DCC_Config.c</itemPath>
-    <itemPath>DCC_Config.h</itemPath>
+    <itemPath>../Aegaeon.c</itemPath>
+    <itemPath>../DCC_Config.c</itemPath>
+    <itemPath>../DCC_Config.h</itemPath>
     <itemPath>DCC_Config_Test.cpp</itemPath>
-    <itemPath>DCC_Decoder.c</itemPath>
-    <itemPath>DCC_Decoder.h</itemPath>
+    <itemPath>../DCC_Decoder.c</itemPath>
+    <itemPath>../DCC_Decoder.h</itemPath>
     <itemPath>DCC_Decoder_Test.cpp</itemPath>
-    <itemPath>DCC_Hardware.c</itemPath>
-    <itemPath>DCC_Hardware.h</itemPath>
+    <itemPath>../DCC_Hardware.c</itemPath>
+    <itemPath>../DCC_Hardware.h</itemPath>
     <itemPath>DCC_Hardware_Test.cpp</itemPath>
-    <itemPath>DCC_Packet.c</itemPath>
-    <itemPath>DCC_Packet.h</itemPath>
+    <itemPath>../DCC_Packet.c</itemPath>
+    <itemPath>../DCC_Packet.h</itemPath>
     <itemPath>DCC_Packet_Test.cpp</itemPath>
-    <itemPath>FX.c</itemPath>
-    <itemPath>FX.h</itemPath>
+    <itemPath>../FX.c</itemPath>
+    <itemPath>../FX.h</itemPath>
     <itemPath>FX_Test.cpp</itemPath>
-    <itemPath>Motor.c</itemPath>
-    <itemPath>Motor.h</itemPath>
+    <itemPath>../Motor.c</itemPath>
+    <itemPath>../Motor.h</itemPath>
     <itemPath>Motor_Test.cpp</itemPath>
     <itemPath>NMRAMotorDecoder_Test.cpp</itemPath>
     <itemPath>RunAllTests.cpp</itemPath>
     <itemPath>Sanity_Test.cpp</itemPath>
     <itemPath>globals.h</itemPath>
-    <itemPath>/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder/reset.c</itemPath>
+    <itemPath>../globals.h</itemPath>
+    <itemPath>reset.c</itemPath>
     <itemPath>reset.h</itemPath>
   </logicalFolder>
   <sourceRootList>
@@ -89,10 +90,33 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder/reset.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
+      <item path="../Aegaeon.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../DCC_Config.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../DCC_Config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../DCC_Decoder.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../DCC_Decoder.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../DCC_Hardware.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../DCC_Hardware.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../DCC_Packet.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../DCC_Packet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../FX.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../FX.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../Motor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="../Motor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../globals.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="AVR/eeprom.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -110,41 +134,15 @@
       </item>
       <item path="AVR/pgmspace.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Aegaeon-L.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="DCC_Config.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="DCC_Config.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="DCC_Config_Test.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DCC_Decoder.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="DCC_Decoder.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DCC_Decoder_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="DCC_Hardware.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="DCC_Hardware.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="DCC_Hardware_Test.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="DCC_Packet.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="DCC_Packet.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DCC_Packet_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="FX.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="FX.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="FX_Test.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Motor.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Motor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Motor_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -155,6 +153,8 @@
       <item path="Sanity_Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="globals.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="reset.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="reset.h" ex="false" tool="3" flavor2="0">
       </item>
