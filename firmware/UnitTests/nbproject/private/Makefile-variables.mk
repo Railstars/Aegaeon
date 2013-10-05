@@ -3,5 +3,4 @@
 #
 # NOCDDL
 #
-# Debug configuration
-# Release configuration
+# Aegaeon-L2 configuration

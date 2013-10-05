@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="84">
+<configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="AVR" displayName="AVR" projectFiles="true">
+      <itemPath>util/atomic.c</itemPath>
+      <itemPath>util/atomic.h</itemPath>
       <itemPath>AVR/eeprom.c</itemPath>
       <itemPath>AVR/eeprom.h</itemPath>
       <itemPath>AVR/interrupt.c</itemPath>
@@ -10,22 +12,6 @@
       <itemPath>AVR/io.h</itemPath>
       <itemPath>AVR/pgmspace.c</itemPath>
       <itemPath>AVR/pgmspace.h</itemPath>
-    </logicalFolder>
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
-                   projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="ResourceFiles"
-                   displayName="Resource Files"
-                   projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="SourceFiles"
-                   displayName="Source Files"
-                   projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="util" displayName="util" projectFiles="true">
-      <itemPath>util/atomic.c</itemPath>
-      <itemPath>util/atomic.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -70,10 +56,12 @@
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="1">
+    <conf name="Aegaeon-L2" type="1">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
@@ -83,6 +71,7 @@
           </incDir>
           <preprocessorList>
             <Elem>TESTING</Elem>
+            <Elem>__AEGAEON_L2</Elem>
           </preprocessorList>
         </cTool>
         <ccTool>
@@ -100,26 +89,79 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-    </conf>
-    <conf name="Release" type="1">
-      <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>default</compilerSet>
-      </toolsSet>
-      <compileType>
-        <cTool>
-          <developmentMode>5</developmentMode>
-        </cTool>
-        <ccTool>
-          <developmentMode>5</developmentMode>
-        </ccTool>
-        <fortranCompilerTool>
-          <developmentMode>5</developmentMode>
-        </fortranCompilerTool>
-        <asmTool>
-          <developmentMode>5</developmentMode>
-        </asmTool>
-      </compileType>
+      <item path="/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder/reset.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="AVR/eeprom.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="AVR/eeprom.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AVR/interrupt.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="AVR/interrupt.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AVR/io.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="AVR/io.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AVR/pgmspace.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="AVR/pgmspace.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Aegaeon-L.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="DCC_Config.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="DCC_Config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DCC_Config_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DCC_Decoder.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="DCC_Decoder.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DCC_Decoder_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DCC_Hardware.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="DCC_Hardware.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DCC_Hardware_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DCC_Packet.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="DCC_Packet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DCC_Packet_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FX.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="FX.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FX_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Motor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Motor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Motor_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="NMRAMotorDecoder_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RunAllTests.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Sanity_Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="globals.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="reset.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/atomic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="util/atomic.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>

@@ -24,14 +24,14 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=DCC_Decoder
+PROJECTNAME=UnitTests
 
 # Active Configuration
-DEFAULTCONF=Debug
+DEFAULTCONF=Aegaeon-L2
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release 
+ALLCONFS=Aegaeon-L2 
 
 
 # build

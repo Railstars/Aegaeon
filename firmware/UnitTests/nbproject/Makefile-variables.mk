@@ -6,22 +6,14 @@
 CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
-# Debug configuration
-CND_PLATFORM_Debug=GNU-MacOSX
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-MacOSX
-CND_ARTIFACT_NAME_Debug=dcc_decoder
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-MacOSX/dcc_decoder
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-MacOSX/package
-CND_PACKAGE_NAME_Debug=dccdecoder.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-MacOSX/package/dccdecoder.tar
-# Release configuration
-CND_PLATFORM_Release=GNU-MacOSX
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-MacOSX
-CND_ARTIFACT_NAME_Release=dcc_decoder
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-MacOSX/dcc_decoder
-CND_PACKAGE_DIR_Release=dist/Release/GNU-MacOSX/package
-CND_PACKAGE_NAME_Release=dccdecoder.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-MacOSX/package/dccdecoder.tar
+# Aegaeon-L2 configuration
+CND_PLATFORM_Aegaeon-L2=GNU-MacOSX
+CND_ARTIFACT_DIR_Aegaeon-L2=dist/Aegaeon-L2/GNU-MacOSX
+CND_ARTIFACT_NAME_Aegaeon-L2=unittests
+CND_ARTIFACT_PATH_Aegaeon-L2=dist/Aegaeon-L2/GNU-MacOSX/unittests
+CND_PACKAGE_DIR_Aegaeon-L2=dist/Aegaeon-L2/GNU-MacOSX/package
+CND_PACKAGE_NAME_Aegaeon-L2=unittests.tar
+CND_PACKAGE_PATH_Aegaeon-L2=dist/Aegaeon-L2/GNU-MacOSX/package/unittests.tar
 #
 # include compiler specific variables
 #
