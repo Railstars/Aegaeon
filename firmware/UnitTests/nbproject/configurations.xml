@@ -68,8 +68,8 @@
         <cTool>
           <incDir>
             <pElem>/usr/local/include/CppUTest</pElem>
-            <pElem>./UnitTest</pElem>
             <pElem>.</pElem>
+            <pElem>..</pElem>
           </incDir>
           <preprocessorList>
             <Elem>TESTING</Elem>
@@ -79,10 +79,12 @@
         <ccTool>
           <incDir>
             <pElem>/usr/local/share/CppUTest/include</pElem>
-            <pElem>/Users/dgoodman/Documents/NetBeansProjects/DCC_Decoder</pElem>
+            <pElem>..</pElem>
+            <pElem>.</pElem>
           </incDir>
           <preprocessorList>
             <Elem>TESTING</Elem>
+            <Elem>__AEGAEON_L2</Elem>
           </preprocessorList>
         </ccTool>
         <linkerTool>
