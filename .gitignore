@@ -4,5 +4,7 @@
 # .eep
 # .elf
 *.atsuo
+*.b#?
+*.s#?
 Debug
 Release
