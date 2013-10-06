@@ -134,8 +134,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_0)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_E)
@@ -151,7 +152,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_E)
     //    FX_Update();
     //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_1)
@@ -167,7 +168,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_1)
     //    FX_Update();
     //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_2)
@@ -181,8 +182,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_2)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(23, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_3)
@@ -196,8 +198,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_3)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(41, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(41), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_4)
@@ -211,8 +214,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_4)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(60, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(60), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_5)
@@ -226,8 +230,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_5)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(78, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(78), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_6)
@@ -241,8 +246,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_6)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(97, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(97), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_7)
@@ -256,8 +262,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_7)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_8)
@@ -271,8 +278,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_8)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(134, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(134), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_9)
@@ -286,8 +294,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_9)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(152, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(152), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_10)
@@ -301,8 +310,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_10)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(170, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(170), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_11)
@@ -316,8 +326,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_11)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(188, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(188), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_12)
@@ -331,8 +342,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_12)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(206, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(206), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_13)
@@ -346,8 +358,9 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_13)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(224, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(224), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_14)
@@ -362,7 +375,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_14)
     Motor_Update();
     //    FX_Update();
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(242, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
 
 /*****************************/
@@ -379,7 +392,7 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_0)
     Motor_Update();
     //    FX_Update();
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_E)
@@ -393,8 +406,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_E)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1)); //obnoxious, ai'nt it?
-    CHECK_EQUAL(0x00, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_1)
@@ -408,8 +422,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_1)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(5, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_2)
@@ -423,8 +438,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_2)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(23, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_3)
@@ -438,8 +454,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_3)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(41, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(41), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_4)
@@ -453,8 +470,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_4)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(60, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(60), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_5)
@@ -468,8 +486,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_5)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(78, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(78), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_6)
@@ -483,8 +502,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_6)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(97, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(97), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_7)
@@ -498,8 +518,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_7)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(115, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_8)
@@ -513,8 +534,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_8)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(134, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(134), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_9)
@@ -528,8 +550,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_9)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(152, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(152), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_10)
@@ -543,8 +566,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_10)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(170, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(170), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_11)
@@ -558,8 +582,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_11)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(188, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(188), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_12)
@@ -573,8 +598,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_12)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(206, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(206), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_13)
@@ -588,8 +614,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_13)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(224, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(224), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_14)
@@ -603,8 +630,9 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_14)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(242, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
 
 /****** Tests described in http://nmra.org/standards/candi/dcctbman.html#test_descriptions *******/
@@ -623,8 +651,9 @@ TEST(NMRAMotorDecoderTests, PacketAcceptanceTest)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 
     //send estop
     sendPreamble(14);
@@ -651,7 +680,7 @@ TEST(NMRAMotorDecoderTests, PacketAcceptanceTest)
         Motor_Update();
         //    FX_Update();
     }
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 }
 
 /** Bad Address Test **/
@@ -668,8 +697,9 @@ TEST(NMRAMotorDecoderTests, BadAddressTest)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 
     //now, start sending etsops to invalid addresses
     uint8_t i;
@@ -686,7 +716,7 @@ TEST(NMRAMotorDecoderTests, BadAddressTest)
             DCC_Decoder_Update();
             Motor_Update();
             //    FX_Update();
-            CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+            CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
         }
     }
 
@@ -700,7 +730,7 @@ TEST(NMRAMotorDecoderTests, BadAddressTest)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 }
 
 /** Bad Bit Test **/
@@ -716,8 +746,9 @@ TEST(NMRAMotorDecoderTests, BadBitTest)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 
     //now, start sending etsops with invalid bits
     uint64_t bitstream = 0xfff01984c5; //an entire estop packet, 40 bits long
@@ -735,7 +766,7 @@ TEST(NMRAMotorDecoderTests, BadBitTest)
         DCC_Decoder_Update();
         Motor_Update();
         //    FX_Update();
-        CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+        CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
     }
 
     //and one last time without corruption
@@ -746,7 +777,7 @@ TEST(NMRAMotorDecoderTests, BadBitTest)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 }
 
 /*** Truncated Packet Test ****/
@@ -769,8 +800,9 @@ IGNORE_TEST(NMRAMotorDecoderTests, TruncatedRecovery)
         DCC_Decoder_Update();
         Motor_Update();
         //    FX_Update();
+        //FIXME
         CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-        CHECK_EQUAL(242, OCR0A);
+        CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
         for (j = 0; j < len - i; ++j) //send estop, truncated a bit at a time…
         {
@@ -779,8 +811,9 @@ IGNORE_TEST(NMRAMotorDecoderTests, TruncatedRecovery)
         DCC_Decoder_Update();
         Motor_Update();
         //    FX_Update();
+        //FIXME
         CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-        CHECK_EQUAL(242, OCR0A);
+        CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
         //now send a good full speed packet
         sendPreamble(14);
@@ -792,8 +825,9 @@ IGNORE_TEST(NMRAMotorDecoderTests, TruncatedRecovery)
         DCC_Decoder_Update();
         Motor_Update();
         //    FX_Update();
+        //FIXME
         CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-        CHECK_EQUAL(242, MOTOR_PWM_CONTROL);
+        CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
     }
 }
@@ -829,8 +863,9 @@ TEST(NMRAMotorDecoderTests, PriorPacketTest)
         DCC_Decoder_Update();
         Motor_Update();
         //    FX_Update();
+        //FIXME
         CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-        CHECK_EQUAL(242, MOTOR_PWM_CONTROL);
+        CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
     }
 }
 
@@ -878,7 +913,7 @@ TEST(NMRAMotorDecoderTests, AddressPartitionTest)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL(r, DCC_address); //should FAIL
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(r), DCC_address); //should FAIL
 }
 
 //todo check 14 bit addresses
@@ -1042,8 +1077,9 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 
     //now send a good full speed packet
     //full speed to consist, should be acted upon
@@ -1055,8 +1091,9 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(242, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
     //reset by stopping consist.
     sendPreamble(14);
@@ -1067,7 +1104,7 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 
     //all over again again in reverse facing
     sendPreamble(14);
@@ -1088,7 +1125,7 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 
     //Now, send a speed command to consist, should result in loco running backwards this time
     sendPreamble(14);
@@ -1099,8 +1136,9 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
+    //FIXME
     CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
-    CHECK_EQUAL(242, OCR0A);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
 
 //00111111        128 Speed Step Mode
@@ -1354,7 +1392,7 @@ TEST(NMRAMotorDecoderTests, DirectVerify_V1)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     sendPreamble(20); //20 bits in service mode!
     sendByte(0x74); //verify byte
@@ -1394,8 +1432,8 @@ TEST(NMRAMotorDecoderTests, DirectVerify_V1)
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog onset
-    while (MOTOR_PWM_CONTROL == 0xFF)
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog onset
+    while (MOTOR_PWM_CONTROL == MOTOR_PWM_LEVEL(0xFF))
     {
         TIM0_OVF_vect();
         DCC_Decoder_Update();
@@ -1447,7 +1485,7 @@ TEST(NMRAMotorDecoderTests, DirectVerify_V2)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     sendPreamble(20); //20 bits in service mode!
     sendByte(0x74); //verify byte
@@ -1489,7 +1527,7 @@ TEST(NMRAMotorDecoderTests, DirectVerify_V2)
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for no jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for no jog onset
 }
 
 //failed verify, this time because of an invalid sequence of commands
@@ -1534,7 +1572,7 @@ TEST(NMRAMotorDecoderTests, DirectVerify_V3)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     sendPreamble(20); //20 bits in service mode!
     sendByte(0x74); //verify byte
@@ -1573,7 +1611,7 @@ TEST(NMRAMotorDecoderTests, DirectVerify_V3)
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for no jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for no jog onset
 }
 
 //successful write
@@ -1616,7 +1654,7 @@ TEST(NMRAMotorDecoderTests, DirectWrite_V1)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     sendPreamble(20); //20 bits in service mode!
     sendByte(0x7C); //write byte
@@ -1656,8 +1694,8 @@ TEST(NMRAMotorDecoderTests, DirectWrite_V1)
     Motor_Update();
     uint32_t timer = _millis_counter;
 
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog onset
-    while (MOTOR_PWM_CONTROL == 0xFF)
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog onset
+    while (MOTOR_PWM_CONTROL == MOTOR_PWM_LEVEL(0xFF))
     {
         TIM0_OVF_vect();
         DCC_Decoder_Update();
@@ -1708,7 +1746,7 @@ TEST(NMRAMotorDecoderTests, DirectWrite_V2)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     sendPreamble(20); //20 bits in service mode!
     sendByte(0x7C); //write byte
@@ -1747,7 +1785,7 @@ TEST(NMRAMotorDecoderTests, DirectWrite_V2)
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for jog onset
     CHECK_EQUAL(MANUFACTURER_ID, eeprom[8]);
 }
 
@@ -1781,7 +1819,7 @@ TEST(NMRAMotorDecoderTests, DirectBitVerify_V1)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -1796,8 +1834,8 @@ TEST(NMRAMotorDecoderTests, DirectBitVerify_V1)
         Motor_Update();
     }
     uint32_t timer = _millis_counter;
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog onset
-    while (MOTOR_PWM_CONTROL == 0xFF)
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog onset
+    while (MOTOR_PWM_CONTROL == MOTOR_PWM_LEVEL(0xFF))
     {
         TIM0_OVF_vect();
         DCC_Decoder_Update();
@@ -1834,7 +1872,7 @@ TEST(NMRAMotorDecoderTests, DirectBitVerify_V2)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -1847,7 +1885,7 @@ TEST(NMRAMotorDecoderTests, DirectBitVerify_V2)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for jog onset
 }
 
 TEST(NMRAMotorDecoderTests, DirectBitWrite_V1)
@@ -1878,7 +1916,7 @@ TEST(NMRAMotorDecoderTests, DirectBitWrite_V1)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -1893,8 +1931,8 @@ TEST(NMRAMotorDecoderTests, DirectBitWrite_V1)
         Motor_Update();
     }
     uint32_t timer = _millis_counter;
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog onset
-    while (MOTOR_PWM_CONTROL == 0xFF)
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog onset
+    while (MOTOR_PWM_CONTROL == MOTOR_PWM_LEVEL(0xFF))
     {
         TIM0_OVF_vect();
         DCC_Decoder_Update();
@@ -1934,7 +1972,7 @@ TEST(NMRAMotorDecoderTests, DirectBitWrite_V2)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -1948,7 +1986,7 @@ TEST(NMRAMotorDecoderTests, DirectBitWrite_V2)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for jog onset
     CHECK_EQUAL(MANUFACTURER_ID, eeprom[8]);
 }
 
@@ -2027,7 +2065,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyVerify_V1)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -2040,7 +2078,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyVerify_V1)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog onset
 }
 
 TEST(NMRAMotorDecoderTests, AdressOnlyVerify_V2)
@@ -2116,7 +2154,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyVerify_V2)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -2129,7 +2167,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyVerify_V2)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for jog onset
 }
 
 TEST(NMRAMotorDecoderTests, AdressOnlyWrite_V1)
@@ -2206,7 +2244,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyWrite_V1)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -2219,7 +2257,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyWrite_V1)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog onset
     CHECK_EQUAL(0x7F, DCC_address);
 }
 
@@ -2298,7 +2336,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyWrite_V2)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //only one packet sent, should not be acking!!
 
     for (i = 0; i < 4; ++i)
     {
@@ -2311,7 +2349,7 @@ TEST(NMRAMotorDecoderTests, AdressOnlyWrite_V2)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL); //check for jog onset
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL); //check for jog onset
     CHECK_EQUAL(3, DCC_address);
 }
 
@@ -2391,7 +2429,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV2)
     DCC_Decoder_Update();
     Motor_Update();
     CHECK_EQUAL(_defaults[2], eeprom[2]); //only one packet sent, should not be acking!!
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 
     for (i = 0; i < 4; ++i)
     {
@@ -2405,7 +2443,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV2)
         Motor_Update();
     }
     CHECK_EQUAL(0xFF, eeprom[2]);
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //check for jog
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //check for jog
 }
 
 TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV110)
@@ -2481,7 +2519,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV110)
     DCC_Decoder_Update();
     Motor_Update();
     CHECK_EQUAL(_defaults[7], eeprom[7]); //only one packet sent, should not be acking!!
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 
     for (i = 0; i < 4; ++i)
     {
@@ -2494,7 +2532,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV110)
         Motor_Update();
     }
     CHECK_EQUAL(_defaults[7], eeprom[7]); //only one packet sent, should not be acking!!
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 
@@ -2571,7 +2609,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV66)
     DCC_Decoder_Update();
     Motor_Update();
     CHECK_EQUAL(_defaults[66], eeprom[66]); //only one packet sent, should not be acking!!
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 
     for (i = 0; i < 4; ++i)
     {
@@ -2585,7 +2623,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Write_CV66)
         Motor_Update();
     }
     CHECK_EQUAL(0xFF, eeprom[66]);
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Verify_CV66)
@@ -2658,7 +2696,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Verify_CV66)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 
     for (i = 0; i < 4; ++i)
     {
@@ -2670,7 +2708,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Verify_CV66)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Verify_CV66_Fail)
@@ -2743,7 +2781,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Verify_CV66_Fail)
     ++_millis_counter;
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 
     for (i = 0; i < 4; ++i)
     {
@@ -2755,7 +2793,7 @@ TEST(NMRAMotorDecoderTests, PhysicalRegsiter_Verify_CV66_Fail)
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
@@ -2833,7 +2871,7 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
         Motor_Update();
     }
     CHECK_EQUAL(0x04, eeprom[1]);
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 //RP 9.2.4
@@ -2848,7 +2886,7 @@ TEST(NMRAMotorDecoderTests, DCTransition)
 
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x73, MOTOR_PWM_CONTROL); //should be full speed regardless
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x73), MOTOR_PWM_CONTROL); //should be full speed regardless
 
     //let 30 milliseconds pass
     while(_millis_counter < 30)
@@ -2858,7 +2896,8 @@ TEST(NMRAMotorDecoderTests, DCTransition)
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //should be full speed regardless
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //should be full speed regardless
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), (TCCR0A & (1 << COM0B1))); //forward
 }
 
@@ -2873,7 +2912,7 @@ TEST(NMRAMotorDecoderTests, DCCTransition)
 
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x73, MOTOR_PWM_CONTROL); //should be full speed regardless
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x73), MOTOR_PWM_CONTROL); //should be full speed regardless
 
     //let 30 milliseconds pass
     while(_millis_counter < 30)
@@ -2882,14 +2921,16 @@ TEST(NMRAMotorDecoderTests, DCCTransition)
 
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL); //should be full speed regardless
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //should be full speed regardless
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), (TCCR0A & (1 << COM0B1))); //forward
     //now in DC mode. Let's transition back
 
     TIM1_CAPT_vect();
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(0x73, MOTOR_PWM_CONTROL); //should be full speed regardless
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x73), MOTOR_PWM_CONTROL); //should be full speed regardless
+    //FIXME
     CHECK_EQUAL((1 << COM0B1), (TCCR0A & (1 << COM0B1))); //forward
 
 }

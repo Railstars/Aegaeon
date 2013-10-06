@@ -3,6 +3,10 @@ extern "C"
 #include "DCC_Config.h"
 #include "Motor.h"
 #include "DCC_Decoder.h"
+#include "DCC_Hardware.h"
+#include "DCC_Config.h"
+#include "Motor.h"
+#include "globals.h"
 #include "reset.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
@@ -12,22 +16,13 @@ void ADC_vect(void);
 
 #include <CppUTest/TestHarness.h>
 #include "HardwareDefs.h"
+#include "utils.h"
 
 extern uint8_t eeprom[];
 extern uint8_t _defaults[];
-extern uint8_t DCC_CV29;
-extern uint32_t _millis_counter, _micros_counter;
-extern uint32_t _prev_time;
-extern int8_t _goal_speed;
-extern int8_t _current_speed;
-extern uint8_t _voltage_level, _voltage_adjust;
-extern uint8_t DCC_speed_table[];
-extern uint32_t _jog_time;
-extern uint8_t DCC_flags;
-extern uint8_t sample;
-extern    uint8_t BEMF_cutoff, BEMF_period;
-extern    int16_t BEMF_Kp, BEMF_Ki;
-extern    uint16_t BEMF_Kf, BEMF_Kf_consist;
+
+//for the ADC
+extern uint8_t sample, sample_ready, min_ADC;
 
 TEST_GROUP(MotorTests)
 {
@@ -40,7 +35,6 @@ TEST_GROUP(MotorTests)
         soft_reset();
         //first, force ops mode
         DCC_flags |= DCC_FLAGS_OPS_MODE_MASK;
-        DCC_Config_Initialize();
     }
 
     void teardown()
@@ -51,7 +45,7 @@ TEST_GROUP(MotorTests)
 
 TEST(MotorTests, Initialization)
 {
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, millis_0)
@@ -78,28 +72,28 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(1);
     Motor_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(2);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MID)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(15);
     Motor_Update();
-    CHECK_EQUAL(125, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX) //MAX SPEED
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(29);
     Motor_Update();
-    CHECK_EQUAL(255, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -108,21 +102,21 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_3)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(3);
     Motor_Update();
-    CHECK_EQUAL(15, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(15), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_4)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(4);
     Motor_Update();
-    CHECK_EQUAL(23, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_25)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(25);
     Motor_Update();
-    CHECK_EQUAL(216, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(216), MOTOR_PWM_CONTROL);
 }
 
 /*********28 speed steps negative speed w/ 3-step speed table*********/
@@ -132,28 +126,28 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP_NEG)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-1);
     Motor_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_NEG)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-2);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_NEG)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-15);
     Motor_Update();
-    CHECK_EQUAL(125, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_NEG) //MAX SPEED
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-29);
     Motor_Update();
-    CHECK_EQUAL(255, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -162,21 +156,21 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_3_NEG)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-3);
     Motor_Update();
-    CHECK_EQUAL(15, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(15), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_4_NEG)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-4);
     Motor_Update();
-    CHECK_EQUAL(23, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_25_NEG)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(-25);
     Motor_Update();
-    CHECK_EQUAL(216, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(216), MOTOR_PWM_CONTROL);
 }
 
 /*********28 speed steps w/alternate 3-step speed table*********/
@@ -189,7 +183,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_28(1);
     Motor_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_new3step)
@@ -200,7 +194,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(2);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_new3step)
@@ -211,7 +205,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(15);
     Motor_Update();
-    CHECK_EQUAL(19, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(19), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_new3step)
@@ -222,7 +216,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(29);
     Motor_Update();
-    CHECK_EQUAL(100, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(100), MOTOR_PWM_CONTROL);
 }
 
 //very tricky!
@@ -235,7 +229,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_3_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(3);
     Motor_Update();
-    CHECK_EQUAL(11, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(11), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_4_new3step)
@@ -246,7 +240,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_4_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(4);
     Motor_Update();
-    CHECK_EQUAL(11, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(11), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_16_new3step)
@@ -257,7 +251,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_16_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(16);
     Motor_Update();
-    CHECK_EQUAL(23, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_26_new3step)
@@ -268,7 +262,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_26_new3step)
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(26);
     Motor_Update();
-    CHECK_EQUAL(80, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(80), MOTOR_PWM_CONTROL);
 }
 
 /*********28 speed steps w/28-step speed table*********/
@@ -278,7 +272,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_STOP)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(1);
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_FIRST)
@@ -286,7 +280,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_FIRST)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(2);
     Motor_Update();
-    CHECK_EQUAL(6, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(6), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MID)
@@ -294,7 +288,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MID)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(15);
     Motor_Update();
-    CHECK_EQUAL(125, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MAX) //MAX SPEED
@@ -302,7 +296,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MAX) //MAX SPEED
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(29);
     Motor_Update();
-    CHECK_EQUAL(255, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -312,7 +306,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_3)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(3);
     Motor_Update();
-    CHECK_EQUAL(16, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(16), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_4)
@@ -320,7 +314,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_4)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(4);
     Motor_Update();
-    CHECK_EQUAL(24, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(24), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_25)
@@ -328,7 +322,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_25)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_28(25);
     Motor_Update();
-    CHECK_EQUAL(216, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(216), MOTOR_PWM_CONTROL);
 }
 
 /*********28 speed steps w/alternate 28-step speed table*********/
@@ -367,7 +361,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_STOP)
     CHECK_EQUAL(_defaults[29] | 0x10, eeprom[29]);
     Motor_Set_Speed_By_DCC_Speed_Step_28(1);
     Motor_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_FIRST)
@@ -403,7 +397,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_FIRST)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_28(2);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MID)
@@ -439,7 +433,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MID)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_28(15);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MAX) //MAX SPEED
@@ -475,7 +469,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MAX) //MAX SPEED
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_28(29);
     Motor_Update();
-    CHECK_EQUAL(220, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(220), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -513,7 +507,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_3)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_28(3);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_4)
@@ -549,7 +543,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_4)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_28(4);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_25)
@@ -585,7 +579,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_25)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_28(25);
     Motor_Update();
-    CHECK_EQUAL(138, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(138), MOTOR_PWM_CONTROL);
 }
 
 /*********128 speed steps w/3-step speed table*********/
@@ -594,28 +588,28 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_STOP)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(1);
     Motor_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(2);
     Motor_Update();
-    CHECK_EQUAL(1, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(1), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MID)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(64);
     Motor_Update();
-    CHECK_EQUAL(128, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(128), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX) //MAX SPEED
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(127);
     Motor_Update();
-    CHECK_EQUAL(255, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -624,28 +618,28 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_3)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(3);
     Motor_Update();
-    CHECK_EQUAL(3, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(3), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_62)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(62);
     Motor_Update();
-    CHECK_EQUAL(123, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(123), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_66)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(66);
     Motor_Update();
-    CHECK_EQUAL(132, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(132), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_125)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_128(125);
     Motor_Update();
-    CHECK_EQUAL(250, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(250), MOTOR_PWM_CONTROL);
 }
 
 /*********128 speed steps w/alternate 3-step speed table*********/
@@ -656,7 +650,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_STOP_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(1);
     Motor_Update();
-    CHECK_EQUAL(0, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST_new3step)
@@ -666,7 +660,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(2);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MID_new3step)
@@ -676,7 +670,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_MID_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(64);
     Motor_Update();
-    CHECK_EQUAL(20, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(20), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX_new3step) //MAX SPEED
@@ -686,7 +680,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX_new3step) //MAX SPEED
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(127);
     Motor_Update();
-    CHECK_EQUAL(100, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(100), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -698,7 +692,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_3_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(3);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_62_new3step)
@@ -708,7 +702,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_62_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(62);
     Motor_Update();
-    CHECK_EQUAL(19, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(19), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_66_new3step)
@@ -718,7 +712,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_66_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(66);
     Motor_Update();
-    CHECK_EQUAL(22, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(22), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_125_new3step)
@@ -728,7 +722,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_125_new3step)
     DCC_Config_Write_CV(CV_V_HIGH, 100);
     Motor_Set_Speed_By_DCC_Speed_Step_128(125);
     Motor_Update();
-    CHECK_EQUAL(97, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(97), MOTOR_PWM_CONTROL);
 }
 
 /*********128 speed steps w/28-step speed table*********/
@@ -738,7 +732,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_STOP)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(1);
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_FIRST)
@@ -746,7 +740,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_FIRST)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(2);
     Motor_Update();
-    CHECK_EQUAL(2, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(2), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MID)
@@ -754,7 +748,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MID)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(64);
     Motor_Update();
-    CHECK_EQUAL(127, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(127), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MAX) //MAX SPEED
@@ -762,7 +756,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MAX) //MAX SPEED
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(127);
     Motor_Update();
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -772,7 +766,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_3)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(3);
     Motor_Update();
-    CHECK_EQUAL(4, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(4), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_62)
@@ -780,7 +774,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_62)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(62);
     Motor_Update();
-    CHECK_EQUAL(123, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(123), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_66)
@@ -788,7 +782,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_66)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(66);
     Motor_Update();
-    CHECK_EQUAL(131, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(131), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_125)
@@ -796,7 +790,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_125)
     DCC_Config_Write_CV(29, DCC_CV29 | 0x10);
     Motor_Set_Speed_By_DCC_Speed_Step_128(125);
     Motor_Update();
-    CHECK_EQUAL(250, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(250), MOTOR_PWM_CONTROL);
 }
 
 /*********128 speed steps w/alternate 28-step speed table*********/
@@ -834,7 +828,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_STOP)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(1);
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_FIRST)
@@ -870,7 +864,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_FIRST)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(2);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MID)
@@ -906,7 +900,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MID)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(64);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MAX) //MAX SPEED
@@ -942,7 +936,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MAX) //MAX SPEED
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(127);
     Motor_Update();
-    CHECK_EQUAL(220, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(220), MOTOR_PWM_CONTROL);
 }
 
 //trickier…
@@ -980,7 +974,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_3)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(3);
     Motor_Update();
-    CHECK_EQUAL(5, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_62)
@@ -1016,7 +1010,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_62)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(62);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_66)
@@ -1052,7 +1046,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_66)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(66);
     Motor_Update();
-    CHECK_EQUAL(10, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_125)
@@ -1088,7 +1082,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_125)
     DCC_Config_Write_CV(CV_SPEED_TABLE_28, 220);
     Motor_Set_Speed_By_DCC_Speed_Step_128(125);
     Motor_Update();
-    CHECK_EQUAL(211, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(211), MOTOR_PWM_CONTROL);
 }
 
 
@@ -1193,44 +1187,44 @@ TEST(MotorTests, TestJog)
 {
     //need to enable motor jogging!
     DCC_Config_Write_CV(CV_OPS_MODE_BASIC_ACK, 0x01);
-    _millis_counter = 1; //need to do this
+    force_timer(1); //need to do this
     Motor_Jog();
     Motor_Update();
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 
-    _millis_counter += 6;
+    force_timer_incr(6);
     Motor_Update();
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 
-    _millis_counter += 2;
+    force_timer_incr(2);
     Motor_Update();
     Motor_Update(); //takes two updates for jog off to go into effect.
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 //motor jog
 
 TEST(MotorTests, TestJogOpsMode)
 {
-    _millis_counter = 1; //need to do this
+    force_timer(1); //need to do this
     DCC_Config_Write_CV(CV_OPS_MODE_BASIC_ACK, 1);
     Motor_Update();
-    _millis_counter = 12;
+    force_timer(12);
     DCC_Config_Write_CV(CV_OPS_MODE_BASIC_ACK, 1);
     Motor_Update();
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestSpeedSettings_eStop_V1)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(29);
     Motor_Update();
-    CHECK_EQUAL(255, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 
     //estop then delay.
     Motor_EStop(1);
     Motor_Update();
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 
     //long delay then recheck
     uint8_t i;
@@ -1239,7 +1233,7 @@ TEST(MotorTests, TestSpeedSettings_eStop_V1)
         TIM0_OVF_vect();
         Motor_Update();
     }
-    CHECK_EQUAL(0x00, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestForwardTrim_V1)
@@ -1247,7 +1241,7 @@ TEST(MotorTests, TestForwardTrim_V1)
     DCC_Config_Write_CV(CV_FORWARD_TRIM, 64); //half voltage
     Motor_Set_Speed_By_DCC_Speed_Step_28(29); //set to full speed, should be half voltage
     Motor_Update();
-    CHECK_EQUAL(127, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(127), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestForwardTrim_V2)
@@ -1255,7 +1249,7 @@ TEST(MotorTests, TestForwardTrim_V2)
     DCC_Config_Write_CV(CV_FORWARD_TRIM, 255); //double voltage
     Motor_Set_Speed_By_DCC_Speed_Step_28(15); //set to half speed, should be nearly full voltage
     Motor_Update();
-    CHECK_EQUAL(249, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(249), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestReverseTrim_V1)
@@ -1263,7 +1257,7 @@ TEST(MotorTests, TestReverseTrim_V1)
     DCC_Config_Write_CV(CV_REVERSE_TRIM, 64); //half voltage
     Motor_Set_Speed_By_DCC_Speed_Step_28(-29); //set to full speed, should be half voltage
     Motor_Update();
-    CHECK_EQUAL(127, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(127), MOTOR_PWM_CONTROL);
 }
 
 TEST(MotorTests, TestReverseTrim_V2)
@@ -1271,7 +1265,7 @@ TEST(MotorTests, TestReverseTrim_V2)
     DCC_Config_Write_CV(CV_REVERSE_TRIM, 255); //double voltage
     Motor_Set_Speed_By_DCC_Speed_Step_28(-15); //set to half speed, should be nearly full voltage
     Motor_Update();
-    CHECK_EQUAL(249, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(249), MOTOR_PWM_CONTROL);
 }
 
 //check motor cutout for BEMF WHEN ENABLED
@@ -1279,7 +1273,7 @@ TEST(MotorTests, TestBEMFCutout)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(14); //50% cruise rate
     Motor_Update();
-    CHECK_EQUAL(115, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
     uint8_t applied_voltage = MOTOR_PWM_CONTROL;
 
     //set up BEMF
@@ -1290,14 +1284,14 @@ TEST(MotorTests, TestBEMFCutout)
     BEMF_Kf = 0xFF;
 
     //check how long it takes for the motor to be disconnected
-    while(MOTOR_PWM_CONTROL != 0xFF)
+    while(MOTOR_PWM_CONTROL != MOTOR_PWM_LEVEL(0xFF))
     {
         TIM0_OVF_vect();
         Motor_Update();
     }
     
     //FIXME
-    CHECK_EQUAL(0xFF, MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
     CHECK_EQUAL(0xFF, OCR0A);
     CHECK_EQUAL((1 << COM0B1) | (1 << COM0A1), TCCR0A & ((1 << COM0B1) | (1 << COM0A1)));
     CHECK_EQUAL(100, _millis_counter);
@@ -1320,7 +1314,7 @@ TEST(MotorTests, TestBEMFCutout)
     //now check that motor has returned to previous voltage
     ADC_vect();
     Motor_Update();
-    CHECK_EQUAL(112, MOTOR_PWM_CONTROL); //TODO HACK!
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(112), MOTOR_PWM_CONTROL); //TODO HACK!
 }
 
 //TEST(MotorTests, TestPID)

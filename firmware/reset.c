@@ -117,7 +117,8 @@ void soft_reset(void)
     FX_Prev_Time[1] = 0;
 
     //DCC_Decoder_Initialize();
-    DCC_Config_Initialize();
+    DCC_Config_Initialize();//first thing first, call the setup functions
+    DCC_Hardware_Initialize();
     Motor_Initialize();
     FX_Initialize();
     reset_state = 1;

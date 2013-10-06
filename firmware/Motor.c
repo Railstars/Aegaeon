@@ -89,6 +89,8 @@ void Motor_Initialize(void)
     DDRB |= (1 << DDB1) | (1 << DDB2);
     PORTB |= (1 << PB2); //set PWM HIGH!
     
+    
+    //FIXME this is wrong! Should be PB1! Write a test for this
     PORTB &= ~(1 << PB2); //and set both direction bits LOW.
     DDRA |= (1 << DDA7);
     PORTA &= ~(1 << PA7);

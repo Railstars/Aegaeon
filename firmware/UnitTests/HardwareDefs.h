@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 #define MOTOR_PWM_CONTROL       OCR0A
+#define MOTOR_PWM_LEVEL(x)      (0xFF-x)  //motor outputs are 0xFF = 0V, 0x00 = 12V
 #define MOTOR_ENABLE_OUTPUT     (PORTB & (1 << PB2))
 #define MOTOR_ENABLE_SET        (1 << PB2)
 #define MOTOR_ENABLE_CLEAR      (0)

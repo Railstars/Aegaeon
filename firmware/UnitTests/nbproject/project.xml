@@ -10,8 +10,8 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>AVR</sourceRootElem>
-                <sourceRootElem>util</sourceRootElem>
+                <sourceRootElem>/Users/dgoodman/Documents/Projects/Railstars/Aegaeon/firmware/UnitTests/AVR</sourceRootElem>
+                <sourceRootElem>/Users/dgoodman/Documents/Projects/Railstars/Aegaeon/firmware/UnitTests/util</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
