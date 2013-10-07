@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/eeprom.h>
-#include <avr/wdt.h>
+//#include <avr/wdt.h>
 
 #include <stdint.h>
 #include "DCC_Hardware.h"
@@ -57,6 +57,7 @@ volatile DCC_Packet_t DCC_rx_buffer[2];
 
 ///////
 
+#ifndef TESTING
 int main(void)
 {
 #ifndef __DEBUG
@@ -108,3 +109,4 @@ int main(void)
         //wdt_reset(); //feed the watchdog
     }
 }
+#endif

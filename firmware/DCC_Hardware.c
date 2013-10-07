@@ -11,7 +11,7 @@
 //extern uint8_t DCC_CV29;
 
 uint16_t prevtime;
-uint16_t times[] = {0xFFFF, 0xFFFF}; //initialize to ones, just because
+uint16_t bit_timings[] = {0xFFFF, 0xFFFF}; //initialize to ones, just because
 uint8_t time_select;
 uint8_t check;
 volatile int8_t _last_known_digital_speed;
@@ -120,33 +120,33 @@ ISR(TIM1_CAPT_vect)
         _last_known_digital_speed = 0;
     }
     //calculate new time
-    times[time_select] = time_delta_16(icr, prevtime);
+    bit_timings[time_select] = time_delta_16(icr, prevtime);
     prevtime = icr;
     time_select = (time_select + 1) % 2;
     
     if (check == time_select)
     {
         //beginning of new pulse. Let:s see what we have and record it
-        if (IS_ONE(times[0]))
+        if (IS_ONE(bit_timings[0]))
         {
-            int16_t delta = times[0] - times[1];
+            int16_t delta = bit_timings[0] - bit_timings[1];
             if(delta < 0) delta *= -1;
             if (delta <= 6) //less than 6uS difference in first and second half, accept
             {
                 DCC_Decoder_Process_Bit(1);
             }
-            else if (IS_ZERO(times[1])) //might have front and back halves confused!
+            else if (IS_ZERO(bit_timings[1])) //might have front and back halves confused!
             {
                 check = (check + 1) % 2;
             }
         }
-        else if (IS_ZERO(times[0]))
+        else if (IS_ZERO(bit_timings[0]))
         {
-            if (IS_ZERO(times[1])) //less than 6uS difference in first and second half, accept
+            if (IS_ZERO(bit_timings[1])) //less than 6uS difference in first and second half, accept
             {
                 DCC_Decoder_Process_Bit(0);
             }
-            else if (IS_ONE(times[1])) //might have front and back halves confused!
+            else if (IS_ONE(bit_timings[1])) //might have front and back halves confused!
             {
                 check = (check + 1) % 2;
             }
