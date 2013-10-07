@@ -109,7 +109,11 @@ TEST(FXTests, BasicFXCommandOn_Remapped)
 
 TEST(FXTests, BasicFXCommandOn_50percentdim)
 {
-    DCC_Config_Write_CV(CV_OUTPUT_1_BRIGHTNESS, 0x10);
+    //set brightness of output 1 to 6.3% or 10 out of 255
+    float brightness = 0.063 * 255;
+    uint8_t intBrightness = (uint8_t)brightness;
+    
+    DCC_Config_Write_CV(CV_OUTPUT_1_BRIGHTNESS, intBrightness);
 
     //trigger F0f, which by default is attached to PA5
     FX_SetFunction(FX_FL, FX_GROUP_1, false);
@@ -119,7 +123,7 @@ TEST(FXTests, BasicFXCommandOn_50percentdim)
     //Make sure that the FX has come on
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
-    while (softcount < 0x0F)
+    while (softcount < (intBrightness-1))
     {
         TIM0_OVF_vect();
     }
@@ -138,7 +142,11 @@ TEST(FXTests, BasicFXCommandOn_50percentdim)
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
 {
-    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, 0x10);
+    //set brightness of output 1 to 6.3% or 10 out of 255
+    float brightness = 0.063 * 255;
+    uint8_t intBrightness = (uint8_t)brightness;
+
+    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, intBrightness);
     DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x05);
 
     //trigger F0f, which by default is attached to PA5
@@ -147,15 +155,18 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 
-    while (softcount < (0x10 - 1))
+    while (softcount < (intBrightness-1))
+    {
         TIM0_OVF_vect();
+    }
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
+    {
         TIM0_OVF_vect();
-    TIM0_OVF_vect();
+    }
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
