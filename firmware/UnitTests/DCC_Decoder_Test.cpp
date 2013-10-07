@@ -236,6 +236,7 @@ TEST(DCCDecoderTests, FunctionGroup1_FL_F1)
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
 }
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_PositiveAccelAdjust)
 {
     DCC_rx_buffer[buf_sel].size = 4;
@@ -249,8 +250,8 @@ IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_PositiveAccelAdjust)
     CHECK_EQUAL(0x0F, eeprom[23]);
     CHECK_EQUAL(106, DCC_accel_rate);
 }
-//TODO check negative version too
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeAccelAdjust_V1)
 {
     DCC_rx_buffer[buf_sel].size = 4;
@@ -265,6 +266,7 @@ IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeAccelAdjust_V1
     CHECK_EQUAL(0, DCC_accel_rate);
 }
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeAccelAdjust_V2)
 {
     //set up a positive acceleration to test against;
@@ -282,6 +284,7 @@ IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeAccelAdjust_V2
     CHECK_EQUAL(0, DCC_accel_rate);
 }
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_PositiveDecelAdjust)
 {
     DCC_rx_buffer[buf_sel].size = 4;
@@ -295,8 +298,8 @@ IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_PositiveDecelAdjust)
     CHECK_EQUAL(0x0F, eeprom[24]);
     CHECK_EQUAL(106, DCC_decel_rate);
 }
-//TODO check negative version too
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeDecelAdjust_V1)
 {
     DCC_rx_buffer[buf_sel].size = 4;
@@ -311,6 +314,7 @@ IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeDecelAdjust_V1
     CHECK_EQUAL(0, DCC_decel_rate);
 }
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, OpsModeProgramming_ShortForm_NegativeDecelAdjust_V2)
 {
     //set up a positive acceleration to test against;
@@ -343,6 +347,7 @@ TEST(DCCDecoderTests, OpsModeProgramming_LongForm_ShortAddress)
     CHECK_EQUAL(0x04, DCC_address);
 }
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand)
 {
     DCC_rx_buffer[buf_sel].size = 4;
@@ -361,6 +366,7 @@ IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand)
     CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
 }
 
+//Not implemented in this decoder.
 IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand_V2)
 {
     DCC_rx_buffer[buf_sel].size = 4;
