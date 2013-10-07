@@ -40,7 +40,8 @@ TEST_GROUP(FXTests)
 TEST(FXTests, Initialization)
 {
     CHECK_EQUAL(((1 << DDA5) | (1 << DDA6)), DDRA & ((1 << DDA5) | (1 << DDA6)));
-    CHECK_EQUAL(0x00, PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
+    CHECK_EQUAL(OUTPUT2_OFF, OUTPUT2_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn)
@@ -50,7 +51,7 @@ TEST(FXTests, BasicFXCommandOn)
     FX_SetFunction(FX_FL, FX_GROUP_1, false); //); //FX_GROUP_1);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOff)
@@ -64,7 +65,8 @@ TEST(FXTests, BasicFXCommandOff)
     uint8_t i;
     for (i = 0; i < 255; ++i) //march through one PWM cycle
         TIM0_OVF_vect();
-    CHECK_EQUAL(0x00, PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
+    CHECK_EQUAL(OUTPUT2_OFF, OUTPUT2_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_Reverse)
@@ -76,7 +78,7 @@ TEST(FXTests, BasicFXCommandOn_Reverse)
     FX_SetFunction(FX_FL, FX_GROUP_1, false);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA6), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT2_ON, OUTPUT2_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOff_Reverse)
@@ -90,7 +92,8 @@ TEST(FXTests, BasicFXCommandOff_Reverse)
     uint8_t i;
     for (i = 0; i < 255; ++i) //march through one PWM cycle
         TIM0_OVF_vect();
-    CHECK_EQUAL(0x00, PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
+    CHECK_EQUAL(OUTPUT2_OFF, OUTPUT2_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_Remapped)
@@ -101,7 +104,7 @@ TEST(FXTests, BasicFXCommandOn_Remapped)
     FX_SetFunction(FX_F1, FX_GROUP_1, false);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_50percentdim)
@@ -142,20 +145,20 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
     FX_SetFunction(FX_FL, FX_GROUP_1, false);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
         TIM0_OVF_vect();
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V2)
@@ -170,20 +173,20 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V2)
     FX_SetFunction(FX_FL, FX_GROUP_1, false); //FX_GROUP_1);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
         TIM0_OVF_vect();
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6))); //off for just a moment.
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT); //off for just a moment.
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V1)
@@ -195,20 +198,20 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V1)
     FX_SetFunction(FX_FL, FX_GROUP_1, false); //FX_GROUP_1);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
         TIM0_OVF_vect();
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V2)
@@ -223,20 +226,20 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V2)
     FX_SetFunction(FX_FL, FX_GROUP_1, false); //FX_GROUP_1);
     FX_Update();
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
         TIM0_OVF_vect();
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, AnimatedFXCommandOn_Strobe)
