@@ -215,13 +215,18 @@ void Motor_Set_Speed_By_DCC_Speed_Step_28(int8_t notch)
 {
     //valid range is 1..29, -1..-29
     uint8_t new_notch = notch;
-    if (notch < 0) new_notch = -notch;
-    else new_notch = notch;
+    if (notch < 0)
+        new_notch = -notch;
+    else
+        new_notch = notch;
     
-    //if (new_notch <= 1) new_notch = 1;
-    //else if (new_notch >= 29) new_notch = 127;
-    //else
-    new_notch = ((new_notch - 1) *9) >> 1; //notch-1 * 4.5
+    if (new_notch > 1) //don't mess with notches 0 or 1, leave those be.
+    {
+        if (new_notch >= 29) //our rounding algorithm messes up on this case: it sets 29 to 126, which is wrong. This is the expedient fix.
+            new_notch = 127;
+        else
+            new_notch = ((new_notch - 1) *9) >> 1; //notch-1 * 4.5
+    }
     
     if (notch < 0) //reverse it again
         new_notch = -new_notch;
