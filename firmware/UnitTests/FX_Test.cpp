@@ -284,7 +284,7 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V2)
 
 TEST(FXTests, AnimatedFXCommandOn_Strobe)
 {
-    DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x41); // on forward, animation = strobe
+    DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x01); // on forward, animation = strobe
 
     FX_SetFunction(FX_FL, FX_GROUP_1, false);
     FX_Update();
