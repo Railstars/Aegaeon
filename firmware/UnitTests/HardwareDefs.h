@@ -20,13 +20,20 @@ extern "C" {
 #define MOTOR_ENABLE_OUTPUT     (PORTB & (1 << PB2))
 #define MOTOR_ENABLE_SET        (1 << PB2)
 #define MOTOR_ENABLE_CLEAR      (0)
-#define MOTOR_FWD_OUTPUT        (PORTB & (1 << PB1);
+#define MOTOR_FWD_OUTPUT        (PORTB & (1 << PB1))
 #define MOTOR_FWD_SET           (1 << PB1)
 #define MOTOR_FWD_CLEAR         (0)
-#define MOTOR_REV_OUTPUT        (PORTA & (1 << PA7);
+#define MOTOR_REV_OUTPUT        (PORTA & (1 << PA7))
 #define MOTOR_REV_SET           (1 << PA7)
 #define MOTOR_REV_CLEAR         (0)
 
+#define OUTPUT1_OUTPUT          (PORTA & (1 << PORTA5))
+#define OUTPUT1_ON              (1 << PORTA5)
+#define OUTPUT1_OFF             (0)
+#define OUTPUT2_OUTPUT          (PORTA & (1 << PORTA6))
+#define OUTPUT2_ON              (1 << PORTA6)
+#define OUTPUT2_OFF             (0)
+    
 
 #ifdef	__cplusplus
 }
