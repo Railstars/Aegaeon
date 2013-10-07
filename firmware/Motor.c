@@ -280,7 +280,7 @@ void Motor_Update(void)
     if(_current_speed < 0) abs_speed = -1*_current_speed;
 	
 #ifdef USE_BEMF
-    if ((abs_speed < BEMF_cutoff) & (time_delta_32(millis(), _prev_bemf_time) >= BEMF_period))
+    if ((abs_speed < BEMF_cutoff) && (time_delta_32(millis(), _prev_bemf_time) >= BEMF_period))
     {
         //first, set the h-bridge to coast
         TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
@@ -302,7 +302,7 @@ void Motor_Update(void)
     // b) -OR- BEMF is enabled and active, and a new sample is ready
     // (E&A&R) | ~(E&A)
     // ~(E&A) | R
-    else if ((abs_speed >= BEMF_cutoff) | sample_ready) //if BEMF is inactive, or there is a sample ready
+    else if ((abs_speed >= BEMF_cutoff) || sample_ready) //if BEMF is inactive, or there is a sample ready
     {
 #endif //USE_BEMF
         uint32_t time = micros();
