@@ -77,6 +77,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP)
 {
     Motor_Set_Speed_By_DCC_Speed_Step_28(1);
     Motor_Update();
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION)
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
