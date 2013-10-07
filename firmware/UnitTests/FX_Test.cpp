@@ -11,6 +11,7 @@ extern "C"
 void TIM0_OVF_vect(void);
 }
 #include <CppUTest/TestHarness.h>
+#include "HardwareDefs.h"
 
 extern uint8_t eeprom[];
 
@@ -29,9 +30,6 @@ TEST_GROUP(FXTests)
         soft_reset();
         //first, force ops mode
         DCC_flags |= DCC_FLAGS_OPS_MODE_MASK;
-        DCC_Config_Initialize();
-        Motor_Initialize();
-        FX_Initialize();
     }
 
     void teardown()
@@ -113,21 +111,26 @@ TEST(FXTests, BasicFXCommandOn_50percentdim)
     //trigger F0f, which by default is attached to PA5
     FX_SetFunction(FX_FL, FX_GROUP_1, false);
     FX_Update();
-    TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
-    uint8_t i;
-    while (softcount < (0x10 - 1))
-        TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
-    TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
 
-    while (softcount < 0xFF)
+    TIM0_OVF_vect();
+    //Make sure that the FX has come on
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
+    
+    while (softcount < 0x0F)
+    {
         TIM0_OVF_vect();
+    }
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((0x00), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
+
+    while (softcount <= 0xFF)
+    {
+        TIM0_OVF_vect();
+    }
+    CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
-    CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
+    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 }
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
@@ -140,7 +143,7 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
     FX_Update();
     TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
-    uint8_t i;
+
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
@@ -168,7 +171,7 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V2)
     FX_Update();
     TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
-    uint8_t i;
+    
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
@@ -193,7 +196,7 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V1)
     FX_Update();
     TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
-    uint8_t i;
+    
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
@@ -221,7 +224,7 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V2)
     FX_Update();
     TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
-    uint8_t i;
+    
     while (softcount < (0x10 - 1))
         TIM0_OVF_vect();
     CHECK_EQUAL((1 << PA5), PORTA & ((1 << PA5) | (1 << PA6)));
