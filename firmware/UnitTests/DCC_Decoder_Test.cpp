@@ -14,21 +14,19 @@ extern "C"
 #include "DCC_Decoder.h"
 #include "reset.h"
 #include <AVR/io.h>
+#include "globals.h"
 void TIM0_OVF_vect(void);
 }
 
 #include <CppUTest/TestHarness.h>
+#include "HardwareDefs.h"
 
-
-extern uint16_t DCC_address;
-extern volatile uint8_t preamble_bits, input_state, byte_counter, bit_counter;
-extern volatile DCC_Packet_t DCC_rx_buffer[];
-extern volatile uint8_t DCC_address_kind, buf_sel, ready_buf, DCC_flags;
-extern uint8_t OCR0B, softcount;
 extern uint8_t eeprom[];
-extern uint16_t DCC_accel_rate, DCC_decel_rate;
-extern volatile uint32_t _time_of_last_packet;
-extern uint32_t _jog_time;
+extern uint8_t _defaults[];
+extern uint8_t prev_packet_kind; //for keeping track of service mode packets
+extern uint8_t preamble_bits, input_state, byte_counter, bit_counter;
+extern uint32_t _time_of_last_packet;
+
 
 #define DCC_PREAMBLE 0
 #define DCC_DATA 1
@@ -40,34 +38,13 @@ TEST_GROUP(DCCDecoderTests)
 
     void setup()
     {
-        uint8_t i;
-        for (i = 0; i <= 106; ++i)
-            eeprom[i] = 0xFF;
         DCC_Packet_Init(&p);
+        uint16_t i;
+        for (i = 0; i < 106; ++i)
+            eeprom[i] = 0xFF;
         soft_reset();
-        preamble_bits = 0;
-	input_state = DCC_PREAMBLE;
-	byte_counter = 0;
-	bit_counter = 0;
-        for(i=0; i < 2; ++i)
-        {
-        	DCC_rx_buffer[i].data_start = 0;
-                DCC_rx_buffer[i].kind = 0;
-                DCC_rx_buffer[i].size = 0;
-                int j;
-                for(j = 0; j < 6; ++j)
-                        DCC_rx_buffer[i].data[j]=0;
-        }
-        buf_sel = 0;
-	ready_buf = 0;
-	DCC_flags = 0;
-	_time_of_last_packet = 0;
-        DCC_flags |= 0x02; // force ops mode
-        Motor_Initialize();
-        FX_Initialize();
-        _jog_time = 0;
-        softcount = 0;
-        eeprom[CV_OPS_MODE_BASIC_ACK] = 0x00; //turn off ops mode basic ack
+        //first, force ops mode
+        DCC_flags |= DCC_FLAGS_OPS_MODE_MASK;
     }
 
     void teardown()
@@ -162,7 +139,7 @@ TEST(DCCDecoderTests, UpdateIdlePacket)
     //now, check that speed and functions are the same
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(0x00, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(DCCDecoderTests, UpdateBasicSpeedPacket)
@@ -177,7 +154,7 @@ TEST(DCCDecoderTests, UpdateBasicSpeedPacket)
     //now, check that speed and functions are the same
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(0xFF, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 TEST(DCCDecoderTests, UpdateBasicSpeedPacketAddressedToOther)
@@ -192,7 +169,7 @@ TEST(DCCDecoderTests, UpdateBasicSpeedPacketAddressedToOther)
     //now, check that speed and functions are the same
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(0x00, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
 TEST(DCCDecoderTests, UpdateAdvancedSpeedPacket)
@@ -208,7 +185,7 @@ TEST(DCCDecoderTests, UpdateAdvancedSpeedPacket)
     //now, check that speed and functions are the same
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(0xFF, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
 TEST(DCCDecoderTests, FunctionGroup1_FL_FOR)
@@ -381,7 +358,7 @@ IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand)
     Motor_Set_Speed_By_DCC_Speed_Step_28(29); //full steam ahead! not!
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(125, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
 }
 
 IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand_V2)
@@ -399,7 +376,7 @@ IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand_V2)
     Motor_Set_Speed_By_DCC_Speed_Step_28(29); //full steam ahead! not!
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(125, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
 
     DCC_rx_buffer[buf_sel].size = 4;
     DCC_rx_buffer[buf_sel].data[0] = 0x03;
@@ -414,7 +391,7 @@ IGNORE_TEST(DCCDecoderTests, RestrictedSpeedCommand_V2)
     Motor_Set_Speed_By_DCC_Speed_Step_28(29); //full steam ahead! not!
     Motor_Update();
     //Functions_Update();
-    CHECK_EQUAL(255, OCR0B);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(255), MOTOR_PWM_CONTROL);
 }
 
 //TODO check too short packets!

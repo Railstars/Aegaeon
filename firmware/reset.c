@@ -23,6 +23,10 @@ extern uint8_t FX_Animation[2];
 extern uint8_t FX_Animation_Frame[2];
 extern uint32_t FX_Prev_Time[2];
 
+extern uint8_t prev_packet_kind; //for keeping track of service mode packets
+extern uint8_t preamble_bits, input_state, byte_counter, bit_counter;
+extern uint32_t _time_of_last_packet;
+
 void soft_reset(void)
 {
     //need to reset ALL variables to 0!!
@@ -115,6 +119,16 @@ void soft_reset(void)
     FX_Animation_Frame[1] = 0;
     FX_Prev_Time[0] = 0;
     FX_Prev_Time[1] = 0;
+    
+    //DCC_Decoder internal variables
+    prev_packet_kind = 0;
+    preamble_bits = 0;
+    input_state = 0;
+    byte_counter = 0;
+    bit_counter = 0;
+    _time_of_last_packet = 0;
+    
+    
 
     //DCC_Decoder_Initialize();
     DCC_Config_Initialize();//first thing first, call the setup functions
