@@ -359,9 +359,6 @@ void Service_Mode_Process_Packet(DCC_Packet_t *packet)
 
 void DCC_Decoder_Update(void)
 {
-    //TODO handle timeout properly, if so configured.
-    //TODO handle service mode
-    
     //check timeouts
     if (DCC_SERVICE_MODE)
     {
