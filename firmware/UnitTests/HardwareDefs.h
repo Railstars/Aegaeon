@@ -17,9 +17,10 @@ extern "C" {
 #define MOTOR_PWM_LEVEL_GT(x)   (OCR0A < (0xFF-x))
 #define MOTOR_PWM_LEVEL_LT(x)   (OCR0A > (0xFF-x))
 
-#define MOTOR_ENABLE_OUTPUT     (PORTB & (1 << PB2))
-#define MOTOR_ENABLE_SET        (1 << PB2)
-#define MOTOR_ENABLE_CLEAR      (0)
+#define MOTOR_ENABLED_STATE     ((OCR0A == 0xFF) && ((PORTB & (1 << PB1)) == 0x00) && ((PORTA & (1 << PA7)) == 0x00))
+#define MOTOR_DEENERGIZED       (true)
+#define MOTOR_ENERGERIZE        (false)
+    
 #define MOTOR_FWD_OUTPUT        (PORTB & (1 << PB1))
 #define MOTOR_FWD_SET           (1 << PB1)
 #define MOTOR_FWD_CLEAR         (0)

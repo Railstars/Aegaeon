@@ -26,7 +26,6 @@ extern uint8_t sample, sample_ready, min_ADC;
 
 TEST_GROUP(MotorTests)
 {
-
     void setup()
     {
         uint16_t i;
@@ -48,6 +47,7 @@ TEST(MotorTests, Initialization)
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
+//test millis function
 TEST(MotorTests, millis_0)
 {
     TIM0_OVF_vect();
@@ -67,6 +67,11 @@ TEST(MotorTests, millis_1)
 }
 
 /*********28 speed steps w/ 3-step speed table*********/
+
+TEST(MotorTests, TestMotorInitializedDeenergized)
+{
+    CHECK_EQUAL(MOTOR_DEENERGIZED, MOTOR_ENABLED_STATE);
+}
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP)
 {
