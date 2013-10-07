@@ -131,10 +131,11 @@ TEST(FXTests, BasicFXCommandOn_50percentdim)
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
-    while (softcount <= 0xFF)
+    while (softcount < 0xFF)
     {
         TIM0_OVF_vect();
     }
+    TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
@@ -167,6 +168,7 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
     {
         TIM0_OVF_vect();
     }
+    TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
