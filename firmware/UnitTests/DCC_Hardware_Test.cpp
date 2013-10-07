@@ -14,7 +14,7 @@ void TIM1_COMPA_vect(void);
 #include <CppUTest/TestHarness.h>
 
 extern int16_t prevtime;
-extern uint16_t times[]; //initialize to ones, just because
+extern uint16_t bit_timings[]; //initialize to ones, just because
 extern uint8_t time_select;
 extern uint8_t check;
 
@@ -27,8 +27,8 @@ TEST_GROUP(DCCHardwareTests)
         time_select = 0;
         ICR1 = 0;
         prevtime = 0;
-        times[0] = 58;
-        times[1] = 58;
+        bit_timings[0] = 58;
+        bit_timings[1] = 58;
         value = 0xFF;
     }
 
