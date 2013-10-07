@@ -148,7 +148,8 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
     uint8_t intBrightness = (uint8_t)brightness;
 
     DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, intBrightness);
-    DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x05);
+    //set up Rule17 dimming to be on, forward, stopped.
+    DCC_Config_Write_CV(CV_OUTPUT_1_DIRECTION_RULE17, 0x05);
 
     //trigger F0f, which by default is attached to PA5
     FX_SetFunction(FX_FL, FX_GROUP_1, false);
@@ -176,8 +177,13 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V1)
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V2)
 {
-    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, 0x10);
-    DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x05);
+    //set brightness of output 1 to 6.3% or 10 out of 255
+    float brightness = 0.063 * 255;
+    uint8_t intBrightness = (uint8_t)brightness;
+    
+    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, intBrightness);
+    //set up Rule17 dimming to be on, forward, stopped.
+    DCC_Config_Write_CV(CV_OUTPUT_1_DIRECTION_RULE17, 0x05);
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(5); //make it move
     Motor_Update();
@@ -188,14 +194,18 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V2)
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
-    while (softcount < (0x10 - 1))
+    while (softcount < (intBrightness - 1))
+    {
         TIM0_OVF_vect();
+    }
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
+    {
         TIM0_OVF_vect();
+    }
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT); //off for just a moment.
     TIM0_OVF_vect();
@@ -204,8 +214,13 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Stop_Dim_V2)
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V1)
 {
-    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, 0x10);
-    DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x11);
+    //set brightness of output 1 to 6.3% or 10 out of 255
+    float brightness = 0.063 * 255;
+    uint8_t intBrightness = (uint8_t)brightness;
+    
+    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, intBrightness);
+    //set up Rule17 dimming to be on, forward.
+    DCC_Config_Write_CV(CV_OUTPUT_1_DIRECTION_RULE17, 0x11);
 
     //trigger F0f, which by default is attached to PA5
     FX_SetFunction(FX_FL, FX_GROUP_1, false); //FX_GROUP_1);
@@ -213,14 +228,17 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V1)
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
-    while (softcount < (0x10 - 1))
+    while (softcount < (intBrightness - 1))
+    {
         TIM0_OVF_vect();
-    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
+    }    CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
+    {
         TIM0_OVF_vect();
+    }
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
@@ -229,8 +247,13 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V1)
 
 TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V2)
 {
-    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, 0x10);
-    DCC_Config_Write_CV(CV_OUTPUT_1_FX, 0x11);
+    //set brightness of output 1 to 6.3% or 10 out of 255
+    float brightness = 0.063 * 255;
+    uint8_t intBrightness = (uint8_t)brightness;
+
+    DCC_Config_Write_CV(CV_OUTPUT_1_RULE_17_BRIGHTNESS, intBrightness);
+    //set up Rule17 dimming to be on, forward.
+    DCC_Config_Write_CV(CV_OUTPUT_1_DIRECTION_RULE17, 0x11);
 
     Motor_Set_Speed_By_DCC_Speed_Step_28(5); //make it move
     Motor_Update();
@@ -241,14 +264,18 @@ TEST(FXTests, BasicFXCommandOn_Rule17_Moving_Dim_V2)
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     
-    while (softcount < (0x10 - 1))
+    while (softcount < (intBrightness - 1))
+    {
         TIM0_OVF_vect();
+    }
     CHECK_EQUAL(OUTPUT1_ON, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
 
     while (softcount < 0xFF)
+    {
         TIM0_OVF_vect();
+    }
     TIM0_OVF_vect();
     CHECK_EQUAL(OUTPUT1_OFF, OUTPUT1_OUTPUT);
     TIM0_OVF_vect();
