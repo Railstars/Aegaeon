@@ -93,10 +93,10 @@ uint8_t DCC_Packet_Get_Address(DCC_Packet_t *packet, uint16_t *address)
 {
      *address = 0x0000;
     //first, is this an accessory decoder packet? If so, ignore it
-    //if ((packet->data[0] >> 6) == 0x02)
-    //{
-    //    return DCC_ACCESSORY_ADDRESS;
-    //}
+    if ((packet->data[0] >> 6) == 0x02)
+    {
+        return DCC_ACCESSORY_ADDRESS;
+    }
     //second, is this a broadcast packet?
     if ((packet->data[0] == 0xFF) || (packet->data[0] == 0x00)) //broadcast
     {

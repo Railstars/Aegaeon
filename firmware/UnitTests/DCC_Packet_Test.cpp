@@ -136,7 +136,7 @@ TEST(DCCPacketTests, GetAddressAccessory) //should bail on accessory addresses; 
     p.data[1] = 0x00;
     p.data[2] = 0x00;
     uint16_t a;
-//    CHECK_EQUAL(0x02, DCC_Packet_Get_Address(&p, &a));
+    CHECK_EQUAL(0x02, DCC_Packet_Get_Address(&p, &a));
     CHECK_EQUAL(0x00, a);
 }
 
