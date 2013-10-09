@@ -45,7 +45,7 @@ TEST_GROUP(MotorTests)
 TEST(MotorTests, Initialization)
 {
     //not sure whether this is the right initial condition or not.
-    CHECK_EQUAL(MOTOR_BRAKE_SET, MOTOR_BRAKE_SET);
+    CHECK_EQUAL(MOTOR_BRAKE_SET, MOTOR_BRAKE_STATE);
 }
 
 //test millis function
