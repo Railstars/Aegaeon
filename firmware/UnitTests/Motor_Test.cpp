@@ -1240,13 +1240,23 @@ TEST(MotorTests, TestAccelDecel_v1)
     DCC_Config_Write_CV(CV_DECELERATION_RATE, 10);
     DCC_Config_Write_CV(CV_ACCELERATION_RATE, 25);
     Motor_Set_Speed_By_DCC_Speed_Step_28(29); //max speed
-    //FIXME
+    
+    //With differential decel and accel rates, this should take 8963 millis to decel to stop, then 22473 to accel
+    //first decel to stop
+    while(MOTOR_PWM_LEVEL_GT(0x00) && (MOTOR_DIRECTION==MOTOR_REVERSE) && (_millis_counter < 32000))
+    {
+        TIM0_OVF_vect();
+        Motor_Update();
+    }
+    CHECK_EQUAL(8963, _millis_counter);
+    //then accelerate to full
     while(MOTOR_PWM_LEVEL_LT(0xFF) && (_millis_counter < 32000))  //What we want here is motor speed less than full, and something about direction.(!((MOTOR_PWM_CONTROL == 255) && (TCCR0A & (1 << COM0B1))))
     {
         TIM0_OVF_vect();
         Motor_Update();
     }
-    CHECK_EQUAL(31436, _millis_counter); //should be ??? really
+
+    CHECK_EQUAL(31436, _millis_counter);
 }
 
 //motor jog
