@@ -20,6 +20,10 @@ extern "C" {
 #define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB2)) == (1 << PB2)) && ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTA & (1 << PA7)) == (1 << PA7)) )
 #define MOTOR_DEENERGIZED       (true)
 #define MOTOR_ENERGERIZE        (false)
+
+#define MOTOR_BRAKE_STATE       ( ((PORTB & (1 << PB2)) == (1 << PB2)) && ((PORTB & (1 << PB1)) == 0) && ((PORTA & (1 << PA7)) == 0) )
+#define MOTOR_BRAKE_SET         (true)
+#define MOTOR_BRAKE_RELEASED    (false)
     
 #define MOTOR_FWD_OUTPUT        (PORTB & (1 << PB1))
 #define MOTOR_FWD_SET           (1 << PB1)

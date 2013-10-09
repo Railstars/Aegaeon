@@ -44,7 +44,8 @@ TEST_GROUP(MotorTests)
 
 TEST(MotorTests, Initialization)
 {
-    CHECK_EQUAL(MOTOR_DEENERGIZED, MOTOR_ENABLED_STATE);
+    //not sure whether this is the right initial condition or not.
+    CHECK_EQUAL(MOTOR_BRAKE_SET, MOTOR_BRAKE_SET);
 }
 
 //test millis function
