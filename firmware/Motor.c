@@ -91,7 +91,7 @@ void Motor_Initialize(void)
     
     
     //FIXME this is wrong! Should be PB1! Write a test for this
-    PORTB &= ~(1 << PB2); //and set both direction bits LOW.
+    PORTB &= ~(1 << PB1); //and set both direction bits LOW.
     DDRA |= (1 << DDA7);
     PORTA &= ~(1 << PA7);
     
