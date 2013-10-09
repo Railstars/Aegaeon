@@ -189,10 +189,12 @@ void Motor_EStop(int8_t dir)
 #ifdef USE_MOTOR
     //NMRA requires that we remove power from motor. We do this by disconnecting PA7 so we can force it low, then bring PB1 and PB2 high.
     //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
-    //set OC0A first to avoid a shoot-through condition
+    //set (PB2) OC0A first to avoid a shoot-through condition
     TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-    PORTB |= (1 << PB2) | (1 << PB1); //force PWM lines HIGH, turns off motor.
-    PORTA |= (1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
+    PORTB |= (1 << PB2);
+    //force PWM lines HIGH, turns off motor.
+    PORTB |= (1 << PB1); //here is reverse.
+    PORTA |= (1 << PA7); //here is forward.
 #endif //USE_MOTOR
     
     if (dir >= 0)
