@@ -133,9 +133,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_0)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
@@ -149,10 +147,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_E)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
-    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_DEENERGIZED, MOTOR_ENABLED_STATE);
 }
 
 TEST(NMRAMotorDecoderTests, ForwardSpeed14_1)
@@ -165,9 +160,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_1)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
@@ -181,9 +175,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_2)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
@@ -197,9 +190,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_3)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(41), MOTOR_PWM_CONTROL);
 }
 
@@ -213,9 +205,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_4)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(60), MOTOR_PWM_CONTROL);
 }
 
@@ -229,9 +220,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_5)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(78), MOTOR_PWM_CONTROL);
 }
 
@@ -245,9 +235,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_6)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(97), MOTOR_PWM_CONTROL);
 }
 
@@ -261,9 +250,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_7)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 }
 
@@ -277,9 +265,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_8)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(134), MOTOR_PWM_CONTROL);
 }
 
@@ -293,9 +280,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_9)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(152), MOTOR_PWM_CONTROL);
 }
 
@@ -309,9 +295,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_10)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(170), MOTOR_PWM_CONTROL);
 }
 
@@ -325,9 +310,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_11)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(188), MOTOR_PWM_CONTROL);
 }
 
@@ -341,9 +325,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_12)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(206), MOTOR_PWM_CONTROL);
 }
 
@@ -357,9 +340,8 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_13)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(224), MOTOR_PWM_CONTROL);
 }
 
@@ -374,7 +356,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_14)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
 
@@ -391,7 +373,7 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_0)
     DCC_Decoder_Update();
     Motor_Update();
     //    FX_Update();
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
 
@@ -405,10 +387,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_E)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1)); //obnoxious, ai'nt it?
-    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+
+    CHECK_EQUAL(MOTOR_DEENERGIZED, MOTOR_ENABLED_STATE);
 }
 
 TEST(NMRAMotorDecoderTests, ReverseSpeed14_1)
@@ -421,9 +401,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_1)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
 }
 
@@ -437,9 +416,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_2)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
 }
 
@@ -453,9 +431,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_3)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(41), MOTOR_PWM_CONTROL);
 }
 
@@ -469,9 +446,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_4)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(60), MOTOR_PWM_CONTROL);
 }
 
@@ -485,9 +461,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_5)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(78), MOTOR_PWM_CONTROL);
 }
 
@@ -501,9 +476,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_6)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(97), MOTOR_PWM_CONTROL);
 }
 
@@ -517,9 +491,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_7)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 }
 
@@ -533,9 +506,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_8)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(134), MOTOR_PWM_CONTROL);
 }
 
@@ -549,9 +521,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_9)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(152), MOTOR_PWM_CONTROL);
 }
 
@@ -565,9 +536,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_10)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(170), MOTOR_PWM_CONTROL);
 }
 
@@ -581,9 +551,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_11)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(188), MOTOR_PWM_CONTROL);
 }
 
@@ -597,9 +566,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_12)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(206), MOTOR_PWM_CONTROL);
 }
 
@@ -613,9 +581,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_13)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(224), MOTOR_PWM_CONTROL);
 }
 
@@ -629,9 +596,8 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_14)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
 
@@ -650,9 +616,8 @@ TEST(NMRAMotorDecoderTests, PacketAcceptanceTest)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 
     //send estop
@@ -696,9 +661,8 @@ TEST(NMRAMotorDecoderTests, BadAddressTest)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 
     //now, start sending etsops to invalid addresses
@@ -745,9 +709,8 @@ TEST(NMRAMotorDecoderTests, BadBitTest)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
 
     //now, start sending etsops with invalid bits
@@ -799,9 +762,8 @@ IGNORE_TEST(NMRAMotorDecoderTests, TruncatedRecovery)
 
         DCC_Decoder_Update();
         Motor_Update();
-        //    FX_Update();
-        //FIXME
-        CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+        CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
         CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
         for (j = 0; j < len - i; ++j) //send estop, truncated a bit at a time…
@@ -810,9 +772,8 @@ IGNORE_TEST(NMRAMotorDecoderTests, TruncatedRecovery)
         }
         DCC_Decoder_Update();
         Motor_Update();
-        //    FX_Update();
-        //FIXME
-        CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+        CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
         CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
         //now send a good full speed packet
@@ -824,9 +785,8 @@ IGNORE_TEST(NMRAMotorDecoderTests, TruncatedRecovery)
 
         DCC_Decoder_Update();
         Motor_Update();
-        //    FX_Update();
-        //FIXME
-        CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+        CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
         CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
     }
@@ -862,9 +822,8 @@ TEST(NMRAMotorDecoderTests, PriorPacketTest)
 
         DCC_Decoder_Update();
         Motor_Update();
-        //    FX_Update();
-        //FIXME
-        CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+        CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
         CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
     }
 }
@@ -1076,9 +1035,8 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 
     //now send a good full speed packet
@@ -1090,9 +1048,8 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), TCCR0A & (1 << COM0B1));
+
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 
     //reset by stopping consist.
@@ -1135,9 +1092,8 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    //FIXME
-    CHECK_EQUAL((1 << COM0A1), TCCR0A & (1 << COM0A1));
+
+    CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
 
