@@ -355,7 +355,7 @@ TEST(NMRAMotorDecoderTests, ForwardSpeed14_14)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(242), MOTOR_PWM_CONTROL);
 }
@@ -372,7 +372,7 @@ TEST(NMRAMotorDecoderTests, ReverseSpeed14_0)
 
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
 }
@@ -628,7 +628,7 @@ TEST(NMRAMotorDecoderTests, PacketAcceptanceTest)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
 
     //then 1 second of idle commands.
     //verify motor has stopped
@@ -643,7 +643,7 @@ TEST(NMRAMotorDecoderTests, PacketAcceptanceTest)
         TIM0_OVF_vect();
         DCC_Decoder_Update();
         Motor_Update();
-        //    FX_Update();
+    
     }
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 }
@@ -679,7 +679,7 @@ TEST(NMRAMotorDecoderTests, BadAddressTest)
             sendStopBit();
             DCC_Decoder_Update();
             Motor_Update();
-            //    FX_Update();
+        
             CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
         }
     }
@@ -693,7 +693,7 @@ TEST(NMRAMotorDecoderTests, BadAddressTest)
     TIM0_OVF_vect();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 }
 
@@ -728,7 +728,7 @@ TEST(NMRAMotorDecoderTests, BadBitTest)
         }
         DCC_Decoder_Update();
         Motor_Update();
-        //    FX_Update();
+    
         CHECK_EQUAL(MOTOR_PWM_LEVEL(115), MOTOR_PWM_CONTROL);
     }
 
@@ -739,7 +739,7 @@ TEST(NMRAMotorDecoderTests, BadBitTest)
     }
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 }
 
@@ -843,7 +843,7 @@ TEST(NMRAMotorDecoderTests, AddressPartitionTest)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(03, DCC_address); //should FAIL
 
     uint8_t r;
@@ -858,7 +858,7 @@ TEST(NMRAMotorDecoderTests, AddressPartitionTest)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(r, DCC_address); //should SUCCEED
 
     uint8_t r2 = rand() % 128 + 127;
@@ -871,8 +871,8 @@ TEST(NMRAMotorDecoderTests, AddressPartitionTest)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
-    CHECK_EQUAL(MOTOR_PWM_LEVEL(r), DCC_address); //should FAIL
+
+    CHECK_EQUAL(r2, DCC_address); //should FAIL
 }
 
 //todo check 14 bit addresses
@@ -1060,7 +1060,7 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 
     //all over again again in reverse facing
@@ -1081,7 +1081,7 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
-    //    FX_Update();
+
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0), MOTOR_PWM_CONTROL);
 
     //Now, send a speed command to consist, should result in loco running backwards this time
@@ -2842,7 +2842,7 @@ TEST(NMRAMotorDecoderTests, DCTransition)
 
     DCC_Decoder_Update();
     Motor_Update();
-    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x73), MOTOR_PWM_CONTROL); //should be full speed regardless
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0x73), MOTOR_PWM_CONTROL); //should be a moderate speed
 
     //let 30 milliseconds pass
     while(_millis_counter < 30)
@@ -2853,8 +2853,7 @@ TEST(NMRAMotorDecoderTests, DCTransition)
     Motor_Update();
 
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //should be full speed regardless
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), (TCCR0A & (1 << COM0B1))); //forward
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION); //forward
 }
 
 TEST(NMRAMotorDecoderTests, DCCTransition)
@@ -2878,16 +2877,14 @@ TEST(NMRAMotorDecoderTests, DCCTransition)
     DCC_Decoder_Update();
     Motor_Update();
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL); //should be full speed regardless
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), (TCCR0A & (1 << COM0B1))); //forward
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION); //forward
     //now in DC mode. Let's transition back
 
     TIM1_CAPT_vect();
     DCC_Decoder_Update();
     Motor_Update();
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x73), MOTOR_PWM_CONTROL); //should be full speed regardless
-    //FIXME
-    CHECK_EQUAL((1 << COM0B1), (TCCR0A & (1 << COM0B1))); //forward
+    CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION); //forward
 
 }
 

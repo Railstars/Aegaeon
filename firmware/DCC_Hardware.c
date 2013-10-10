@@ -73,7 +73,7 @@ ISR(TIM1_COMPA_vect)
     int8_t new_speed;
     if (CV29_POWER_CONVERSION)
     {
-        new_speed = 126;
+        new_speed = 127;
     }
     else
     {
