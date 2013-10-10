@@ -1369,30 +1369,19 @@ TEST(MotorTests, TestBEMFCutout)
     BEMF_Kf = 0xFF;
     
     //check how long it takes for the motor to be disconnected
-    while(0) //FIXME need a test for motor disconnection MOTOR_PWM_CONTROL != MOTOR_PWM_LEVEL(0xFF))
+    while(MOTOR_ENABLED_STATE == MOTOR_ENERGERIZED) //while the motor is energized
     {
         TIM0_OVF_vect();
         Motor_Update();
     }
     
-    //FIXME
     CHECK_EQUAL(MOTOR_DEENERGIZED, MOTOR_ENABLED_STATE);
-//    CHECK_EQUAL(0xFF, OCR0A);
-//FIXME what is this line checking?    CHECK_EQUAL((1 << COM0B1) | (1 << COM0A1), TCCR0A & ((1 << COM0B1) | (1 << COM0A1)));
-    CHECK_EQUAL(100, _millis_counter);
-    
-    //now, check how long it takes to cut out
-    //    while(0 == (ADCSRA & (1 << ADSC)))
-    //    {
-    //        TIM0_OVF_vect();
-    //        Motor_Update();
-    //    }
-    //    CHECK_EQUAL(512, _micros_counter - timer); //should stay off for 500us before triggering ADC measurement, this is the closest we can get
+    CHECK_EQUAL(BEMF_period, _millis_counter);
     
     //advance time by 32 us, then trigger ADC measurement;
     TIM0_OVF_vect();
     //set ADC measurement to right at 115 the motor was set at
-    ADCH = applied_voltage;
+    ADCH = MOTOR_PWM_LEVEL(applied_voltage);
     ADC_vect();
     CHECK_EQUAL(126, sample);
     
