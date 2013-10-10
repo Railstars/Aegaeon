@@ -450,53 +450,53 @@ void Motor_Update(void)
         {
             if(_eStop == 0) //if not estopped, and only if not estopped, update firection pins and calulate voltage
             {
-            if (_current_speed < 0) //if negative
-            {
-                //set REVERSE ENABLE
-                PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through
-                PORTA |=  (1 << PA7);
-#ifdef USE_MOTOR_FOR_FX
-				voltage = Output_Match_Buf[1];
-#else //use motor for motor
-                voltage = DCC_speed_table[(_current_speed * -1) - 1]; // + _voltage_adjust;
-                if (DCC_reverse_trim)
+                if (_current_speed < 0) //if negative
                 {
-                    voltage = (voltage * DCC_reverse_trim) >> 7 ; // / 128;
-                }
-#endif //USE_MOTOR_FOR_FX
-            }
-            else
-            {
-                //set FORWARD ENABLE
-                PORTA &= ~(1 << PA7); //must bring this pin low first, to avoid shoot-through
-                PORTB |=  (1 << PB1);
+                    //set REVERSE ENABLE
+                    PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through
+                    PORTA |=  (1 << PA7);
 #ifdef USE_MOTOR_FOR_FX
-				voltage = Output_Match_Buf[0];
+                    voltage = Output_Match_Buf[1];
 #else //use motor for motor
-                voltage = DCC_speed_table[_current_speed - 1]; // + _voltage_adjust;
-                if (DCC_forward_trim)
-                {
-                    voltage = (voltage * DCC_forward_trim) >> 7; // / 128;
-                }
+                    voltage = DCC_speed_table[(_current_speed * -1) - 1]; // + _voltage_adjust;
+                    if (DCC_reverse_trim)
+                    {
+                        voltage = (voltage * DCC_reverse_trim) >> 7 ; // / 128;
+                    }
 #endif //USE_MOTOR_FOR_FX
-            }
-            
+                }
+                else
+                {
+                    //set FORWARD ENABLE
+                    PORTA &= ~(1 << PA7); //must bring this pin low first, to avoid shoot-through
+                    PORTB |=  (1 << PB1);
+#ifdef USE_MOTOR_FOR_FX
+                    voltage = Output_Match_Buf[0];
+#else //use motor for motor
+                    voltage = DCC_speed_table[_current_speed - 1]; // + _voltage_adjust;
+                    if (DCC_forward_trim)
+                    {
+                        voltage = (voltage * DCC_forward_trim) >> 7; // / 128;
+                    }
+#endif //USE_MOTOR_FOR_FX
+                }
+                
 #ifdef USE_MOTOR
-            //If switching mode is enabled, half the voltage
-            //TODO fix motor half speed issue!
-            if(FX_Active & FX_SHUNTING)
-                voltage = (uint8_t)(voltage) >> 1;
+                //If switching mode is enabled, half the voltage
+                //TODO fix motor half speed issue!
+                if(FX_Active & FX_SHUNTING)
+                    voltage = (uint8_t)(voltage) >> 1;
 #endif //USE_MOTOR
-
+                
 #ifdef USE_BEMF
-            //now, if enabled and active, adjust the output voltage with PDFF
-            abs_speed = _current_speed;
-            if(_current_speed < 0) abs_speed = -1*_current_speed;
-            if (abs_speed < BEMF_cutoff) //if BEMF is enabled and active
-            {
-                voltage = PDFF(voltage, sample);
-                sample_ready = 0;
-            }
+                //now, if enabled and active, adjust the output voltage with PDFF
+                abs_speed = _current_speed;
+                if(_current_speed < 0) abs_speed = -1*_current_speed;
+                if (abs_speed < BEMF_cutoff) //if BEMF is enabled and active
+                {
+                    voltage = PDFF(voltage, sample);
+                    sample_ready = 0;
+                }
 #endif //USE_BEMF
             }
         }
