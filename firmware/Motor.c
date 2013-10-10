@@ -15,6 +15,8 @@
 volatile uint8_t sample, sample_ready, min_ADC;
 int16_t sum_err;
 
+uint8_t _eStop;
+
 //FORWARD =     PA7 HIGH,   PB1 LOW,    PB2 (OC0A) PWM
 //REVERSE =     PA7 LOW,    PB1 HIGH,   PB2 (OC0A) PWM
 //BRAKE =        PA7 LOW,    PB1 LOW,    PB2 (OC0A) HIGH
@@ -90,7 +92,6 @@ void Motor_Initialize(void)
     PORTB |= (1 << PB2); //set PWM HIGH!
     
     
-    //FIXME this is wrong! Should be PB1! Write a test for this
     PORTB &= ~(1 << PB1); //and set both direction bits LOW.
     DDRA |= (1 << DDA7);
     PORTA &= ~(1 << PA7);
@@ -114,6 +115,7 @@ void Motor_Initialize(void)
     ADMUX = 0x03; //enable ADC3 for analog conversion, use VCC as reference.
 #endif //USE_BEMF
     
+    _eStop = 0;
     _current_speed = _goal_speed = 1; //forward stop
     min_ADC = 0x93;
 }
@@ -197,6 +199,7 @@ void Motor_EStop(int8_t dir)
     PORTA |= (1 << PA7); //here is forward.
 #endif //USE_MOTOR
     
+    _eStop = 1;
     if (dir >= 0)
         _current_speed = _goal_speed = 1; //immediate forward stop
     else
@@ -320,6 +323,7 @@ void Motor_Update(void)
         //first calculate next speed step
         if (_goal_speed != _current_speed) //need to update the current speed!
         {
+            _eStop = 0; //reset eStop in the face of a command otherwise.
             //not just if at a stop, but take into account the sign of goal_speed! Don't want a kick-start in reverse!
             if( (1 == abs_speed) &&
                ( ((_current_speed > 0) && (_goal_speed > 0)) || ((_current_speed < 0) && (_goal_speed < 0))) &&
@@ -444,6 +448,8 @@ void Motor_Update(void)
         }
         else //use the commanded speed step to set the motor!
         {
+            if(_eStop == 0) //if not estopped, and only if not estopped, update firection pins and calulate voltage
+            {
             if (_current_speed < 0) //if negative
             {
                 //set REVERSE ENABLE
@@ -492,6 +498,7 @@ void Motor_Update(void)
                 sample_ready = 0;
             }
 #endif //USE_BEMF
+            }
         }
         if (voltage < 0) voltage = 0;
         if (voltage > 255) voltage = 255;
