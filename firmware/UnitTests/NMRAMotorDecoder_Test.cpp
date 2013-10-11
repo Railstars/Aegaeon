@@ -2762,9 +2762,14 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
     // NO power off followed by power on
     // 5 or more writes
     // 6 or more identical writes
-
+    
+    uint8_t CV = 1;
+    uint8_t Page = ((CV-1)>>2)+1;
+    uint8_t DataRegister = (CV-1)%4;
+    uint8_t CVvalue = _defaults[CV]+1;
+    
     uint8_t i;
-
+    
     //3 or more reset
     for (i = 0; i < 3; ++i)
     {
@@ -2776,7 +2781,7 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
         ++_millis_counter;
         DCC_Decoder_Update();
     }
-
+    
     //five or more page programming packets
     //write to CV65, should be page 17, register 1!
     // See RP-9.2.3, line 245-ff.
@@ -2784,13 +2789,13 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
     {
         sendPreamble(20);
         sendByte(0x7D); //page register
-        sendByte(0x00); //page 0
-        sendByte(0x7C ^ 0x00);
+        sendByte(Page); //page 17
+        sendByte(0x7D ^ Page);
         sendStopBit();
         ++_millis_counter;
         DCC_Decoder_Update();
     }
-
+    
     //6 or more reset/pagepreset
     for (i = 0; i < 6; ++i)
     {
@@ -2802,7 +2807,7 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
         ++_millis_counter;
         DCC_Decoder_Update();
     }
-
+    
     //3 or more reset
     for (i = 0; i < 3; ++i)
     {
@@ -2814,16 +2819,14 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
         ++_millis_counter;
         DCC_Decoder_Update();
     }
-
+    
     //now, send the write packets
-    int CV = 1;
-    int CVvalue = _defaults[CV]+1;
     for (i = 0; i < 5; ++i)
     {
         sendPreamble(20); //20 bits in service mode!
-        sendByte(0x79); //write register 1 TODO make this clearer?
+        sendByte(0x78 | DataRegister); //write register 1 TODO make this clearer?
         sendByte(CVvalue); //value 4
-        sendByte(0x79^(CVvalue));
+        sendByte((0x78 | DataRegister)^(CVvalue));
         sendStopBit();
         ++_millis_counter;
         DCC_Decoder_Update();
@@ -2832,6 +2835,7 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
     CHECK_EQUAL(CVvalue, eeprom[CV]);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
+
 
 TEST(NMRAMotorDecoderTests, PagedModeArbitraryCVWrite)
 {
