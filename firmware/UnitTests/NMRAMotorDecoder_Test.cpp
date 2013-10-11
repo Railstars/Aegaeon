@@ -834,45 +834,46 @@ TEST(NMRAMotorDecoderTests, PriorPacketTest)
 TEST(NMRAMotorDecoderTests, AddressPartitionTest)
 {
     //0 address
+    uint8_t address = 0;
     sendPreamble(14);
     sendByte(0x03);
     sendByte(0xEC); //ops mode program of base address
     sendByte(0x00); //CV 1
-    sendByte(0x00);
-    sendByte(0x03^0xEC^0x00^0x00);
+    sendByte(address); //set to address 0
+    sendByte(0x03^0xEC^0x00^address);
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(03, DCC_address); //should FAIL
+    CHECK_EQUAL(false, (DCC_address == address)); //should FAIL
 
-    uint8_t r;
-    //check to see what happens when addresses are set inside and outside permitted range
-    r = rand() % 127 + 1;
+    //check to see what happens when addresses are set inside permitted range
+    address = rand() % 127 + 1;
     sendPreamble(14);
     sendByte(0x03);
     sendByte(0xEC); //ops mode program of base address
     sendByte(0x00); //CV 1
-    sendByte(r);
-    sendByte(0x03^0xEC^0x00^r);
+    sendByte(address);
+    sendByte(0x03^0xEC^0x00^address);
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(r, DCC_address); //should SUCCEED
+    CHECK_EQUAL(address, DCC_address); //should SUCCEED
 
-    uint8_t r2 = rand() % 128 + 127;
+    //check to see what happens when addresses are set outside of permitted range
+    uint8_t newAddress = rand() % 128 + 127;
     sendPreamble(14);
-    sendByte(r);
+    sendByte(address);
     sendByte(0xEC); //ops mode program of base address
     sendByte(0x01); //CV 1
-    sendByte(r2);
-    sendByte(r^0xEC^0x01^r2);
+    sendByte(newAddress);
+    sendByte(address^0xEC^0x01^newAddress);
     sendStopBit();
     DCC_Decoder_Update();
     Motor_Update();
 
-    CHECK_EQUAL(r2, DCC_address); //should FAIL
+    CHECK_EQUAL(false, (DCC_address==newAddress)); //should FAIL
 }
 
 //todo check 14 bit addresses
