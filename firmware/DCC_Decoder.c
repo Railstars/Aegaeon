@@ -173,7 +173,7 @@ void handleDirectModePacket(DCC_Packet_t *packet, uint8_t i)
 
 void Ops_Mode_Process_Packet(DCC_Packet_t *packet)
 {
-    uint8_t tempa;//, tempb; //needed for function messages
+    uint8_t tempa = 0x00;//, tempb; //needed for function messages
     uint16_t add;
     uint8_t kind = DCC_Packet_Get_Address(packet, &add);
     uint8_t packet_match = 0;
@@ -270,10 +270,10 @@ void Ops_Mode_Process_Packet(DCC_Packet_t *packet)
             //    		break;
             
             /**** Consisting Commands ****/
-        case DCC_PACKET_CREATE_CONSIST_FACE_FORWARD_KIND:
+        case DCC_PACKET_CREATE_CONSIST_FACE_REVERSE_KIND:
             tempa = 0x80;
             //fall through
-        case DCC_PACKET_CREATE_CONSIST_FACE_REVERSE_KIND:
+        case DCC_PACKET_CREATE_CONSIST_FACE_FORWARD_KIND:
             //count on tempa = 0 if we hit exactly here
             DCC_Config_Write_CV(CV_CONSIST_ADDRESS, packet->data[packet->data_start + 1] | tempa);
             break;

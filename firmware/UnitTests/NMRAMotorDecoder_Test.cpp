@@ -1017,14 +1017,37 @@ IGNORE_TEST(NMRAMotorDecoderTests, DecoderControlPacket_AdvancedAddressing)
 
 TEST(NMRAMotorDecoderTests, ConsistControl)
 {
+    //send DCC_PACKET_CREATE_CONSIST_FACE_FORWARD_KIND packet.
+    //RP 9.2.1 states:
+    //"When Consist Control is in effect, the decoder will ignore any speed or direction
+    // instructions addressed to its normal locomotive address (unless this address is the
+    // same as its consist address). Speed and direction instructions now apply to the
+    // consist address only."
+    //Of the least significant nibble of the first instruction byte, RP 9.2.1 reads:
+    //"CCCC=0010 Set the consist address as specified in the second byte, and activate the
+    //           consist. The consist address is stored in bits 0-6 of CV #19 and bit 7 of
+    //           CV #19 is set to a value of 0. The direction of this unit in the consist is
+    //           the normal direction. If the consist address is 0000000 the consist is
+    //           deactivated.
+    // CCCC=0011 Set the consist address as specified in the second byte and activate the
+    //           consist. The consist address is stored in bits 0-6 of CV #19 and bit 7 of
+    //           CV#19 is set to a value of 1. The direction of this unit in the consist is
+    //           opposite its normal direction. If the consist address is 0000000 the consist
+    //           is deactivated."
+    //RP 9.2.2 states:
+    //"[CV 19] Contains a seven bit address in bit positions 0-6. Bit 7 indicates the relative
+    // direction of this unit within a consist, with a value of "0" indicating normal
+    // direction, and a value of "1" indicating a direction opposite the unit's normal
+    // direction. If the seven bit address in bits 0-6 is "0000000" the unit is not in a
+    // consist."
     sendPreamble(14);
     sendByte(0x03);
-    sendByte(0x12); //consist, make forward
+    sendByte(0x12); //Create Consist Packet
     sendByte(0x66); //enable consist address 66
     sendByte(0x03^0x12^0x66);
     sendStopBit();
     DCC_Decoder_Update();
-    CHECK_EQUAL(0x66 | 0x80, DCC_consist_address);
+    CHECK_EQUAL(0x66, DCC_consist_address);
 
     //test by sending a speed command to 03, then to 66
     //full speed command to 03, should be ignored.
@@ -1066,12 +1089,12 @@ TEST(NMRAMotorDecoderTests, ConsistControl)
     //all over again again in reverse facing
     sendPreamble(14);
     sendByte(0x03);
-    sendByte(0x13); //consist, make forward
+    sendByte(0x13); //consist, make reverse
     sendByte(0x65); //enable consist address 65
     sendByte(0x03^0x13^0x65);
     sendStopBit();
     DCC_Decoder_Update();
-    CHECK_EQUAL(0x65, DCC_consist_address);
+    CHECK_EQUAL(0x65 | 0x80, DCC_consist_address);
 
     //Now, tell loco to full speed, should be ignored,
     sendPreamble(14);
