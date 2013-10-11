@@ -2820,7 +2820,7 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
         sendPreamble(20); //20 bits in service mode!
         sendByte(0x79); //write register 1
         sendByte(_defaults[1] + 1); //value 4
-        sendByte(0x79^(_defaults[11] + 1));
+        sendByte(0x79^(_defaults[1] + 1));
         sendStopBit();
         ++_millis_counter;
         DCC_Decoder_Update();
