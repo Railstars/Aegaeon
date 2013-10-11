@@ -2844,7 +2844,10 @@ TEST(NMRAMotorDecoderTests, PagedModeArbitraryCVWrite)
     // 5 or more writes
     // 6 or more identical writes
     
-    int CV = 66; //followin the example for CV65 given from RP-9.2.3
+    uint8_t CV = 66; //followin the example for CV65 given from RP-9.2.3
+    uint8_t Page = ((CV-1)>>2)+1;
+    uint8_t DataRegister = (CV-1)%4;
+    uint8_t CVvalue = _defaults[CV]+1;
     
     uint8_t i;
     
@@ -2867,8 +2870,8 @@ TEST(NMRAMotorDecoderTests, PagedModeArbitraryCVWrite)
     {
         sendPreamble(20);
         sendByte(0x7D); //page register
-        sendByte(17); //page 17
-        sendByte(0x7C ^ 0x00);
+        sendByte(Page); //page 17
+        sendByte(0x7D ^ Page);
         sendStopBit();
         ++_millis_counter;
         DCC_Decoder_Update();
@@ -2899,13 +2902,12 @@ TEST(NMRAMotorDecoderTests, PagedModeArbitraryCVWrite)
     }
     
     //now, send the write packets
-    int CVvalue = _defaults[CV]+1;
     for (i = 0; i < 5; ++i)
     {
         sendPreamble(20); //20 bits in service mode!
-        sendByte(0x79); //write register 1 TODO make this clearer?
+        sendByte(0x78 | DataRegister); //write register 1 TODO make this clearer?
         sendByte(CVvalue); //value 4
-        sendByte(0x79^(CVvalue));
+        sendByte((0x78 | DataRegister)^(CVvalue));
         sendStopBit();
         ++_millis_counter;
         DCC_Decoder_Update();
