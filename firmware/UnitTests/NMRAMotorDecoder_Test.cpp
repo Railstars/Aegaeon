@@ -2779,10 +2779,11 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
 
     //five or more page programming packets
     //write to CV65, should be page 17, register 1!
+    // See RP-9.2.3, line 245-ff.
     for (i = 0; i < 5; ++i)
     {
         sendPreamble(20);
-        sendByte(0x7C);
+        sendByte(0x7D); //page register
         sendByte(0x00); //page 0
         sendByte(0x7C ^ 0x00);
         sendStopBit();
@@ -2816,6 +2817,88 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
 
     //now, send the write packets
     int CV = 1;
+    int CVvalue = _defaults[CV]+1;
+    for (i = 0; i < 5; ++i)
+    {
+        sendPreamble(20); //20 bits in service mode!
+        sendByte(0x79); //write register 1 TODO make this clearer?
+        sendByte(CVvalue); //value 4
+        sendByte(0x79^(CVvalue));
+        sendStopBit();
+        ++_millis_counter;
+        DCC_Decoder_Update();
+        Motor_Update();
+    }
+    CHECK_EQUAL(CVvalue, eeprom[CV]);
+    CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
+}
+
+TEST(NMRAMotorDecoderTests, PagedModeArbitraryCVWrite)
+{
+    //here is the sequence:
+    // 3 or more reset
+    // 5 or more writes to page register
+    // 6 or more reset packets
+    // 3 or more reset pakets [sic]
+    // NO power off followed by power on
+    // 5 or more writes
+    // 6 or more identical writes
+    
+    int CV = 66; //followin the example for CV65 given from RP-9.2.3
+    
+    uint8_t i;
+    
+    //3 or more reset
+    for (i = 0; i < 3; ++i)
+    {
+        sendPreamble(20);
+        sendByte(0x00);
+        sendByte(0x00); //soft reset
+        sendByte(0x00);
+        sendStopBit();
+        ++_millis_counter;
+        DCC_Decoder_Update();
+    }
+    
+    //five or more page programming packets
+    //write to CV65, should be page 17, register 1!
+    // See RP-9.2.3, line 245-ff.
+    for (i = 0; i < 5; ++i)
+    {
+        sendPreamble(20);
+        sendByte(0x7D); //page register
+        sendByte(17); //page 17
+        sendByte(0x7C ^ 0x00);
+        sendStopBit();
+        ++_millis_counter;
+        DCC_Decoder_Update();
+    }
+    
+    //6 or more reset/pagepreset
+    for (i = 0; i < 6; ++i)
+    {
+        sendPreamble(20);
+        sendByte(0x00);
+        sendByte(0x00); //soft reset
+        sendByte(0x00);
+        sendStopBit();
+        ++_millis_counter;
+        DCC_Decoder_Update();
+    }
+    
+    //3 or more reset
+    for (i = 0; i < 3; ++i)
+    {
+        sendPreamble(20);
+        sendByte(0x00);
+        sendByte(0x00); //soft reset
+        sendByte(0x00);
+        sendStopBit();
+        ++_millis_counter;
+        DCC_Decoder_Update();
+    }
+    
+    //now, send the write packets
     int CVvalue = _defaults[CV]+1;
     for (i = 0; i < 5; ++i)
     {
