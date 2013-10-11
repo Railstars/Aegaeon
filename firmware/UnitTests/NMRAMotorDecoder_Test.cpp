@@ -2815,18 +2815,20 @@ TEST(NMRAMotorDecoderTests, PagedModeAddressWrite)
     }
 
     //now, send the write packets
+    int CV = 1;
+    int CVvalue = _defaults[CV]+1;
     for (i = 0; i < 5; ++i)
     {
         sendPreamble(20); //20 bits in service mode!
-        sendByte(0x79); //write register 1
-        sendByte(_defaults[1] + 1); //value 4
-        sendByte(0x79^(_defaults[1] + 1));
+        sendByte(0x79); //write register 1 TODO make this clearer?
+        sendByte(CVvalue); //value 4
+        sendByte(0x79^(CVvalue));
         sendStopBit();
         ++_millis_counter;
         DCC_Decoder_Update();
         Motor_Update();
     }
-    CHECK_EQUAL(0x04, eeprom[1]);
+    CHECK_EQUAL(CVvalue, eeprom[CV]);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
 }
 
