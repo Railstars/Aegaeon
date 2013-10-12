@@ -24,7 +24,7 @@ The hardware features an Atmel ATtiny84A microcontroller, a high-current H-Bridg
 Firmware
 --------
 
-The firmware is written in pure C, and can be conditionally compiled for one of three possible configurations (motor only; motor + two functions; H-Bridge-driven function-only). Feature packed, and fully NMRA standards compliant, guaranteed by a stringent set of unit tests (not yet uploaded, but to be available soon).
+The firmware is written in pure C, and can be conditionally compiled for one of three possible configurations (motor only; motor + two functions; H-Bridge-driven function-only). Feature packed, and fully NMRA standards compliant, guaranteed by a stringent set of unit tests (in UnitTests folder, includes Xcode and NetBeans projects so you can run them straight on your Mac or PC).
 
 ### Features
 
