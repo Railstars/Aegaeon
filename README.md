@@ -66,9 +66,9 @@ The Future
 ----------
 
 There are a large number of features I would like to add to this product. I need your help!
-[ ] 2-layer PCB with easy-to-solder components for DIY
-[ ] ATmega328p/AT90CAN128 support for Arduino Uno/Railstars Io:duino
-[ ] Visual Studio project for unit tests
-[ ] Arduino project for easy integration into Arduino projects
-[ ] RailCom support (Railstars has a license to the necessary patents to implement RailCom, need to verify that implementing it as an open source project is kosher)
-[ ] On-the-tracks ops-mode bootloader. Ideally Arduino compatible but that might be a stretch. Would certainly require RailCom to work. But wouldn't that be awesome!?
+- [ ] 2-layer PCB with easy-to-solder components for DIY
+- [ ] ATmega328p/AT90CAN128 support for Arduino Uno/Railstars Io:duino
+- [ ] Visual Studio project for unit tests
+- [ ] Arduino project for easy integration into Arduino projects
+- [ ] RailCom support (Railstars has a license to the necessary patents to implement RailCom, need to verify that implementing it as an open source project is kosher)
+- [ ] On-the-tracks ops-mode bootloader. Ideally Arduino compatible but that might be a stretch. Would certainly require RailCom to work. But wouldn't that be awesome!?
