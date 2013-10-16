@@ -13,11 +13,11 @@ extern "C" {
 #endif
 
 #define MOTOR_PWM_CONTROL       OCR0A
-#define MOTOR_PWM_LEVEL(x)      (0xFF-x)  //motor outputs are 0xFF = 0V, 0x00 = 12V
-#define MOTOR_PWM_LEVEL_GT(x)   (OCR0A < (0xFF-x))
-#define MOTOR_PWM_LEVEL_LT(x)   (OCR0A > (0xFF-x))
+#define MOTOR_PWM_LEVEL(x)      x  //motor outputs are 0xFF = 0V, 0x00 = 12V
+#define MOTOR_PWM_LEVEL_GT(x)   (OCR0A < x)
+#define MOTOR_PWM_LEVEL_LT(x)   (OCR0A > x)
 
-#define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB2)) == (1 << PB2)) && ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTA & (1 << PA7)) == (1 << PA7)) )
+#define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB2)) == (1 << PB2)) &&  (((PORTB & (1 << PB1)) == (1 << PB1)) || ((PORTA & (1 << PA7)) == (1 << PA7))) )
 #define MOTOR_DEENERGIZED       (true)
 #define MOTOR_ENERGERIZED       (false)
 
