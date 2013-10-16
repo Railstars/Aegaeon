@@ -1599,17 +1599,15 @@ After a Hard Reset, don't forget that your Aegaeon will default to Primary Addre
 \label{FAQ}
 
 \begin{description}
-\item[The lights work, but the motor won't turn when I apply power.] There are several reasons why this might happen, ranging from configuration issues (which should be cleard by a Hard Reset) to wiring issues.
-
-	\begin{itemize}
+\item[The lights work, but the motor does not turn.]\ 
+    \begin{itemize}
 	\item Make sure you are using the correct address! After a Hard Reset, Aegaeon defaults to address 3.
 	\item Check that your command station is sending speed packets in the format that Aegaeon is expecting; the setting for this is in CV 29 (\S\ref{CV29speedcontrol}).
    \item Make sure that the voltage values in CVs 2, 6 and 5 (see \S\S\ref{CV2}, \ref{CV6}, \ref{CV5}) are set to provide a reasonably large voltage to the motor.
 	\item Check that the motor leads are soldered solidly to the motor brushes.
 	\end{itemize}
 
-\item[The motor seems to work, but the lights never] \textbf{come on.} There are several reasons why this might happen ,ranging from configuration issues (which should be cleared by a Hard Reset) to wiring issues.
-
+\item[The motor works, but the lights do not come on.]\ 
 	\begin{itemize}
 	\item Make sure you are using the correct address! After a Hard Reset, Aegaeon defaults to address 3.
    \item Make sure that the configuration values in the special effects CVs described in \S\ref{specialeffectsconfiguration} are configured to actually turn on the lights.
