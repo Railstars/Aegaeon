@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="yes"/>
@@ -140,8 +140,8 @@
 <text x="0" y="-3" size="1.016" layer="51">Aegaeon:L2 DCC Decoder</text>
 <text x="0" y="-4.5" size="1.016" layer="51">Copyright (C) 2012, Railstars Limited</text>
 <text x="0" y="-6" size="1.016" layer="51">All Rights Reserved</text>
-<dimension x1="0.3" y1="12.9" x2="9.5" y2="12.9" x3="4.9" y3="15.9" textsize="3.5" layer="51"/>
-<dimension x1="7.7" y1="0" x2="7.7" y2="15.25" x3="7.7" y3="7.625" textsize="3.5" layer="51" dtype="vertical"/>
+<dimension x1="0.3" y1="12.9" x2="9.5" y2="12.9" x3="4.9" y3="15.9" layer="51"/>
+<dimension x1="7.7" y1="0" x2="7.7" y2="15.25" x3="7.7" y3="7.625" layer="51" dtype="vertical"/>
 </plain>
 <libraries>
 <library name="Railstars">
@@ -1465,7 +1465,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules name="default">
+<designrules>
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
