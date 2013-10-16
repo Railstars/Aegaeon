@@ -138,6 +138,27 @@ While the model is apart, check to see if the manufacturer has placed a capacito
 Once the decisions have been made, and you are certain how the model goes together, we can begin with the installation itself.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installing Aegaeon:L2}
+
+% TODO write this
+
+The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install. Installation consists of the following steps:
+\begin{enumerate}
+\item Make space for the decoder.
+\item Make space for the wires and trim to length.
+\item Isolate the motor from the frame.
+\item Isolate the lighting board(s).
+\item Solder decoder to the frame or brass/copper pickups.
+\item Solder decoder to the motor.
+\item Solder decoder to the lighting board(s).
+\item Route wires.
+\item Test.
+\item Reassemble model.
+\end{enumerate}
+
+% TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installing Aegaeon:M}
 
 The Aegaeon:M is designed to be a reasonably easy decoder to install. Installation consists of the following steps:
@@ -162,11 +183,13 @@ With the ammeter or multimeter wired in series between the power pack and the tr
 Many larger models will have plenty of open space inside of them where the decoder could be sited. However in N and Z scales, the options are (both literally and figuratively) much narrower. In many cases, you will have to create a pocket for the decoder by milling out a portion of the metal frame. If you have a hard time determining where to site your Aegaeon:M, consider visiting the Railstars Support Site at \url{http://support.railstars.com}. This website offers a range of pictorial instructions for installing Aegaeon decoders, as well as a friendly support forum where you can ask other Aegaeon users for advice.
 
 \subsection{Make Space for the Wires and Trim to Length}
-Siting the decoder is only half the battle. The Aegaeon:M has four wires that must also be positioned. It is quite likely that you may have to cut channels in the metal frame or internal plastic supports to make room for the wires---they may look small, but space is tight inside your model! Holding the Aegaeon in place with a little double-sided tape, develop a careful plan for routing each lead. Once you have a satisfactory notion of where each will go, trim back any excess length. Otherwise, all that extra wire is going to need space of its own.
+Siting the decoder is only half the battle. The Aegaeon:M has four wires that must also be positioned. It is quite likely that you may have to cut channels in the metal frame or internal plastic supports to make room for the wires---they may look small, but space is tight inside your model!
 
-Part of this step is identifying where each of the four wires can be most easily connected to the model. The Red and Black wires collect the DCC signal and power from the tracks, and will need to be wired to the internal current collectors (some times called pick-ups). The Orange and Gray wires control the motor, and will need to be wired to the motor brushes. See Figure \ref{M-wiring} for an example of how to wire the Aegaeon:M.
+First, identifying where each of the four wires can be most easily connected to the model. The Red and Black wires collect the DCC signal and power from the tracks, and will need to be wired to the internal current collectors (some times called pick-ups)---the bits of metal that make electrical contact with the rails. The Orange and Gray wires control the motor, and will need to be wired to the motor brushes. See Figure \ref{M-wiring} for an example of how to wire the Aegaeon:M.
 
 %TODO figure \label{M-wiring}
+
+Holding the Aegaeon:M in place with a little double-sided tape, develop a careful plan for routing each lead. Once you have a satisfactory notion of where each will go, trim back any excess length. Otherwise, all that extra wire is going to need space of its own.
 
 \subsection{Isolate the Motor from the Frame}
 Normally, the motor's brushes make electrical contact with the two rails (usually indirectly via the frame, or other metal conductors within the model). Installing the Aegaeon:M requires that we break this connection, so that the decoder can control the motor directly. Find the points of electrical contact between the motor brushes and the rest of the model (often inside the metal frame, but sometimes with soldered wires or other mechanisms). Trim back any wires or long leads connecting the motor to the rest of the model, and use Kapton tape as insulation where the electrical contact is achieved via press-fit (a single layer of tape will suffice).
@@ -201,8 +224,7 @@ Even once the model has passed all the tests with flying colors, your work is no
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installing Aegaeon:C}
 
-% TODO write this
-The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to install. Installation consists of the following steps:
+The Aegaeon:C is designed to control simple DC lighting boards, and hence is probably the easiest decoder to install. Installation consists of the following steps:
 \begin{enumerate}
 \item Make space for the decoder.
 \item Make space for the wires and trim to length.
@@ -214,29 +236,49 @@ The Aegaeon:C is designed for TODO and hence is probably the easiest decoder to 
 \item Reassemble model.
 \end{enumerate}
 
-% TODO write this
+\subsection{Make Space for the Decoder}
+Many larger models will have plenty of open space inside of them where the decoder could be sited. However in N and Z scales, the options are (both literally and figuratively) much narrower. In many cases, you will have to create a pocket for the decoder by milling out a portion of the metal frame. If you have a hard time determining where to site your Aegaeon:M, consider visiting the Railstars Support Site at \url{http://support.railstars.com}. This website offers a range of pictorial instructions for installing Aegaeon decoders, as well as a friendly support forum where you can ask other Aegaeon users for advice.
+
+\subsection{Make Space for the Wires and Trim to Length}
+Siting the decoder is only half the battle. The Aegaeon:C has four wires that must also be positioned. It is quite likely that you may have to cut channels in the metal frame or internal plastic supports to make room for the wires---they may look small, but space is tight inside your model!
+
+First, identifying where each of the four wires can be most easily connected to the model. The Red and Black wires collect the DCC signal and power from the tracks, and will need to be wired to the internal current collectors (some times called pick-ups)---the bits of metal that make electrical contact with the rails. The White and Yellow wires control the lighting, and will need to be wired to the two leads on the lighting circuit board. See Figure \ref{C-wiring} for an example of how to wire the Aegaeon:C.
+
+%TODO figure \label{C-wiring}
+
+Holding the Aegaeon:M in place with a little double-sided tape, develop a careful plan for routing each lead. Once you have a satisfactory notion of where each will go, trim back any excess length. Otherwise, all that extra wire is going to need space of its own.
+
+\subsection{Isolate the Lighting Board from the Frame}
+Normally, the lighting board's leads make electrical contact with the two rails (usually indirectly via the frame, or other metal conductors within the model). Installing the Aegaeon:C requires that we break this connection, so that the decoder can control the lighting board directly. Find the points of electrical contact between the lighting board leads and the rest of the model (often via simple contact with the metal frame, but sometimes with soldered wires or other mechanisms). Trim back any wires or long leads connecting the lighting board to the rest of the model, and use Kapton tape as insulation where the electrical contact is achieved via press-fit (a single layer of tape will suffice).
+
+Sometimes it is not obvious how to isolate the lighting board. If you find yourself stumped, don't forget about the Raisltars Support Site at \url{http://support.railstars.com}, where you can view pictorial installation guides and ask for advice from other Aegaeon users.
+
+Make sure that the lighting board really is isolated, using a continuity tester where possible. On some models, it may be nearly impossible to test that the lighting board is isolated. One simple, but not perfectly reliable, method is to reassemble the model, and see if you can make it light up with a standard DC throttle. If the lighting does not respond to the throttle, there is a good chance is has been successully isolated; if the lighting \textit{does} respond, you have not yet achieved the necessary isolation.
+
+\subsection{Solder Red and Black Wires to the Pickups}
+Once the motor is isolated, begin connecting the decoder by soldering in the Red and Black wires. You should have, in an earlier step, identified the best place to connect these wires. Now, the time has come to solder these wires to the internal current collectors that make electrical contact with the rails.
+
+\subsection{Solder White and Yellow Wires to the Lighting Board Leads}
+
+The White and Yellow wires control the lighting board. Now that we are certain that the lighting board is isolated from the rails, and the decoder is connected to the rails, solder the White and Yellow wires to the lighting board leads.
+
+Once connected, this is a good time to make your first real test. You do not need to fully reassemble the model for this step; but you will need to be able to place it on a DCC-controlled main line. Once on the main line, attempt to control the model with your DCC throttle set to DCC address 3. The lighting should come on, and respond to throttle direction changes. If you can so control the lighting, the test is passed. If you cannot, then either the decoder is not making good electrical contact with the rails, or with the lighting board. In this case, use a continuity checker to determine where the break in the circuit might be.
+
+Unfortunately, the usual programming-track test won't always work with the Aegaegon:C, because reading a CV requires a certain amount of current draw from the programmer. Many modern models use highly efficient LED lighting, which does not draw sufficient current to provide the feedback that the DCC programmer is expecting. Thus, we can only test reliably on the main line.
+
+\subsection{Route Wires and Affix Decoder}
+
+Once you are certain that the decoder is wired in securely and properly, route the wires into the channels (if you needed to make channels). A spudger comes in handy for telling wires just where they need to go, and pressing them flat into the channels. Use a little double-sided tape to secure the decoder in place, making sure that it is not touching any metal surface; use some Kapton tape if necessary to provide some electrical isolation. You can tape the metal surfaces in the mode near the decoder site, or wrap the decoder in the tape.
+
+\subsection {Test. Test. Test.}
+
+Once everything is in place, repeat all of the tests above. Try reading and writing CVs; give the model a spin on the main line. Everything should run as expected. If not, don't be discouraged! Better to find out that something has gone wrong now, than after the model has been put back together! Again, if something isn't working, a continuity checker is going to be your best tool for isolating problems.
+
+\subsection{Final Reassembly and Test Again}
+
+Even once the model has passed all the tests with flying colors, your work is not yet done. Reassembling the model is not always easy. It might reveal that you didn't leave enough room for the decoder, or the wires. It might also reveal that one of the connections is still a bit loose, and comes apart under pressure from the plastic shell. Both problems are often easy to spot, because the plastic shell will bulge from the pressure of the installed decoder.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Installing Aegaeon:L2}
-
-% TODO write this
-
-The Aegaeon:L2 is designed for TODO and is the most difficult decoder to install. Installation consists of the following steps:
-\begin{enumerate}
-\item Make space for the decoder.
-\item Make space for the wires and trim to length.
-\item Isolate the motor from the frame.
-\item Isolate the lighting board(s).
-\item Solder decoder to the frame or brass/copper pickups.
-\item Solder decoder to the motor.
-\item Solder decoder to the lighting board(s).
-\item Route wires.
-\item Test.
-\item Reassemble model.
-\end{enumerate}
-
-% TODO need to say something about checking stall current, use of resistors with LEDs, lots of diagrams, etc. Also use of bulbs and potential for overheating on DCC.
-
 \section{It Doesn't Work!}
 
 Sometimes an install doesn't go as expected, and problems arise. If you've followed the directions, and your Aegaeon isn't responding as you expect, or at all, please have a careful read of Chapter \ref{troubleshooting}, and especially \S\ref{FAQ}.
@@ -1566,13 +1608,15 @@ After a Hard Reset, don't forget that your Aegaeon will default to Primary Addre
 	\item Check that the motor leads are soldered solidly to the motor brushes.
 	\end{itemize}
 
-\item[The motor seems to work, but the lights never come on.] There are several reasons why this might happen ,ranging from configuration issues (which should be cleared by a Hard Reset) to wiring issues.
+\item[The motor seems to work, but the lights never] \textbf{come on.} There are several reasons why this might happen ,ranging from configuration issues (which should be cleared by a Hard Reset) to wiring issues.
 
 	\begin{itemize}
 	\item Make sure you are using the correct address! After a Hard Reset, Aegaeon defaults to address 3.
    \item Make sure that the configuration values in the special effects CVs described in \S\ref{specialeffectsconfiguration} are configured to actually turn on the lights.
 	\item Check that the yellow, white (and possibly blue) leads are soldered solidly to the lights.
 	\end{itemize}
+
+\item[I get an error message] \textbf{when I try to write/read CVs to/from my Aegaeon:C.} The mechanism for CV readback relies on the decoder drawing a certain amount of current as a flag to the programmer. Most modern equipment uses highly efficient LED lighting, which when on draws very little current indeed. In these situations, Aegaeon:C is incapable of drawing sufficient current to flag the programmer. This does not mean the CVs are not being written! It does mean that the only reliable way to ensure that a CV has been written is to test the desired behavior change on the main.
 
 \end{description}
 
