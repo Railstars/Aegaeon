@@ -87,12 +87,9 @@ void Motor_Initialize(void)
     //do other things to set up the hardware.
     //on ATtiny84A, setup TIMER0 for both motor control PWM on output compare B and a millis timer on compare match overflow
     
-    //set PA7, PB1 and PB2 to output, bring PA7 and PB1 low and PB2 HIGH (= BRAKE)
+    //set PA7, PB1 and PB2 to output, bring PA7 and PB1 LOW and PB2 LOW (= BRAKE); this disables all switches
     DDRB |= (1 << DDB1) | (1 << DDB2);
-    PORTB |= (1 << PB2); //set PWM HIGH!
-    
-    
-    PORTB &= ~(1 << PB1); //and set both direction bits LOW.
+    PORTB &= ~((1 << PB1) | (1 << PB2));
     DDRA |= (1 << DDA7);
     PORTA &= ~(1 << PA7);
     

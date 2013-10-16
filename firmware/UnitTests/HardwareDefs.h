@@ -21,7 +21,7 @@ extern "C" {
 #define MOTOR_DEENERGIZED       (true)
 #define MOTOR_ENERGERIZED       (false)
 
-#define MOTOR_BRAKE_STATE       ( ((PORTB & (1 << PB2)) == (1 << PB2)) && ((PORTB & (1 << PB1)) == 0) && ((PORTA & (1 << PA7)) == 0) )
+#define MOTOR_BRAKE_STATE       ( ((PORTB & (1 << PB2)) == (0)) && ((PORTB & (1 << PB1)) == 0) && ((PORTA & (1 << PA7)) == 0) )
 #define MOTOR_BRAKE_SET         (true)
 #define MOTOR_BRAKE_RELEASED    (false)
     
