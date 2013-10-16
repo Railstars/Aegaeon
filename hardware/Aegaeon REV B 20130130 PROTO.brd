@@ -15,7 +15,7 @@
 <layer number="5" name="Route5" color="4" fill="4" visible="no" active="no"/>
 <layer number="6" name="Route6" color="1" fill="8" visible="no" active="no"/>
 <layer number="7" name="Route7" color="4" fill="8" visible="no" active="no"/>
-<layer number="8" name="Route8" color="5" fill="1" visible="no" active="yes"/>
+<layer number="8" name="Route8" color="5" fill="1" visible="yes" active="yes"/>
 <layer number="9" name="Route9" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="10" name="Route10" color="1" fill="7" visible="no" active="no"/>
 <layer number="11" name="Route11" color="4" fill="7" visible="no" active="no"/>
@@ -2019,10 +2019,10 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="IC1" pad="P$12"/>
 <wire x1="4.8" y1="7.175" x2="4.8" y2="7.5" width="0.1524" layer="1"/>
 <wire x1="4.8" y1="7.5" x2="5.375" y2="8.075" width="0.1524" layer="1"/>
-<contactref element="U$9" pad="S1"/>
-<contactref element="U$4" pad="G1"/>
-<wire x1="5" y1="10.3" x2="5.1" y2="10.475" width="0" layer="19" extent="1-9"/>
-<wire x1="3.225" y1="10.75" x2="3.675" y2="10.725" width="0" layer="19" extent="1-9"/>
+<contactref element="U$9" pad="S2"/>
+<contactref element="U$4" pad="G2"/>
+<wire x1="5.1" y1="12.7" x2="5.1" y2="12.325" width="0" layer="19" extent="1-1"/>
+<wire x1="1.375" y1="12.05" x2="3.5" y2="11.4" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="FORWARD">
 <contactref element="IC1" pad="P$15"/>
@@ -2042,10 +2042,10 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="4.15" y1="10.2" x2="1.775" y2="10.2" width="0.1524" layer="8"/>
 <wire x1="1.025" y1="9.625" x2="1.6" y2="10.2" width="0.1524" layer="8"/>
 <wire x1="1.6" y1="10.2" x2="1.775" y2="10.2" width="0.1524" layer="8"/>
-<contactref element="U$9" pad="S2"/>
-<contactref element="U$4" pad="G2"/>
-<wire x1="5.1" y1="10" x2="5.1" y2="12.325" width="0" layer="19" extent="1-1"/>
-<wire x1="1.375" y1="12.05" x2="1.2" y2="11.4" width="0" layer="19" extent="1-1"/>
+<contactref element="U$9" pad="S1"/>
+<contactref element="U$4" pad="G1"/>
+<wire x1="5.1" y1="10" x2="5.1" y2="10.475" width="0" layer="19" extent="1-1"/>
+<wire x1="3.225" y1="10.75" x2="4.15" y2="10.2" width="0" layer="19" extent="1-8"/>
 </signal>
 <signal name="BEMF">
 <contactref element="R1" pad="2"/>

@@ -13766,11 +13766,11 @@ Production Part - 8199
 <pinref part="IC1" gate="G$1" pin="PB1"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="43.18" x2="17.78" y2="43.18" width="0.1524" layer="91"/>
-<label x="17.78" y="43.18" size="1.778" layer="95"/>
-<pinref part="U$9" gate="G$1" pin="S"/>
-<wire x1="76.2" y1="43.18" x2="45.72" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="U$4" gate="G$1" pin="G"/>
+<wire x1="45.72" y1="58.42" x2="17.78" y2="58.42" width="0.1524" layer="91"/>
+<label x="17.78" y="58.42" size="1.778" layer="95"/>
+<pinref part="U$9" gate="G$2" pin="S"/>
+<pinref part="U$4" gate="G$2" pin="G"/>
+<wire x1="45.72" y1="58.42" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="FORWARD" class="0">
@@ -13780,11 +13780,11 @@ Production Part - 8199
 <label x="109.22" y="160.02" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="45.72" y1="58.42" x2="17.78" y2="58.42" width="0.1524" layer="91"/>
-<label x="17.78" y="58.42" size="1.778" layer="95"/>
-<pinref part="U$9" gate="G$2" pin="S"/>
-<pinref part="U$4" gate="G$2" pin="G"/>
-<wire x1="45.72" y1="58.42" x2="76.2" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="43.18" x2="17.78" y2="43.18" width="0.1524" layer="91"/>
+<label x="17.78" y="43.18" size="1.778" layer="95"/>
+<pinref part="U$9" gate="G$1" pin="S"/>
+<wire x1="76.2" y1="43.18" x2="45.72" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="G"/>
 </segment>
 </net>
 <net name="BEMF" class="0">
