@@ -100,7 +100,7 @@ void Motor_Initialize(void)
     TCCR0B = (1 << CS00); //use /1 prescaler
     
     TCNT0 = 0;
-    OCR0A = 0xFF; //turn output off.
+    OCR0A = 0; //turn output off.
     
     TIMSK0 |= (1 << TOIE0); //enable overflow interrupt so we can count micros
     
@@ -499,7 +499,7 @@ void Motor_Update(void)
         }
         if (voltage < 0) voltage = 0;
         if (voltage > 255) voltage = 255;
-        OCR0A = 0xFF - voltage;
+        OCR0A = voltage;
         TCCR0A |= (1 << COM0A1); //force connection of PA7 to timer, in case it was disconnected earlier
 		
 #ifdef USE_BEMF	//hackish
