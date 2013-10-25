@@ -47,14 +47,14 @@ TEST(DCCPacketTests, ObjectInitializesToIdle)
     CHECK_EQUAL(0xFF, p.data[2]);
 }
 
-IGNORE_TEST(DCCPacketTests, GetKindIsIdle)
+TEST(DCCPacketTests, GetKindIsIdle)
 {
     DCC_Packet_Get_Kind(&p);
     CHECK_EQUAL(DCC_PACKET_IDLE_KIND, p.kind);
     CHECK_EQUAL(DCC_PACKET_IDLE_KIND, p.kind);
 }
 
-IGNORE_TEST(DCCPacketTests, GetKindIsIdleCorrectDataStart)
+TEST(DCCPacketTests, GetKindIsIdleCorrectDataStart)
 {
     DCC_Packet_Get_Kind(&p);
     CHECK_EQUAL(DCC_PACKET_IDLE_KIND, p.kind);
@@ -348,7 +348,7 @@ TEST(DCCPacketTests, GetKindFuncGroupOne_RP921_L240)
     CHECK_EQUAL(DCC_PACKET_FUNC_FL_F4_KIND, p.kind);
 }
 
-IGNORE_TEST(DCCPacketTests, GetKindFuncGroupTwo_V1_RP921_L251)
+TEST(DCCPacketTests, GetKindFuncGroupTwo_V1_RP921_L251)
 {
     p.size = 4;
     p.data[0] = 0x00;
@@ -358,7 +358,7 @@ IGNORE_TEST(DCCPacketTests, GetKindFuncGroupTwo_V1_RP921_L251)
     CHECK_EQUAL(DCC_PACKET_FUNC_F5_F8_KIND, p.kind);
 }
 
-IGNORE_TEST(DCCPacketTests, GetKindFuncGroupTwo_V2_RP921_L251)
+TEST(DCCPacketTests, GetKindFuncGroupTwo_V2_RP921_L251)
 {
     p.size = 4;
     p.data[0] = 0x00;
