@@ -460,15 +460,17 @@ TEST(DCCPacketTests, GetKindOpsModeLong_RP921_L353)
 
 //Can only distinguish Func Group 1 instructions from Accessory Basic Commands by the address!!
 
-IGNORE_TEST(DCCPacketTests, GetKindIgnoreAccessoryBasicPackets_RP921_L402)
+TEST(DCCPacketTests, GetKindIgnoreAccessoryBasicPackets_RP921_L402)
 {
     //accessory address 0, deactivate device 0
     p.size = 3;
     p.data[0] = 0x80;
     p.data[1] = 0x80;
     p.data[2] = p.data[0] ^ p.data[1];
-    DCC_Packet_Get_Kind(&p);
-    CHECK_EQUAL(DCC_PACKET_NONE_KIND, p.kind);
+    uint16_t address = 0x88;
+    uint8_t address_type = DCC_Packet_Get_Address(&p, &address);
+    CHECK_EQUAL(DCC_ACCESSORY_ADDRESS, address_type);
+    CHECK_EQUAL(0x00, address);
 }
 
 /*********************/
