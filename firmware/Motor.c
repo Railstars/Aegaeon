@@ -2,6 +2,8 @@
 #include <avr/interrupt.h>
 #include <avr/eeprom.h>
 #include <util/atomic.h>
+#define F_CPU 8000000UL  // 8 MHz
+#include <util/delay.h>
 
 #include <stdint.h>
 #include "DCC_Config.h"
@@ -454,6 +456,7 @@ void Motor_Update(void)
                 {
                     //set REVERSE ENABLE
                     PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through
+                    _delay_loop_1(1); //pause for three cycles;
                     PORTA |=  (1 << PA7);
 #ifdef USE_MOTOR_FOR_FX
                     voltage = Output_Match_Buf[1];
@@ -469,6 +472,7 @@ void Motor_Update(void)
                 {
                     //set FORWARD ENABLE
                     PORTA &= ~(1 << PA7); //must bring this pin low first, to avoid shoot-through
+                    _delay_loop_1(1); //pause for three cycles;
                     PORTB |=  (1 << PB1);
 #ifdef USE_MOTOR_FOR_FX
                     voltage = Output_Match_Buf[0];

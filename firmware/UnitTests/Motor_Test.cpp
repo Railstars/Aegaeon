@@ -10,6 +10,7 @@ extern "C"
 #include "reset.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <util/delay.h>
     void TIM0_OVF_vect(void);
     void ADC_vect(void);
 }
@@ -65,6 +66,32 @@ TEST(MotorTests, millis_1)
     }
     //i = 0;
     CHECK_EQUAL(0x01, millis());
+}
+
+/*********Motor dead time*********/
+
+//Check that dead time is inserted by a call to one of the delay.h functions
+TEST(MotorTests, deadTime_FwdToRev)
+{
+    Motor_Set_Speed_By_DCC_Speed_Step_28(14);
+    Motor_Update();
+    delay = 0;
+    Motor_Set_Speed_By_DCC_Speed_Step_28(-14);
+    Motor_Update();
+    CHECK_TRUE(delay > 0);
+}
+
+
+TEST(MotorTests, deadTime_RevToFwd)
+{
+    Motor_Set_Speed_By_DCC_Speed_Step_28(-14);
+    Motor_Update();
+    Motor_Set_Speed_By_DCC_Speed_Step_28(-14);
+    Motor_Update();
+    delay = 0;
+    Motor_Set_Speed_By_DCC_Speed_Step_28(-14);
+    Motor_Update();
+    CHECK_TRUE(delay > 0);
 }
 
 /*********28 speed steps w/ 3-step speed table*********/

@@ -9,6 +9,7 @@
 
 uint8_t reset_state;
 #include <avr/io.h>
+#include <util/delay.h>
 #include "globals.h"
 
 //extern PID_t PID;
@@ -33,6 +34,8 @@ void soft_reset(void)
     //PID.last_error = 0;
     //PID.integral = 0.0;
 
+    delay = 0;
+    
     TCCR0A = 0;
     TCCR0B = 0;
     TCNT0 = 0;

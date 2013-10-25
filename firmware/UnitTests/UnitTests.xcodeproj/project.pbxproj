@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC053F6C1819765600D5435F /* delay.c in Sources */ = {isa = PBXBuildFile; fileRef = BC053F6B1819765600D5435F /* delay.c */; };
 		BC24EEE318025DD9002FCA8D /* Aegaeon.c in Sources */ = {isa = PBXBuildFile; fileRef = BCB29725180259B800842814 /* Aegaeon.c */; };
 		BC24EEE418025DD9002FCA8D /* DCC_Config.c in Sources */ = {isa = PBXBuildFile; fileRef = BCB29726180259B800842814 /* DCC_Config.c */; };
 		BC24EEE618025DD9002FCA8D /* DCC_Decoder.c in Sources */ = {isa = PBXBuildFile; fileRef = BCB29728180259B800842814 /* DCC_Decoder.c */; };
@@ -46,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC053F6A1819764D00D5435F /* delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = delay.h; path = ../util/delay.h; sourceTree = "<group>"; };
+		BC053F6B1819765600D5435F /* delay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = delay.c; path = ../util/delay.c; sourceTree = "<group>"; };
 		BC24EF0918025E14002FCA8D /* libCppUTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCppUTest.a; path = ../../../../../../../../usr/local/Cellar/cpputest/3.5/lib/libCppUTest.a; sourceTree = "<group>"; };
 		BCB296FF180259A200842814 /* eeprom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = eeprom.c; sourceTree = "<group>"; };
 		BCB29700180259A200842814 /* eeprom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eeprom.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 		BCB29711180259A200842814 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				BC053F6A1819764D00D5435F /* delay.h */,
+				BC053F6B1819765600D5435F /* delay.c */,
 				BCB29712180259A200842814 /* atomic.c */,
 				BCB29713180259A200842814 /* atomic.h */,
 			);
@@ -244,6 +249,7 @@
 				BC24EEFB18025DD9002FCA8D /* DCC_Config_Test.cpp in Sources */,
 				BC24EEFC18025DD9002FCA8D /* DCC_Decoder_Test.cpp in Sources */,
 				BC24EEFD18025DD9002FCA8D /* DCC_Hardware_Test.cpp in Sources */,
+				BC053F6C1819765600D5435F /* delay.c in Sources */,
 				BC24EEFE18025DD9002FCA8D /* DCC_Packet_Test.cpp in Sources */,
 				BC24EEFF18025DD9002FCA8D /* FX_Test.cpp in Sources */,
 				BC24EF0118025DD9002FCA8D /* Motor_Test.cpp in Sources */,
@@ -290,6 +296,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -323,6 +333,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
