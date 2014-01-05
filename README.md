@@ -73,6 +73,10 @@ There are a large number of features I would like to add to this product. I need
 - [ ] RailCom support (Railstars has a license to the necessary patents to implement RailCom, need to verify that implementing it as an open source project is kosher)
 - [ ] On-the-tracks ops-mode bootloader. Ideally Arduino compatible but that might be a stretch. Would certainly require RailCom to work. But wouldn't that be awesome!?
 
+Discussion
+----------
+
+You can get support for the Aegaeon software at the Railstars [Support Forum](http://support.railstars.com/index.php?p=/categories/aegaeon-firmware)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Railstars/aegaeon/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
