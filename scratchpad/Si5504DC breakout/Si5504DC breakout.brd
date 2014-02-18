@@ -291,7 +291,7 @@ Please make sure your boards conform to these design rules.</description>
 <param name="mlMaxStopFrame" value="4mil"/>
 <param name="mlMinCreamFrame" value="0mil"/>
 <param name="mlMaxCreamFrame" value="0mil"/>
-<param name="mlViaStopLimit" value="0mil"/>
+<param name="mlViaStopLimit" value="100mil"/>
 <param name="srRoundness" value="0"/>
 <param name="srMinRoundness" value="0mil"/>
 <param name="srMaxRoundness" value="0mil"/>
@@ -422,21 +422,21 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="U$1" pad="P$5"/>
 <contactref element="JP3" pad="3"/>
 <contactref element="JP3" pad="4"/>
-<polygon width="0.4064" layer="1" isolate="0.254" thermals="no" rank="2">
-<vertex x="0.3175" y="-5.08"/>
-<vertex x="0.3175" y="5.08"/>
+<polygon width="0.3556" layer="1" isolate="0.381" thermals="no">
+<vertex x="0.381" y="-5.08"/>
+<vertex x="0.381" y="5.08"/>
 <vertex x="5.08" y="5.08"/>
 <vertex x="5.08" y="-5.08"/>
 </polygon>
-<polygon width="0.4064" layer="16" isolate="0.254" thermals="no">
-<vertex x="0.3175" y="5.08"/>
+<polygon width="0.3556" layer="16" isolate="0.381" thermals="no">
+<vertex x="0.381" y="5.08"/>
 <vertex x="5.08" y="5.08"/>
 <vertex x="5.08" y="-5.08"/>
-<vertex x="0.3175" y="-5.08"/>
+<vertex x="0.381" y="-5.08"/>
 </polygon>
 <via x="0.9525" y="1.905" extent="1-16" drill="0.6"/>
-<via x="1.905" y="0.9525" extent="1-16" drill="0.6"/>
-<via x="2.8575" y="0" extent="1-16" drill="0.6"/>
+<via x="2.54" y="0.9525" extent="1-16" drill="0.6"/>
+<via x="2.54" y="-0.3175" extent="1-16" drill="0.6"/>
 </signal>
 <signal name="NS1">
 <contactref element="U$1" pad="P$1"/>
@@ -449,21 +449,21 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="U$1" pad="P$7"/>
 <contactref element="JP3" pad="1"/>
 <contactref element="JP3" pad="2"/>
-<polygon width="0.4064" layer="1" isolate="0.254" thermals="no">
+<polygon width="0.3556" layer="1" isolate="0.381" thermals="no">
 <vertex x="-5.08" y="-5.08"/>
 <vertex x="-5.08" y="5.08"/>
-<vertex x="-0.3175" y="5.08"/>
-<vertex x="-0.3175" y="-5.08"/>
+<vertex x="-0.381" y="5.08"/>
+<vertex x="-0.381" y="-5.08"/>
 </polygon>
-<polygon width="0.4064" layer="16" isolate="0.254" thermals="no">
+<polygon width="0.3556" layer="16" isolate="0.381" thermals="no">
 <vertex x="-5.08" y="5.08"/>
-<vertex x="-0.3175" y="5.08"/>
-<vertex x="-0.3175" y="-5.08"/>
+<vertex x="-0.381" y="5.08"/>
+<vertex x="-0.381" y="-5.08"/>
 <vertex x="-5.08" y="-5.08"/>
 </polygon>
 <via x="-0.9525" y="1.905" extent="1-16" drill="0.6"/>
-<via x="-1.905" y="0.9525" extent="1-16" drill="0.6"/>
-<via x="-2.8575" y="0" extent="1-16" drill="0.6"/>
+<via x="-2.54" y="0.9525" extent="1-16" drill="0.6"/>
+<via x="-2.54" y="-0.3175" extent="1-16" drill="0.6"/>
 </signal>
 <signal name="N$1">
 </signal>
@@ -478,6 +478,16 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="0.325" y1="-2.738" x2="1.27" y2="-3.683" width="0.4064" layer="1"/>
 </signal>
 </signals>
+<errors>
+<approved hash="18,29,8c571462db3e26cf"/>
+<approved hash="18,29,f0fedaf4c1f5c2db"/>
+<approved hash="18,29,1609c339d838c224"/>
+<approved hash="18,29,67fdf1483d36cd65"/>
+<approved hash="18,29,1613f7a01fc6fbbf"/>
+<approved hash="18,29,ec54bdce4541131d"/>
+<approved hash="18,29,07fe5664a349f637"/>
+<approved hash="18,29,f0e4ee6d060bfb40"/>
+</errors>
 </board>
 </drawing>
 </eagle>
