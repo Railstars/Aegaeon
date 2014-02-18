@@ -6,6 +6,17 @@
 *.atsuo
 *.b#?
 *.s#?
+*.GBL
+*.GBO
+*.GBS
+*.GKO
+*.GTL
+*.GTO
+*.GTS
+*.TXT
+*.dri
+*.gpi
+*.zip
 .DS_Store
 Debug
 Release
