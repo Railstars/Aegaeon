@@ -9,4 +9,5 @@
 .DS_Store
 Debug
 Release
+Datasheets
 /firmware/UnitTests/dist/
