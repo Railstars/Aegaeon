@@ -191,14 +191,11 @@ uint32_t micros(void)
 void Motor_EStop(int8_t dir)
 {
 #ifdef USE_MOTOR
-    //NMRA requires that we remove power from motor. We do this by disconnecting PA7 so we can force it low, then bring PB1 and PB2 high.
-    //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
-    //set (PB2) OC0A first to avoid a shoot-through condition
-    TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-    PORTB |= (1 << PB2);
-    //force PWM lines HIGH, turns off motor.
-    PORTB |= (1 << PB1); //here is reverse.
-    PORTA |= (1 << PA7); //here is forward.
+    //NMRA requires that we remove power from motor. We do this by setting out motor lines LOW.
+    TCCR0A &= ~(1 << COM0A0) & ~(1 << COM0A1) & ~(COM0B0) & ~(COM0B1); //disconnect PWM from timer
+    PORTB &= ~(1 << PB0) & ~(1 << PB1) & ~(1 << PB2); //force all four motor control lines LOW, turns off motor.
+    PORTA &= ~(1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
+
 #endif //USE_MOTOR
     
     _eStop = 1;
@@ -297,12 +294,10 @@ void Motor_Update(void)
     if ((abs_speed < BEMF_cutoff) && (time_delta_32(millis(), _prev_bemf_time) >= BEMF_period))
     {
         //first, set the h-bridge to coast
-        TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-        //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
         //set OC0A first to avoid a shoot-through condition
-        TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-        PORTB |= (1 << PB2) | (1 << PB1); //force PWM lines HIGH, turns off motor.
-        PORTA |= (1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
+        TCCR0A &= ~(1 << COM0A0) & ~(1 << COM0A1) & ~(COM0B0) & ~(COM0B1); //disconnect PWM from timer
+        PORTB &= ~(1 << PB0) & ~(1 << PB1) & ~(1 << PB2); //force all four motor control lines LOW, turns off motor.
+        PORTA &= ~(1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
         //start an AD conversion
         ADCSRA |= (1 << ADSC);
     }
@@ -506,8 +501,9 @@ void Motor_Update(void)
         }
         if (voltage < 0) voltage = 0;
         if (voltage > 255) voltage = 255;
-        OCR0A = 0xFF - voltage;
-        TCCR0A |= (1 << COM0A1); //force connection of PA7 to timer, in case it was disconnected earlier
+        OCR0A = 0xFF - voltage; //TODO need to set OCR0B as well!
+        TCCR0A |= (1 << COM0A0) | (1 << COM0A1) | (COM0B0) | (COM0B1); //reconnect PWM to timer
+
 		
 #ifdef USE_BEMF	//hackish
     }
