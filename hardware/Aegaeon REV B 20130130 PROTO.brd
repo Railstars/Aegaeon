@@ -1648,10 +1648,10 @@ Please make sure your boards conform to these design rules.</description>
 <element name="U$19" library="Railstars" package="POGO_PAD" value="PAD.75MM" x="1.2" y="7.48"/>
 <element name="C2" library="rcl" package="C0402" value=".1uF" x="2.525" y="1.4" rot="MR270"/>
 <element name="C4" library="rcl" package="CPOL0603" value="47uF" x="2.6" y="5.825" rot="MR270"/>
-<element name="R6" library="rcl" package="R0201" value="10K" x="5.3" y="9.55" rot="R180"/>
-<element name="R7" library="rcl" package="R0201" value="470" x="4.2" y="9.55"/>
-<element name="R10" library="rcl" package="R0201" value="470" x="1.825" y="9.525"/>
-<element name="R11" library="rcl" package="R0201" value="10K" x="2.95" y="9.525" rot="R180"/>
+<element name="R6" library="rcl" package="R0201" value="1K" x="5.3" y="9.55" rot="R180"/>
+<element name="R7" library="rcl" package="R0201" value="1K" x="4.2" y="9.55"/>
+<element name="R10" library="rcl" package="R0201" value="1K" x="1.825" y="9.525"/>
+<element name="R11" library="rcl" package="R0201" value="1K" x="2.95" y="9.525" rot="R180"/>
 <element name="U1" library="SparkFun-PowerIC" package="SOT23-5" value="V_REG_LDOSMD" x="7.2" y="6.9" rot="MR180"/>
 <element name="D5" library="SparkFun-DiscreteSemi" package="SOD-323" value="MM3Z27VT1G" x="8.15" y="1.975" rot="R270"/>
 <element name="R3" library="rcl" package="R0201" value="470" x="2.15" y="8.65" rot="MR180"/>
@@ -1712,7 +1712,11 @@ Please make sure your boards conform to these design rules.</description>
 <via x="1.125" y="13.275" extent="1-16" drill="0.3302"/>
 <wire x1="1.5635" y1="12.775" x2="1.125" y2="13.2135" width="0.1524" layer="1"/>
 <wire x1="1.125" y1="13.2135" x2="1.125" y2="13.275" width="0.1524" layer="1"/>
-<wire x1="7.175" y1="10.5" x2="5.4365" y2="10.825" width="0" layer="19" extent="1-16"/>
+<contactref element="U$1" pad="P$3"/>
+<contactref element="U$1" pad="P$6"/>
+<wire x1="6.95" y1="10.85" x2="8.25" y2="12.75" width="0" layer="19" extent="1-1"/>
+<wire x1="7.175" y1="10.5" x2="6.95" y2="10.85" width="0" layer="19" extent="1-16"/>
+<wire x1="5.4365" y1="10.825" x2="6.95" y2="10.85" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="DCC_L">
 <contactref element="D1" pad="1"/>
@@ -1955,24 +1959,15 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="IC1" pad="P$12"/>
 <wire x1="4.8" y1="7.175" x2="4.8" y2="7.5" width="0.1524" layer="1"/>
 <wire x1="4.8" y1="7.5" x2="5.375" y2="8.075" width="0.1524" layer="1"/>
-<contactref element="U$1" pad="P$5"/>
-<contactref element="U$8" pad="P$2"/>
-<wire x1="5.4365" y1="11.475" x2="5.5615" y2="11.6" width="0.1524" layer="1"/>
-<wire x1="5.5615" y1="11.6" x2="7.4" y2="11.6" width="0.1524" layer="1"/>
-<wire x1="7.4" y1="11.6" x2="7.6" y2="11.4" width="0.1524" layer="1"/>
-<wire x1="7.6" y1="11.4" x2="7.6" y2="10.85" width="0.1524" layer="1"/>
-<wire x1="5.3" y1="10" x2="5.4365" y2="11.475" width="0" layer="19" extent="1-9"/>
+<contactref element="U$1" pad="P$2"/>
+<wire x1="5.3" y1="10" x2="7.6" y2="12.75" width="0" layer="19" extent="1-9"/>
 </signal>
-<signal name="FORWARD">
+<signal name="FWD_PWM">
 <contactref element="IC1" pad="P$15"/>
 <via x="2.275" y="7.875" extent="1-16" drill="0.3302"/>
 <wire x1="3.45" y1="7.175" x2="2.975" y2="7.175" width="0.1524" layer="1"/>
 <wire x1="2.975" y1="7.175" x2="2.275" y2="7.875" width="0.1524" layer="1"/>
-<contactref element="U$1" pad="P$2"/>
 <contactref element="U$20" pad="P$2"/>
-<via x="0.975" y="12.125" extent="1-16" drill="0.3302"/>
-<wire x1="0.975" y1="12.125" x2="1.5635" y2="12.125" width="0.1524" layer="1"/>
-<wire x1="1.5635" y1="12.125" x2="7.6" y2="12.75" width="0" layer="19" extent="1-1"/>
 <wire x1="2.275" y1="7.875" x2="1.5635" y2="12.125" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="BEMF">
@@ -2019,13 +2014,13 @@ Please make sure your boards conform to these design rules.</description>
 </signal>
 <signal name="N$10">
 <contactref element="R10" pad="1"/>
-<contactref element="U$1" pad="P$1"/>
-<wire x1="1.57" y1="9.525" x2="6.95" y2="12.75" width="0" layer="19" extent="1-1"/>
+<contactref element="U$1" pad="P$4"/>
+<wire x1="1.57" y1="9.525" x2="8.25" y2="10.85" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$11">
 <contactref element="R7" pad="1"/>
-<contactref element="U$1" pad="P$4"/>
-<wire x1="3.945" y1="9.55" x2="8.25" y2="10.85" width="0" layer="19" extent="1-1"/>
+<contactref element="U$1" pad="P$1"/>
+<wire x1="3.945" y1="9.55" x2="6.95" y2="12.75" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$2">
 <contactref element="C5" pad="1"/>
@@ -2056,16 +2051,19 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="6.25" y1="8.2001" x2="6.2" y2="8.2001" width="0.1524" layer="16"/>
 <wire x1="6.2" y1="8.2001" x2="6.2" y2="9.3" width="0.1524" layer="16"/>
 </signal>
-<signal name="PWM">
+<signal name="REV_PWM">
 <contactref element="IC1" pad="P$14"/>
 <wire x1="3.9" y1="7.175" x2="3.9" y2="7.425" width="0.1524" layer="1"/>
 <wire x1="3.9" y1="7.425" x2="3.475" y2="7.85" width="0.1524" layer="1"/>
 <wire x1="3.475" y1="7.85" x2="3.475" y2="8.075" width="0.1524" layer="1"/>
 <via x="3.475" y="8.075" extent="1-16" drill="0.3302"/>
-<contactref element="U$1" pad="P$6"/>
-<contactref element="U$1" pad="P$3"/>
-<wire x1="3.475" y1="8.075" x2="6.95" y2="10.85" width="0" layer="19" extent="1-1"/>
-<wire x1="6.95" y1="10.85" x2="8.25" y2="12.75" width="0" layer="19" extent="1-1"/>
+<contactref element="U$8" pad="P$2"/>
+<wire x1="3.475" y1="8.075" x2="5.4365" y2="11.475" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="FORWARD">
+<contactref element="IC1" pad="P$11"/>
+<contactref element="U$1" pad="P$5"/>
+<wire x1="5.25" y1="7.175" x2="7.6" y2="10.85" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
