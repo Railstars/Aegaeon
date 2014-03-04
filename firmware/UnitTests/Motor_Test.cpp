@@ -47,6 +47,7 @@ TEST(MotorTests, Initialization)
 {
     //not sure whether this is the right initial condition or not.
     CHECK_EQUAL(MOTOR_COAST_SET, MOTOR_COAST_STATE);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //test millis function
