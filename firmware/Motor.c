@@ -18,13 +18,6 @@ volatile uint8_t sample, sample_ready, min_ADC;
 int16_t sum_err;
 
 uint8_t _eStop;
-//                  PB0 (fwd)   PB1 (rev)   PA7 (fpwm)  PB2 (rpwm)
-//FORWARD =         HIGH        LOW         HIGH        LOW
-//REVERSE =         LOW         HIGH        LOW         HIGH
-//BRAKE   =         HIGH        HIGH        LOW         LOW
-//  or              LOW         LOW         HIGH        HIGH
-//COAST   =         LOW         LOW         LOW         LOW
-//I think.
 
 //consider the algorithm at http://www.advice1.com/reference/pidalgorithmref.html
 
@@ -79,6 +72,14 @@ uint8_t PDFF(int16_t set, int16_t measured)
     else return retval;
 }
 
+//                  PB0 (fwd)   PB1 (rev)   PA7 (fpwm)  PB2 (rpwm)
+//FORWARD =         HIGH        LOW         HIGH        LOW
+//REVERSE =         LOW         HIGH        LOW         HIGH
+//BRAKE   =         HIGH        HIGH        LOW         LOW
+//  or              LOW         LOW         HIGH        HIGH
+//COAST   =         LOW         LOW         LOW         LOW
+//I think.
+
 void Motor_Initialize(void)
 {
     //pre-condition: DCC_Config_Initialize has been called first. Interrupts have been disabled
@@ -90,13 +91,10 @@ void Motor_Initialize(void)
     //do other things to set up the hardware.
     //on ATtiny84A, setup TIMER0 for both motor control PWM on output compare B and a millis timer on compare match overflow
     
-    //set PA7, PB1 and PB2 to output, bring PA7 and PB1 low and PB2 HIGH (= BRAKE)
-    DDRB |= (1 << DDB1) | (1 << DDB2);
-    PORTB |= (1 << PB2); //set PWM HIGH!
-    
-    
-    PORTB &= ~(1 << PB1); //and set both direction bits LOW.
+    //set PB0, PB1, PA7, and PB2 to output, and bring all low
+    DDRB |= (1 << DDB0) | (1 << DDB1) | (1 << DDB2);
     DDRA |= (1 << DDA7);
+    PORTB &= ~(1 << PB0) & ~(1 << PB1) & ~(1 << PB2); //set all these LOW
     PORTA &= ~(1 << PA7);
     
     
@@ -106,7 +104,8 @@ void Motor_Initialize(void)
     TCCR0B = (1 << CS00); //use /1 prescaler
     
     TCNT0 = 0;
-    OCR0A = 0xFF; //turn output off.
+    OCR0A = 0x00; //turn right low-side switch off.
+    OCR0B = 0x00; //turn left low-side switch off
     
     TIMSK0 |= (1 << TOIE0); //enable overflow interrupt so we can count micros
     
