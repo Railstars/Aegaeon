@@ -27,12 +27,13 @@ extern "C" {
 
 #define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTA & (1 << PA7)) == (1 << PA7))  \
                               ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTB & (1 << PB2)) == (1 << PB2)) )
-#define MOTOR_DEENERGIZED       (true)
-#define MOTOR_ENERGERIZED       (false)
+#define MOTOR_DEENERGIZED       (false)
+#define MOTOR_ENERGERIZED       (true)
     
 //TODO need to incorporate a test for this AND use it in conjunction with the above to ensure against overshoot states when energizing motor
 #define MOTOR_SHOOTTHRU_STATE   ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTB & (1 << PB2)) == (1 << PB2)) \
                               ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTA & (1 << PA7)) == (1 << PA7)) )
+#define MOTOR_SHOTTHRU_NONE     (false)
 
 #define MOTOR_BRAKE_STATE       ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTB & (1 << PB1)) == (1 << PB1)) \
                                && ((PORTA & (1 << PA7)) == 0) && ((PORTB & (1 << PB2)) == 0) )
