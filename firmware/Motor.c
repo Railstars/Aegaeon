@@ -18,12 +18,13 @@ volatile uint8_t sample, sample_ready, min_ADC;
 int16_t sum_err;
 
 uint8_t _eStop;
-
-//FORWARD =     PA7 HIGH,   PB1 LOW,    PB2 (OC0A) PWM
-//REVERSE =     PA7 LOW,    PB1 HIGH,   PB2 (OC0A) PWM
-//BRAKE =        PA7 LOW,    PB1 LOW,    PB2 (OC0A) HIGH
-//COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
-//DEAD H-BRIDGE PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) LOW
+//                  PB0 (fwd)   PB1 (rev)   PA7 (fpwm)  PB2 (rpwm)
+//FORWARD =         HIGH        LOW         HIGH        LOW
+//REVERSE =         LOW         HIGH        LOW         HIGH
+//BRAKE   =         HIGH        HIGH        LOW         LOW
+//  or              LOW         LOW         HIGH        HIGH
+//COAST   =         LOW         LOW         LOW         LOW
+//I think.
 
 //consider the algorithm at http://www.advice1.com/reference/pidalgorithmref.html
 
