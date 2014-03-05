@@ -444,15 +444,16 @@ void Motor_Update(void)
             }
         }
         else //use the commanded speed step to set the motor!
+            //TODO we need a case to handle if we are changing direction, to briefly disconnect the PWM outputs, and make sure they are low.
         {
             if(_eStop == 0) //if not estopped, and only if not estopped, update firection pins and calulate voltage
             {
                 if (_current_speed < 0) //if negative
                 {
                     //set REVERSE ENABLE
-                    PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through
+                    PORTB &= ~(1 << PB0); //must bring this pin low first, to avoid shoot-through
                     _delay_loop_1(1); //pause for three cycles;
-                    PORTA |=  (1 << PA7);
+                    PORTB |=  (1 << PB1); //reverse enable
 #ifdef USE_MOTOR_FOR_FX
                     voltage = Output_Match_Buf[1];
 #else //use motor for motor
@@ -466,9 +467,10 @@ void Motor_Update(void)
                 else
                 {
                     //set FORWARD ENABLE
-                    PORTA &= ~(1 << PA7); //must bring this pin low first, to avoid shoot-through
+                    //set REVERSE ENABLE
+                    PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through TODO IS THIS TRUE NOW I don't think so. I think we have a different condition to worry about
                     _delay_loop_1(1); //pause for three cycles;
-                    PORTB |=  (1 << PB1);
+                    PORTB |=  (1 << PB0); //forward enable
 #ifdef USE_MOTOR_FOR_FX
                     voltage = Output_Match_Buf[0];
 #else //use motor for motor
@@ -501,8 +503,24 @@ void Motor_Update(void)
         }
         if (voltage < 0) voltage = 0;
         if (voltage > 255) voltage = 255;
-        OCR0A = 0xFF - voltage; //TODO need to set OCR0B as well!
-        TCCR0A |= (1 << COM0A0) | (1 << COM0A1) | (COM0B0) | (COM0B1); //reconnect PWM to timer
+        if(_current_speed > 0) //forward
+        {
+            TCCR0A &= ~(1 << COM0B0) & ~(1 << COM0B1);
+            TCCR0A |= (1 << COM0A0) | (1 << COM0A1); //reconnect PWM to timer
+            OCR0B = 0x00;
+            OCR0A = voltage;
+        }
+        else if(_current_speed < 0)
+        {
+            TCCR0A &= ~(1 << COM0A0) & ~(1 << COM0A1);
+            TCCR0A |= (1 << COM0B0) | (1 << COM0B1);
+            OCR0A = 0x00;
+            OCR0B = voltage;
+        }
+        else //0 speed TODO CHECK THIS
+        {
+            OCR0A = OCR0B = 0x00;
+        }
 
 		
 #ifdef USE_BEMF	//hackish
