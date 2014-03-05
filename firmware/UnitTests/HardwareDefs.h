@@ -53,9 +53,9 @@ extern "C" {
 #define MOTOR_REV_SET           (1 << PB1)
 #define MOTOR_REV_CLEAR         (0)
 
-#define MOTOR_DIRECTION         ((PORTB & (1 << PB1)) | (PORTB & (1 << PB2))) //HACK but it works
-#define MOTOR_FORWARD           (1 << PB1)
-#define MOTOR_REVERSE           (1 << PB2)
+#define MOTOR_DIRECTION         ((PORTB & (1 << PB0)) | (PORTB & (1 << PB1))) //HACK but it works
+#define MOTOR_FORWARD           (1 << PB0)
+#define MOTOR_REVERSE           (1 << PB1)
     
 #define OUTPUT1_OUTPUT          (PORTA & (1 << PORTA5))
 #define OUTPUT1_ON              (1 << PORTA5)
