@@ -25,24 +25,24 @@ extern "C" {
 #define MOTOR_PWM_LEVEL_GT(x)   (MOTOR_PWM_CONTROL > (x))
 #define MOTOR_PWM_LEVEL_LT(x)   (MOTOR_PWM_CONTROL < (x))
 
-#define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTA & (1 << PA7)) == (1 << PA7))  \
-                              ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTB & (1 << PB2)) == (1 << PB2)) )
+#define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB0)) == (1 << PB0)) && (OCR0A > 0x00)  \
+                              ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && (OCR0B > 0x00) )
 #define MOTOR_DEENERGIZED       (false)
 #define MOTOR_ENERGERIZED       (true)
     
 //TODO need to incorporate a test for this AND use it in conjunction with the above to ensure against overshoot states when energizing motor
-#define MOTOR_SHOOTTHRU_STATE   ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTB & (1 << PB2)) == (1 << PB2)) \
-                              ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTA & (1 << PA7)) == (1 << PA7)) )
+#define MOTOR_SHOOTTHRU_STATE   ( ((PORTB & (1 << PB0)) == (1 << PB0)) && (OCR0B > 0x00) \
+                              ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && (OCR0A > 0x00) )
 #define MOTOR_SHOTTHRU_NONE     (false)
 
 #define MOTOR_BRAKE_STATE       ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTB & (1 << PB1)) == (1 << PB1)) \
-                               && ((PORTA & (1 << PA7)) == 0) && ((PORTB & (1 << PB2)) == 0) )
+                               && (OCR0A == 0x00) && (OCR0B = 0x00) )
 #define MOTOR_BRAKE_SET         (true)
 #define MOTOR_BRAKE_NOTSET      (false)
     
 //TODO need to incorporate these;
 #define MOTOR_COAST_STATE       ( ((PORTB & (1 << PB0)) == 0) && ((PORTB & (1 << PB1)) == 0) \
-                               && ((PORTA & (1 << PA7)) == 0) && ((PORTB & (1 << PB2)) == 0) )
+                               && (OCR0A == 0x00) && (OCR0B == 0x00) )
 #define MOTOR_COAST_SET         (true)
 #define MOTOR_COAST_UNSET       (false)
 
