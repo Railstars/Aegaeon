@@ -22,8 +22,8 @@ extern "C" {
 
 #define MOTOR_PWM_CONTROL       (OCR0A | OCR0B)
 #define MOTOR_PWM_LEVEL(x)      (x)  //motor outputs are 0xFF = 0V, 0x00 = 12V
-#define MOTOR_PWM_LEVEL_GT(x)   (MOTOR_PWM_CONTROL < (x))
-#define MOTOR_PWM_LEVEL_LT(x)   (MOTOR_PWM_CONTROL > (x))
+#define MOTOR_PWM_LEVEL_GT(x)   (MOTOR_PWM_CONTROL > (x))
+#define MOTOR_PWM_LEVEL_LT(x)   (MOTOR_PWM_CONTROL < (x))
 
 #define MOTOR_ENABLED_STATE     ( ((PORTB & (1 << PB0)) == (1 << PB0)) && ((PORTA & (1 << PA7)) == (1 << PA7))  \
                               ||  ((PORTB & (1 << PB1)) == (1 << PB1)) && ((PORTB & (1 << PB2)) == (1 << PB2)) )
