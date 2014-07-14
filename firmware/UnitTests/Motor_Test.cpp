@@ -46,7 +46,8 @@ TEST_GROUP(MotorTests)
 TEST(MotorTests, Initialization)
 {
     //not sure whether this is the right initial condition or not.
-    CHECK_EQUAL(MOTOR_BRAKE_SET, MOTOR_BRAKE_STATE);
+    CHECK_EQUAL(MOTOR_COAST_SET, MOTOR_COAST_STATE);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //test millis function
@@ -102,6 +103,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST)
@@ -110,6 +112,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MID)
@@ -118,6 +121,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MID)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX) //MAX SPEED
@@ -126,6 +130,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -136,6 +141,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_3)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(15), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_4)
@@ -144,6 +150,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_4)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_25)
@@ -152,6 +159,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_25)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(216), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********28 speed steps negative speed w/ 3-step speed table*********/
@@ -163,6 +171,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP_NEG)
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_NEG)
@@ -171,6 +180,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_NEG)
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_NEG)
@@ -179,6 +189,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_NEG)
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_NEG) //MAX SPEED
@@ -187,6 +198,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_NEG) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -197,6 +209,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_3_NEG)
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(15), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_4_NEG)
@@ -205,6 +218,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_4_NEG)
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_25_NEG)
@@ -213,6 +227,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_25_NEG)
     Motor_Update();
     CHECK_EQUAL(MOTOR_REVERSE, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(216), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********28 speed steps w/alternate 3-step speed table*********/
@@ -227,6 +242,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_STOP_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_new3step)
@@ -239,6 +255,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FIRST_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_new3step)
@@ -251,6 +268,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MID_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(19), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_new3step)
@@ -263,6 +281,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_MAX_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(100), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //very tricky!
@@ -277,6 +296,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_3_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(11), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_4_new3step)
@@ -289,6 +309,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_4_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(11), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_16_new3step)
@@ -301,6 +322,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_16_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(23), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_26_new3step)
@@ -313,6 +335,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_26_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(80), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********28 speed steps w/28-step speed table*********/
@@ -324,6 +347,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_STOP)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_FIRST)
@@ -333,6 +357,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_FIRST)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(6), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MID)
@@ -342,6 +367,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MID)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(125), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MAX) //MAX SPEED
@@ -351,6 +377,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_MAX) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -362,6 +389,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_3)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(16), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_4)
@@ -371,6 +399,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_4)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(24), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_25)
@@ -380,6 +409,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_FancyCurve_25)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(216), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********28 speed steps w/alternate 28-step speed table*********/
@@ -420,6 +450,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_STOP)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_FIRST)
@@ -457,6 +488,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_FIRST)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MID)
@@ -494,6 +526,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MID)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MAX) //MAX SPEED
@@ -531,6 +564,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_MAX) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(220), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -570,6 +604,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_3)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_4)
@@ -607,6 +642,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_4)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_25)
@@ -644,6 +680,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_28_AltFancyCurve_25)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(138), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********128 speed steps w/3-step speed table*********/
@@ -654,6 +691,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_STOP)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST)
@@ -662,6 +700,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(1), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MID)
@@ -670,6 +709,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_MID)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(128), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX) //MAX SPEED
@@ -678,6 +718,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -688,6 +729,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_3)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(3), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_62)
@@ -696,6 +738,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_62)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(123), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_66)
@@ -704,6 +747,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_66)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(132), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_125)
@@ -712,6 +756,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_125)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(250), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********128 speed steps w/alternate 3-step speed table*********/
@@ -724,6 +769,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_STOP_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST_new3step)
@@ -735,6 +781,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FIRST_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MID_new3step)
@@ -746,6 +793,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_MID_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(20), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX_new3step) //MAX SPEED
@@ -757,6 +805,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_MAX_new3step) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(100), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -770,6 +819,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_3_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_62_new3step)
@@ -781,6 +831,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_62_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(19), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_66_new3step)
@@ -792,6 +843,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_66_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(22), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_125_new3step)
@@ -803,6 +855,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_125_new3step)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(97), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********128 speed steps w/28-step speed table*********/
@@ -814,6 +867,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_STOP)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_FIRST)
@@ -823,6 +877,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_FIRST)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(2), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MID)
@@ -832,6 +887,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MID)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(127), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MAX) //MAX SPEED
@@ -841,6 +897,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_MAX) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0xFF), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -852,6 +909,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_3)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(4), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_62)
@@ -861,6 +919,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_62)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(123), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_66)
@@ -870,6 +929,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_66)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(131), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_125)
@@ -879,6 +939,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_FancyCurve_125)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(250), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 /*********128 speed steps w/alternate 28-step speed table*********/
@@ -918,6 +979,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_STOP)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(0x00), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_FIRST)
@@ -955,6 +1017,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_FIRST)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MID)
@@ -992,6 +1055,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MID)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MAX) //MAX SPEED
@@ -1029,6 +1093,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_MAX) //MAX SPEED
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(220), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 //trickier…
@@ -1068,6 +1133,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_3)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(5), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_62)
@@ -1105,6 +1171,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_62)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_66)
@@ -1142,6 +1209,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_66)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(10), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_125)
@@ -1179,6 +1247,7 @@ TEST(MotorTests, TestSpeedSettings_noAccel_128_AltFancyCurve_125)
     Motor_Update();
     CHECK_EQUAL(MOTOR_FORWARD, MOTOR_DIRECTION);
     CHECK_EQUAL(MOTOR_PWM_LEVEL(211), MOTOR_PWM_CONTROL);
+    CHECK_EQUAL(MOTOR_SHOOTTHRU_STATE, MOTOR_SHOTTHRU_NONE);
 }
 
 

@@ -9,6 +9,7 @@
 #define WGM01   1
 #define TOIE0   0
 #define DDA7    7
+#define DDB0    0
 #define DDB1    1
 #define DDB2    2
 #define PB1     1

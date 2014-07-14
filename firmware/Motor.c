@@ -19,12 +19,6 @@ int16_t sum_err;
 
 uint8_t _eStop;
 
-//FORWARD =     PA7 HIGH,   PB1 LOW,    PB2 (OC0A) PWM
-//REVERSE =     PA7 LOW,    PB1 HIGH,   PB2 (OC0A) PWM
-//BRAKE =        PA7 LOW,    PB1 LOW,    PB2 (OC0A) HIGH
-//COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
-//DEAD H-BRIDGE PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) LOW
-
 //consider the algorithm at http://www.advice1.com/reference/pidalgorithmref.html
 
 uint8_t PDFF(int16_t set, int16_t measured)
@@ -78,6 +72,14 @@ uint8_t PDFF(int16_t set, int16_t measured)
     else return retval;
 }
 
+//                  PB0 (fwd)   PB1 (rev)   PA7 (fpwm)  PB2 (rpwm)
+//FORWARD =         HIGH        LOW         HIGH        LOW
+//REVERSE =         LOW         HIGH        LOW         HIGH
+//BRAKE   =         HIGH        HIGH        LOW         LOW
+//  or              LOW         LOW         HIGH        HIGH
+//COAST   =         LOW         LOW         LOW         LOW
+//I think.
+
 void Motor_Initialize(void)
 {
     //pre-condition: DCC_Config_Initialize has been called first. Interrupts have been disabled
@@ -89,13 +91,10 @@ void Motor_Initialize(void)
     //do other things to set up the hardware.
     //on ATtiny84A, setup TIMER0 for both motor control PWM on output compare B and a millis timer on compare match overflow
     
-    //set PA7, PB1 and PB2 to output, bring PA7 and PB1 low and PB2 HIGH (= BRAKE)
-    DDRB |= (1 << DDB1) | (1 << DDB2);
-    PORTB |= (1 << PB2); //set PWM HIGH!
-    
-    
-    PORTB &= ~(1 << PB1); //and set both direction bits LOW.
+    //set PB0, PB1, PA7, and PB2 to output, and bring all low
+    DDRB |= (1 << DDB0) | (1 << DDB1) | (1 << DDB2);
     DDRA |= (1 << DDA7);
+    PORTB &= ~(1 << PB0) & ~(1 << PB1) & ~(1 << PB2); //set all these LOW
     PORTA &= ~(1 << PA7);
     
     
@@ -105,7 +104,8 @@ void Motor_Initialize(void)
     TCCR0B = (1 << CS00); //use /1 prescaler
     
     TCNT0 = 0;
-    OCR0A = 0xFF; //turn output off.
+    OCR0A = 0x00; //turn right low-side switch off.
+    OCR0B = 0x00; //turn left low-side switch off
     
     TIMSK0 |= (1 << TOIE0); //enable overflow interrupt so we can count micros
     
@@ -191,14 +191,11 @@ uint32_t micros(void)
 void Motor_EStop(int8_t dir)
 {
 #ifdef USE_MOTOR
-    //NMRA requires that we remove power from motor. We do this by disconnecting PA7 so we can force it low, then bring PB1 and PB2 high.
-    //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
-    //set (PB2) OC0A first to avoid a shoot-through condition
-    TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-    PORTB |= (1 << PB2);
-    //force PWM lines HIGH, turns off motor.
-    PORTB |= (1 << PB1); //here is reverse.
-    PORTA |= (1 << PA7); //here is forward.
+    //NMRA requires that we remove power from motor. We do this by setting out motor lines LOW.
+    TCCR0A &= ~(1 << COM0A0) & ~(1 << COM0A1) & ~(COM0B0) & ~(COM0B1); //disconnect PWM from timer
+    PORTB &= ~(1 << PB0) & ~(1 << PB1) & ~(1 << PB2); //force all four motor control lines LOW, turns off motor.
+    PORTA &= ~(1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
+
 #endif //USE_MOTOR
     
     _eStop = 1;
@@ -297,12 +294,10 @@ void Motor_Update(void)
     if ((abs_speed < BEMF_cutoff) && (time_delta_32(millis(), _prev_bemf_time) >= BEMF_period))
     {
         //first, set the h-bridge to coast
-        TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-        //COAST =       PA7 HIGH,   PB1 HIGH,   PB2 (OC0A) HIGH
         //set OC0A first to avoid a shoot-through condition
-        TCCR0A &= ~( (1 << COM0A1) ); //disconnect PA7 from timer
-        PORTB |= (1 << PB2) | (1 << PB1); //force PWM lines HIGH, turns off motor.
-        PORTA |= (1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
+        TCCR0A &= ~(1 << COM0A0) & ~(1 << COM0A1) & ~(COM0B0) & ~(COM0B1); //disconnect PWM from timer
+        PORTB &= ~(1 << PB0) & ~(1 << PB1) & ~(1 << PB2); //force all four motor control lines LOW, turns off motor.
+        PORTA &= ~(1 << PA7); //these two lines may not be necessary. Possibly even dangerous.
         //start an AD conversion
         ADCSRA |= (1 << ADSC);
     }
@@ -449,15 +444,16 @@ void Motor_Update(void)
             }
         }
         else //use the commanded speed step to set the motor!
+            //TODO we need a case to handle if we are changing direction, to briefly disconnect the PWM outputs, and make sure they are low.
         {
             if(_eStop == 0) //if not estopped, and only if not estopped, update firection pins and calulate voltage
             {
                 if (_current_speed < 0) //if negative
                 {
                     //set REVERSE ENABLE
-                    PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through
+                    PORTB &= ~(1 << PB0); //must bring this pin low first, to avoid shoot-through
                     _delay_loop_1(1); //pause for three cycles;
-                    PORTA |=  (1 << PA7);
+                    PORTB |=  (1 << PB1); //reverse enable
 #ifdef USE_MOTOR_FOR_FX
                     voltage = Output_Match_Buf[1];
 #else //use motor for motor
@@ -471,9 +467,10 @@ void Motor_Update(void)
                 else
                 {
                     //set FORWARD ENABLE
-                    PORTA &= ~(1 << PA7); //must bring this pin low first, to avoid shoot-through
+                    //set REVERSE ENABLE
+                    PORTB &= ~(1 << PB1); //must bring this pin low first, to avoid shoot-through TODO IS THIS TRUE NOW I don't think so. I think we have a different condition to worry about
                     _delay_loop_1(1); //pause for three cycles;
-                    PORTB |=  (1 << PB1);
+                    PORTB |=  (1 << PB0); //forward enable
 #ifdef USE_MOTOR_FOR_FX
                     voltage = Output_Match_Buf[0];
 #else //use motor for motor
@@ -506,8 +503,25 @@ void Motor_Update(void)
         }
         if (voltage < 0) voltage = 0;
         if (voltage > 255) voltage = 255;
-        OCR0A = 0xFF - voltage;
-        TCCR0A |= (1 << COM0A1); //force connection of PA7 to timer, in case it was disconnected earlier
+        if(_current_speed > 0) //forward
+        {
+            TCCR0A &= ~(1 << COM0B0) & ~(1 << COM0B1);
+            TCCR0A |= (1 << COM0A0) | (1 << COM0A1); //reconnect PWM to timer
+            OCR0B = 0x00;
+            OCR0A = voltage;
+        }
+        else if(_current_speed < 0)
+        {
+            TCCR0A &= ~(1 << COM0A0) & ~(1 << COM0A1);
+            TCCR0A |= (1 << COM0B0) | (1 << COM0B1);
+            OCR0A = 0x00;
+            OCR0B = voltage;
+        }
+        else //0 speed TODO CHECK THIS
+        {
+            OCR0A = OCR0B = 0x00;
+        }
+
 		
 #ifdef USE_BEMF	//hackish
     }
